@@ -326,8 +326,8 @@ function update_Check(){
 		dataType:'text',
 		data: {'memberId' : memberId},
 		success:function(data){
-			//console.log(data);
-			window.location.href=("subscribe_leaf.do?data="+encodeURIComponent(JSON.stringify(data))); //자바스크립트의 값을 JSON 문자열로 변환
+			// encodeURIComponent : URI로 데이터를 전달하기 위해서 문자열을 인코딩
+			window.location.href=("subscribe_leaf.do?data="+encodeURIComponent(JSON.stringify(data))); // JSON -> String 
 		},
 		error: function(e){
 			console.log(e);

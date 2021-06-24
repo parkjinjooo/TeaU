@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
-<%
+<% // 자바코드
 	String data =  request.getParameter("data"); // data를 String으로 
 %>	
 <!DOCTYPE html>
@@ -224,6 +224,7 @@
 				var tagBlend = obj['subInfo'].tagBlend;
 				
 				$('input:checkbox[name="tagSeason"]').each(function() {
+					//split 생각해보기 
 					if(this.value == tagSeason) {
 						this.checked = true;
 					}
