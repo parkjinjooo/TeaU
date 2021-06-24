@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SubDAO">
+	
+	<!-- 씨앗(seed) --> 
+	
+	<insert id="insertSub_seed">
+	<![CDATA[
+		INSERT INTO SUB_SEED(SS_ID, ORDER_CATE, SS_USER, SS_DATE, SS_PRICE, TAG_TASTE, TAG_CAFE, TAG_EFFECT)
+		VALUES((SELECT NVL(MAX(SS_ID), 0) + 1 FROM SUB_SEED), #{cate}, #{user}, #{date}, 19900, #{taste}, #{caffeine}, #{effect})
+	]]>
+	</insert>
+	
+	<update id="updateSub_seed">
+		<![CDATA[
+		UPDATE SUB_SEED 
+		SET SS_DATE = #{date}, TAG_TASTE = #{taste}, TAG_CAFE = #{caffeine}, TAG_EFFECT = #{effect}
+		WHERE SS_ID = #{id}
+		]]>
+	</update>
+	
+	<delete id="deleteSub_seed">
+	<![CDATA[
+		DELETE SUB_SEED 
+		WHERE SS_ID = #{id}
+	]]>
+	</delete>	
+	
+	<select id="getSub_seed" resultType="sub">
+		<![CDATA[
+		SELECT * FROM SUB_SEED 
+		WHERE SS_ID = #{id}
+		]]>
+	</select>
+	
+	<!-- 새싹(leaf) --> 
+	
+	<insert id="insertSub_leaf">
+	<![CDATA[
+		INSERT INTO SUB_LEAF(SUB_ID, SUB_USER, TAG_SEASON, TAG_BASE, TAG_DRINK, TAG_BLEND)
+		VALUES((SELECT NVL(MAX(SUB_ID), 0) + 1 FROM SUB_LEAF), #{subUser}, #{tagSeason}, #{tagBase}, #{tagDrink}, #{tagBlend})
+	]]>
+	</insert>
+	
+	<update id="updateSub_leaf">
+		<![CDATA[
+		UPDATE SUB_LEAF 
+		SET TAG_SEASON = #{tagSeason}, TAG_BASE = #{tagBase}, TAG_DRINK = #{tagDrink}, TAG_BLEND = #{tagBlend}
+		WHERE SUB_USER = #{subUser}
+		]]>
+	</update>
+	
+	<delete id="deleteSub_leaf">
+	<![CDATA[
+		DELETE SUB_LEAF 
+		WHERE SUB_USER = #{subUser}
+	]]>
+	</delete>	
+	
+	<select id="getSub_leaf" resultType="sub">
+		<![CDATA[
+		SELECT * FROM SUB_LEAF 
+		WHERE SUB_USER = #{subUser}
+		]]>
+	</select>
+	
+<!-- 	<select id="getSubList_leaf" resultType="sub">
+		<![CDATA[
+		SELECT * FROM SUB_LEAF 
+		WHERE SL_USER = #{user}
+		]]>
+	</select> -->
+	
+	<!-- 나무(tree) --> 
+	
+	<insert id="insertSub_tree">
+	<![CDATA[
+		INSERT INTO SUB_TREE(ST_ID, ST_SELECTED_ID, ORDER_CATE, ST_USER, ST_DATE, ST_ADD, ST_PRICE, ST_REQ)
+		VALUES((SELECT NVL(MAX(ST_ID), 0) + 1 FROM SUB_TREE), #{select}, #{cate}, #{user}, #{date}, #{add}, 34900, #{req})
+	]]>
+	</insert>
+	
+	<update id="updateSub_tree">
+		<![CDATA[
+		UPDATE SUB_TREE 
+		SET ST_SELECTED_ID = #{select}, ST_DATE = #{date}, ST_ADD = #{add}, ST_REQ = #{req}
+		WHERE ST_ID = #{id}
+		]]>
+	</update>
+	
+	<delete id="deleteSub_tree">
+	<![CDATA[
+		DELETE SUB_TREE 
+		WHERE ST_ID = #{id}
+	]]>
+	</delete>	
+	
+	<select id="getSub_tree" resultType="sub">
+		<![CDATA[
+		SELECT * FROM SUB_TREE 
+		WHERE ST_ID = #{id}
+		]]>
+	</select>
+	
+</mapper>
