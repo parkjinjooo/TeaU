@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%
-	String data =  request.getParameter("data");
+	String data =  request.getParameter("data"); // data를 String으로 
 %>	
 <!DOCTYPE html>
 <html lang="en">
@@ -216,7 +216,7 @@
 			var data = <%=data%>;
 			console.log(data);
 			if(data != null) {
-				var obj = JSON.parse(data);
+				var obj = JSON.parse(data); //string 객체를 json 객체로 변환
 				console.log(obj);
 				var tagSeason = obj['subInfo'].tagSeason;
 				var tagBase = obj['subInfo'].tagBase;

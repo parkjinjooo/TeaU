@@ -51,11 +51,11 @@ public class SubController {
 		
 		Map<String, Object> hashMap = new HashMap<String, Object>();
 		
-		hashMap.put("subInfo", subInfo);
+		hashMap.put("subInfo", subInfo); // VO 객체를 담는다 
 		
-		ObjectMapper mapper = new ObjectMapper();
+		ObjectMapper mapper = new ObjectMapper(); // 데이터 가공 
 		
-		String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(hashMap);
+		String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(hashMap); // java를 json으로
 		
 		return json;
 	}
