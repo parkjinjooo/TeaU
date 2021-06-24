@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<%
+	String data =  request.getParameter("data");
+%>	
 <!DOCTYPE html>
 <html lang="en">
 
@@ -83,10 +87,7 @@
 
 				<form id="insertForm" method="POST">
 					<input type="hidden" id="subUser" name="subUser" value="${user.memberId}"/>
-					<div class="row justify-content-center">
-					
-
-
+					<div class="row justify-content-center">						
 						<!--나눠놓은 기준은 행 단위-->
 						<div class="col-lg-2"></div>
 						<div class="col-lg-8 sub_leaf_title">계절별</div>
@@ -211,6 +212,25 @@
       ================================================== -->
 	<jsp:include page="footer.jsp"></jsp:include>
 <script>
+		$(document).ready(function() {
+			var data = <%=data%>;
+			console.log(data);
+			if(data != null) {
+				var obj = JSON.parse(data);
+				console.log(obj);
+				var tagSeason = obj['subInfo'].tagSeason;
+				var tagBase = obj['subInfo'].tagBase;
+				var tagDrink = obj['subInfo'].tagDrink;
+				var tagBlend = obj['subInfo'].tagBlend;
+				
+				$('input:checkbox[name="tagSeason"]').each(function() {
+					if(this.value == tagSeason) {
+						this.checked = true;
+					}
+				});
+			}
+			
+		});
 		function checkbox_Check() {
 			if ($("input:checkbox[name=tagSeason]").is(":checked") == false) {
 				alert("'계절별'을 하나 이상 선택해주세요");

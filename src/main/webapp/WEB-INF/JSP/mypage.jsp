@@ -142,7 +142,7 @@
                 
                 <div class="col-md-7 col-xs-4">
                  <form id="updateForm" method="POST">
-                 <input type="hidden" id="sub" name="sub" value="${sub}" >
+                 <input type="hidden" id="memberId" name="memberId" value="${sub.subUser}" >
                   <div class="item_content">
                     <div>
                       <div>
@@ -319,17 +319,18 @@
 <jsp:include page="footer.jsp"></jsp:include>
 <script>
 function update_Check(){
+	var memberId = $('#memberId').val();
 	$.ajax({
 		type:'POST',
-		url:'subscribe_leafs.do',
+		url:'subleafupdate.do',
 		dataType:'text',
-		data: $('#sub').serialize(),
+		data: {'memberId' : memberId},
 		success:function(data){
-			alert(data);
-			window.location.href=("getSubLeaf.do")
+			//console.log(data);
+			window.location.href=("subscribe_leaf.do?data="+encodeURIComponent(JSON.stringify(data)));
 		},
 		error: function(e){
-			consoe.log(e);
+			console.log(e);
 		}
 		
 	});

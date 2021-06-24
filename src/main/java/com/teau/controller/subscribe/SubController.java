@@ -1,5 +1,8 @@
 package com.teau.controller.subscribe;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,7 +11,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.teau.biz.subscribe.SubService;
 import com.teau.biz.subscribe.SubVO;
 import com.teau.biz.user.UserVO;
@@ -34,6 +41,26 @@ public class SubController {
 		return "WEB-INF/JSP/subscribe_leaf.jsp";
 	}
 	
+	@RequestMapping(value = "/subleafupdate.do", produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String update(@RequestParam Map<String, String> paramMap) throws JsonProcessingException {
+		SubVO sub = new SubVO();
+		sub.setSubUser(paramMap.get("memberId"));
+		
+		SubVO subInfo = leafService.getSub(sub);
+		
+		Map<String, Object> hashMap = new HashMap<String, Object>();
+		
+		hashMap.put("subInfo", subInfo);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(hashMap);
+		
+		return json;
+	}
+	
+	
 	@RequestMapping("/mypage.do")
 	public String my(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
@@ -45,7 +72,7 @@ public class SubController {
 		SubVO leaf = leafService.getSub(vo);
 			
 		model.addAttribute("sub", leaf);
-		return "WEB-INF/JSP/mypage.jsp"; 
+		return "WEB-INF/JSP/mypage.jsp";
 	}
 	
 }
