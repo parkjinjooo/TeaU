@@ -218,20 +218,45 @@
 			if(data != null) {
 				var obj = JSON.parse(data); //string 객체를 json 객체로 변환
 				console.log(obj);
-				var tagSeason = obj['subInfo'].tagSeason;
-				var tagBase = obj['subInfo'].tagBase;
-				var tagDrink = obj['subInfo'].tagDrink;
-				var tagBlend = obj['subInfo'].tagBlend;
+				var tagSeason = obj['subInfo'].tagSeason.split(',');
+				var tagBase = obj['subInfo'].tagBase.split(',');
+				var tagDrink = obj['subInfo'].tagDrink.split(',');
+				var tagBlend = obj['subInfo'].tagBlend.split(',');
+				console.log(tagSeason);
 				
 				$('input:checkbox[name="tagSeason"]').each(function() {
-					//split 생각해보기 
-					if(this.value == tagSeason) {
-						this.checked = true;
+					for(var i = 0; i< tagSeason.length; i++){
+						if(this.value == tagSeason[i]) {
+							this.checked = true;
+						}
 					}
 				});
+				$('input:checkbox[name="tagBase"]').each(function() {
+					for(var i = 0; i< tagBase.length; i++){
+						if(this.value == tagBase[i]) {
+							this.checked = true;
+						}
+					}
+				});
+				$('input:checkbox[name="tagDrink"]').each(function() {
+					for(var i = 0; i< tagDrink.length; i++){
+						if(this.value == tagDrink[i]) {
+							this.checked = true;
+						}
+					}
+				});
+				$('input:checkbox[name="tagBlend"]').each(function() {
+					for(var i = 0; i< tagBlend.length; i++){
+						if(this.value == tagBlend[i]) {
+							this.checked = true;
+						}
+					}
+				});
+				
 			}
 			
 		});
+		
 		function checkbox_Check() {
 			if ($("input:checkbox[name=tagSeason]").is(":checked") == false) {
 				alert("'계절별'을 하나 이상 선택해주세요");

@@ -127,7 +127,7 @@
                 <ul class="header_btns_group ul_li_right">
                   <li>
                     <button type="button" class="main_search_btn">
-                      <a class="fal fa-user" href="contact.html" style="color: black;" ></a>
+                      <a class="fal fa-user" href="mypage.do" style="color: black;" ></a>
                     </button>
                   </li>
                   <li>
