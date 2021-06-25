@@ -28,7 +28,7 @@
   
               <div class="col-lg-2 col-md-6 col-6">
                 <div class="brand_logo">
-                  <a class="brand_link" href="index.html">
+                  <a class="brand_link" href="index.jsp">
                     <img src="assets/images/logo/TeaU.png"
                       alt="logo_not_found">
                   </a>
@@ -45,7 +45,7 @@
                   <div class="main_menu_inner collapse navbar-collapse" id="main_menu_dropdown">
                     <ul class="main_menu_list ul_li">
                       <li class="active dropdown">
-                        <a class="nav-link" href="subscribe_main.html" id="home_submenu">
+                        <a class="nav-link" href="subscribe_main.do" id="home_submenu">
                           Subscribe
                         </a>
                       </li>
@@ -96,7 +96,7 @@
                       </button>
                     </li>
                     <li>
-                      <a class="btn btn_primary text-uppercase" href="contact.html">Join Us</a>
+                      <a class="btn btn_primary text-uppercase" href="contact.do">LOGIN</a>
                     </li>
                   </ul>
                 </nav>

@@ -52,12 +52,12 @@
           <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6 col-sm-6">
               <div class="blog_grid wow fadeInUp" data-wow-delay=".1s">
-                <a class="item_image" href="subscribe_seed.html">
+                <a class="item_image" href="subscribe_seed.do">
                   <img src="assets/images/blog/select_seed.jpg" alt="image_not_found">
                 </a>
                 <div class="item_content">
                   <h3 class="item_title text-uppercase">
-                    <a href="subscribe_seed.html">
+                    <a href="subscribe_seed.do">
                       <씨앗구독> (초심자용 구독)
                     </a>
                   </h3>
@@ -91,12 +91,12 @@
 
             <div class="col-lg-4 col-md-6 col-sm-6">
               <div class="blog_grid wow fadeInUp" data-wow-delay=".3s">
-                <a class="item_image" href="subscribe_tree.html">
+                <a class="item_image" href="subscribe_tree.do">
                   <img src="assets/images/blog/select_tree.jpg" alt="image_not_found">
                 </a>
                 <div class="item_content">
                   <h3 class="item_title text-uppercase">
-                    <a href="subscribe_tree.html">
+                    <a href="subscribe_tree.do">
                       <나무구독> (고급자용 구독)
                     </a>
                   </h3>

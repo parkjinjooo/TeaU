@@ -9,24 +9,26 @@ import com.teau.biz.subscribe.SubVO;
 @Service("seedService")
 public class SeedServiceImpl implements SubService{
 	@Autowired
-	private SeedDAOMybatis subDAO;
+	private SeedDAOMybatis SeedDAO;
 	
+	// 초기화
 	public SeedServiceImpl() {
 	}
 	
 	public void insertSub(SubVO vo) {
-		subDAO.insertSub(vo);
+		SeedDAO.insertSub(vo);
 	}
+	
 	public void updateSub(SubVO vo) {
-		subDAO.updateSub(vo);
+		SeedDAO.updateSub(vo);
 	}
 	
 	public void deleteSub(SubVO vo) {
-		subDAO.deleteSub(vo);
+		SeedDAO.deleteSub(vo);
 	}
 	
 	public SubVO getSub(SubVO vo) {
-		return subDAO.getSub(vo);
+		return SeedDAO.getSub(vo);
 	}
  
 }

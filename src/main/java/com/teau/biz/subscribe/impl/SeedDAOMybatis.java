@@ -28,7 +28,7 @@ public class SeedDAOMybatis {
 	
 	// 구독 정보
 	public SubVO getSub(SubVO vo) {
-		return (SubVO) mybatis.selectOne("SubDAO.getSub", vo);
+		return (SubVO) mybatis.selectOne("SubDAO.getSub_seed", vo);
 	}
 	
 

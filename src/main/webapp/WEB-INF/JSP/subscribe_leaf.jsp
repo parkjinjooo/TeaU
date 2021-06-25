@@ -187,7 +187,7 @@
 
 						<div class="text-center">
 							<br /> <br /> <br />
-							<button type="button" class="btn btn_primary text-uppercase" onclick="checkbox_Check();">새싹 구독 신청</button>
+							<input  type="button" id="btn_subSubmit" class="btn btn_primary text-uppercase" onclick="inOrUp()"/>
 						</div>
 					</div>
 				</form>
@@ -254,10 +254,30 @@
 				});
 				
 			}
+		
+		if(data == null){
+			$('#btn_subSubmit').val('새싹 구독 신청'); 
+			
+		}else{
+			$('#btn_subSubmit').val('새싹 구독 수정');
+		}
 			
 		});
 		
-		function checkbox_Check() {
+		
+		function inOrUp(){
+			var data = <%=data%>
+			if(data == null){
+				var insert = 'insertSubLeaf.do';
+				checkbox_Check(insert);
+			}else{
+				var update = 'updateSubLeaf.do';
+				checkbox_Check(update);
+			}
+		}
+		
+		function checkbox_Check(inOrUp) {
+						
 			if ($("input:checkbox[name=tagSeason]").is(":checked") == false) {
 				alert("'계절별'을 하나 이상 선택해주세요");
 				return false;				
@@ -271,13 +291,13 @@
 				alert("'블렌드'를 하나 이상 선택해주세요");
 				return false;				
 			}else{
+				
 			 $.ajax({
 					type: 'POST',
-					url: 'insertSubLeaf.do',
+					url: inOrUp,
 					dataType: 'text', // form에 있는 데이터들을 controller로 text타입으로 
 					data: $('#insertForm').serialize(),
 					success: function(data) {
-
 						alert(data);
 						window.location.href=("getSubLeaf.do?subUser=" + $('#subUser').val()); //JSP 이동 페이지 적기  
 					}, 
@@ -287,6 +307,8 @@
 				}); 
 			}
 		}
+		
+		
 		
 	</script>
 </body>

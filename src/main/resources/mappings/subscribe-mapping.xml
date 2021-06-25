@@ -5,35 +5,36 @@
 <mapper namespace="SubDAO">
 	
 	<!-- 씨앗(seed) --> 
-	
-	<insert id="insertSub_seed">
-	<![CDATA[
-		INSERT INTO SUB_SEED(SS_ID, ORDER_CATE, SS_USER, SS_DATE, SS_PRICE, TAG_TASTE, TAG_CAFE, TAG_EFFECT)
-		VALUES((SELECT NVL(MAX(SS_ID), 0) + 1 FROM SUB_SEED), #{cate}, #{user}, #{date}, 19900, #{taste}, #{caffeine}, #{effect})
-	]]>
-	</insert>
-	
-	<update id="updateSub_seed">
-		<![CDATA[
-		UPDATE SUB_SEED 
-		SET SS_DATE = #{date}, TAG_TASTE = #{taste}, TAG_CAFE = #{caffeine}, TAG_EFFECT = #{effect}
-		WHERE SS_ID = #{id}
-		]]>
-	</update>
-	
-	<delete id="deleteSub_seed">
-	<![CDATA[
-		DELETE SUB_SEED 
-		WHERE SS_ID = #{id}
-	]]>
-	</delete>	
-	
-	<select id="getSub_seed" resultType="sub">
-		<![CDATA[
-		SELECT * FROM SUB_SEED 
-		WHERE SS_ID = #{id}
-		]]>
-	</select>
+   
+   <insert id="insertSub_seed">
+   <![CDATA[
+      INSERT INTO SUB_SEED(SUB_ID, SUB_USER, TAG_TASTE, TAG_CAFF, TAG_EFFECT)
+      VALUES((SELECT NVL(MAX(SUB_ID), 0) + 1 FROM SUB_SEED), #{subUser}, #{tagTaste}, #{tagCaff}, #{tagEffect})
+   ]]>
+   </insert>
+   
+   
+   <update id="updateSub_seed">
+      <![CDATA[
+      UPDATE SUB_SEED 
+      SET TAG_TASTE = #{tagTaste}, TAG_CAFF = #{tagCaff}, TAG_EFFECT = #{tagEffect}
+      WHERE SUB_USER = #{subUser}
+      ]]>
+   </update>
+   
+   <delete id="deleteSub_seed">
+   <![CDATA[
+      DELETE SUB_SEED 
+      WHERE SUB_USER = #{subUser}
+   ]]>
+   </delete>   
+   
+   <select id="getSub_seed" resultType="sub">
+      <![CDATA[
+      SELECT * FROM SUB_SEED 
+      WHERE SUB_USER = #{subUser}
+      ]]>
+   </select>
 	
 	<!-- 새싹(leaf) --> 
 	
@@ -64,44 +65,45 @@
 		SELECT * FROM SUB_LEAF 
 		WHERE SUB_USER = #{subUser}
 		]]>
-	</select>
-	
-<!-- 	<select id="getSubList_leaf" resultType="sub">
-		<![CDATA[
-		SELECT * FROM SUB_LEAF 
-		WHERE SL_USER = #{user}
-		]]>
-	</select> -->
+	</select>	
 	
 	<!-- 나무(tree) --> 
 	
 	<insert id="insertSub_tree">
-	<![CDATA[
-		INSERT INTO SUB_TREE(ST_ID, ST_SELECTED_ID, ORDER_CATE, ST_USER, ST_DATE, ST_ADD, ST_PRICE, ST_REQ)
-		VALUES((SELECT NVL(MAX(ST_ID), 0) + 1 FROM SUB_TREE), #{select}, #{cate}, #{user}, #{date}, #{add}, 34900, #{req})
-	]]>
-	</insert>
-	
-	<update id="updateSub_tree">
-		<![CDATA[
-		UPDATE SUB_TREE 
-		SET ST_SELECTED_ID = #{select}, ST_DATE = #{date}, ST_ADD = #{add}, ST_REQ = #{req}
-		WHERE ST_ID = #{id}
-		]]>
-	</update>
-	
-	<delete id="deleteSub_tree">
-	<![CDATA[
-		DELETE SUB_TREE 
-		WHERE ST_ID = #{id}
-	]]>
-	</delete>	
-	
-	<select id="getSub_tree" resultType="sub">
-		<![CDATA[
-		SELECT * FROM SUB_TREE 
-		WHERE ST_ID = #{id}
-		]]>
-	</select>
+   <![CDATA[
+      INSERT INTO SUB_TREE(SUB_ID, TREE_SELECT, SUB_USER, TREE_ADD, SUB_PRICE, TREE_REQ)
+      VALUES((SELECT NVL(MAX(SUB_ID), 0) + 1 FROM SUB_TREE), #{treeSelect}, #{subUser}, #{treeAdd}, #{subPrice}, #{treeReq})
+   ]]>
+   </insert>
+   
+   <update id="updateSub_tree">
+      <![CDATA[
+      UPDATE SUB_TREE 
+      SET TREE_SELECT = #{treeSelect}, TREE_ADD = #{treeAdd, jdbcType=VARCHAR}, SUB_PRICE = #{subPrice}, TREE_REQ = #{treeReq, jdbcType=VARCHAR}
+      WHERE SUB_USER = #{subUser}
+      ]]>
+   </update>
+   
+   <delete id="deleteSub_tree">
+   <![CDATA[
+      DELETE SUB_TREE 
+      WHERE SUB_USER = #{subUser}
+   ]]>
+   </delete>   
+   
+   <select id="getSub_tree" resultType="sub">
+      <![CDATA[
+      SELECT * FROM SUB_TREE
+      WHERE SUB_USER = #{subUser}
+      ]]>
+      
+   </select>
+      <select id="getTeaList" resultType="subTea">
+      <![CDATA[
+      SELECT * FROM TEA_T
+      WHERE 1 = 1
+      ORDER BY TT_ID
+      ]]>
+   </select>
 	
 </mapper>

@@ -21,7 +21,7 @@ public class SubVO {
 	private String tagBlend;
 	
 	// 나무 
-	private String treeSelectedId;
+	private String treeSelect;
 	private String treeAdd;
 	private String treeReq;
 	
@@ -98,11 +98,11 @@ public class SubVO {
 	public void setTagBlend(String tagBlend) {
 		this.tagBlend = tagBlend;
 	}
-	public String getTreeSelectedId() {
-		return treeSelectedId;
+	public String getTreeSelect() {
+		return treeSelect;
 	}
-	public void setTreeSelectedId(String treeSelectedId) {
-		this.treeSelectedId = treeSelectedId;
+	public void setTreeSelect(String treeSelect) {
+		this.treeSelect = treeSelect;
 	}
 	public String getTreeAdd() {
 		return treeAdd;
@@ -122,8 +122,8 @@ public class SubVO {
 		return "SubVO [subId=" + subId + ", orderCate=" + orderCate + ", subUser=" + subUser + ", subDate=" + subDate
 				+ ", subPrice=" + subPrice + ", tagTaste=" + tagTaste + ", tagCaff=" + tagCaff + ", tagEffect="
 				+ tagEffect + ", tagSeason=" + tagSeason + ", tagBase=" + tagBase + ", tagDrink=" + tagDrink
-				+ ", tagBlend=" + tagBlend + ", treeSelectedId=" + treeSelectedId + ", treeAdd=" + treeAdd
-				+ ", treeReq=" + treeReq + "]";
+				+ ", tagBlend=" + tagBlend + ", treeSelect=" + treeSelect + ", treeAdd=" + treeAdd + ", treeReq="
+				+ treeReq + "]";
 	}
-	
+
 }

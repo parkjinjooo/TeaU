@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!doctype html>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<% 
+	String data =  request.getParameter("data"); //data 를 String 으로 변환 
+%> 
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+					   "http://www.w3.org/TR/html4/loose.dtd">
+
 <html lang="en">
 
 <head>
@@ -12,7 +21,7 @@
   <title>Subscribe - Tree</title>
   <link rel="shortcut icon" href="assets/images/feature/11.jpg">
 
-  <!-- fraimwork - css include -->
+  <!-- framework - css include -->
   <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
 
   <!-- icon font - css include -->
@@ -34,6 +43,9 @@
   <!-- custom - css include -->
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
   <link rel="stylesheet" type="text/css" href="assets/css/teau.css">
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
 </head>
@@ -72,156 +84,43 @@
             <div class="subcribe_title">
               <h2 class="form_title text-center text-uppercase" style="font-size: 35px;">원하는 항목을 골라보세요(중복가능)</h2>
             </div>
+            
+            
 
+            <form id="tree_form" method="get" action="insertSubTree.do">
+            
+            <input type=hidden id="subUser" name="subUser" value="${user.memberId}"/>
+            
             <div class="row justify-content-center">
               <div id="tt_base" class="sub_tree">
                 <p class="sub_tree_title">베이스 선택</p>
 
                 <div class="list_wrap">
                   <ul>
-                    <li class="tt_goods tt_base">
-                      <label for="chk1">
-                        <div>
-                          <div class="tt_cate">
-                            <span>[카테출력] 녹차 </span>
-                          </div><br>
-                          <div class="tt_thum">
-                            <!-- <img src="${list.ttThumImg}"> -->
-                            <img src="./assets/images/tree/tt_1.png" alt="[상품명]세작" class="tt_thum_img">
-                          </div>
-                          <div class="tt_info">
-                            <input type="checkbox" value="1[상품고유번호]" name="tt_name" id="chk1">
-                            <p class="tt_name"> 세작</p> </input>
-                            <p class="tt_explain">어린잎을 덖어 만든 푸릇하고 깔끔한 풀맛 녹차 </p>
-                          </div>
-                      </label>
-                    </li>
+                  
+                  <c:forEach items="${teaList}" var="tea">
+                    <c:if test="${tea.ttGen eq 'base'}">
+                    
                     <li class="tt_goods">
                       <label>
-                        <div>
                           <div class="tt_cate">
-                            <span>[카테출력] 녹차</span>
+                            <span>${tea.ttCate}</span>
                           </div><br>
                           <div class="tt_thum">
                             <!-- <img src="${list.ttThumImg}"> -->
-                            <img src="./assets/images/tree/tt_2.png" alt="호지차" class="tt_thum_img">
+                            <img src="./assets/images/tree/tt_${tea.ttId}.png" alt="${tea.ttName}" class="tt_thum_img">
                           </div>
                           <div class="tt_info">
-                            <input type="checkbox" value="2[상품고유번호]" name="tt_name" id="chk2">
-                            <p class="tt_name"> 호지차 </p></input>
-                            <p class="tt_explain"> 찻잎을 볶아 만든 고소한 맛과 풍부한 향 </p>
+                            <input type="checkbox" value="${tea.ttName}" name="treeSelect" id="tt_${tea.ttId}" class="tt_base">
+                            <p class="tt_name"> ${tea.ttName} </p>
+                            <p class="tt_explain"> ${tea.ttInfo} </p>
                           </div>
                       </label>
                     </li>
-                    <li class="tt_goods">
-                      <label>
-                        <div>
-                          <div class="tt_cate">
-                            <span> 반발효차</span>
-                          </div><br>
-                          <div class="tt_thum">
-                            <!-- <img src="${list.ttThumImg}"> -->
-                            <img src="./assets/images/tree/tt_3.png" alt="백차" class="tt_thum_img">
-                          </div>
-                          <div class="tt_info">
-                            <input type="checkbox" value="3[상품고유번호]" name="tt_name">
-                            <p class="tt_name">백차</p> </input>
-                            <p class="tt_explain"> 산뜻한 맛과 향 </p>
-                          </div>
-                      </label>
-                    </li>
+                   </c:if>
+                </c:forEach>
 
-                    <li class="tt_goods">
-                      <label>
-                        <div>
-                          <div class="tt_cate">
-                            <span>반발효차</span>
-                          </div><br>
-                          <div class="tt_thum">
-                            <!-- <img src="${list.ttThumImg}"> -->
-                            <img src="./assets/images/tree/tt_4.png" alt="우롱차" class="tt_thum_img">
-                          </div>
-                          <div class="tt_info">
-                            <input type="checkbox" value="4[상품고유번호]" name="tt_name">
-                            <p class="tt_name">우롱차</p></input>
-                            <p class="tt_explain"> 부드러운 향기 </p>
-                          </div>
-                      </label>
-                    </li>
-
-                    <li class="tt_goods">
-                      <label>
-
-                        <div>
-                          <div class="tt_cate">
-                            <span>홍차</span>
-                          </div><br>
-                          <div class="tt_thum">
-                            <!-- <img src="${list.ttThumImg}"> -->
-                            <img src="./assets/images/tree/tt_5.png" alt="홍차" class="tt_thum_img">
-                          </div>
-                          <div class="tt_info">
-                            <input type="checkbox" value="5[상품고유번호]" name="tt_name">
-                            <p class="tt_name">아쌈</p> </input>
-                            <p class="tt_explain"> 진한 맛과 맥아향 <br> ☆밀크티 추천 </p>
-                          </div>
-                      </label>
-                    </li>
-
-                    <li class="tt_goods">
-                      <label>
-                        <div>
-                          <div class="tt_cate">
-                            <span>홍차</span>
-                          </div><br>
-                          <div class="tt_thum">
-                            <!-- <img src="${list.ttThumImg}"> -->
-                            <img src="./assets/images/tree/tt_6.png" alt="홍차" class="tt_thum_img">
-                          </div>
-                          <div class="tt_info">
-                            <input type="checkbox" value="6[상품고유번호]" name="tt_name">
-                            <p class="tt_name">실론</p></input>
-                            <p class="tt_explain">[상세설명 출력위치] </p>
-                          </div>
-                      </label>
-                    </li>
-
-                    <li class="tt_goods">
-                      <label>
-                        <div>
-                          <div class="tt_cate">
-                            <span>홍차</span>
-                          </div><br>
-                          <div class="tt_thum">
-                            <!-- <img src="${list.ttThumImg}"> -->
-                            <img src="./assets/images/tree/tt_7.png" alt="홍차" class="tt_thum_img">
-                          </div>
-                          <div class="tt_info">
-                            <input type="checkbox" value="7[상품고유번호]" name="tt_name">
-                            <p class="tt_name">보이차</p></input>
-                            <p class="tt_explain">[상세설명 출력위치] </p>
-                          </div>
-                      </label>
-                    </li>
-
-                    <li class="tt_goods">
-                      <label>
-
-                        <div>
-                          <div class="tt_cate">
-                            <span>홍차</span>
-                          </div><br>
-                          <div class="tt_thum">
-                            <!-- <img src="${list.ttThumImg}"> -->
-                            <img src="./assets/images/tree/tt_8.png" alt="홍차" class="tt_thum_img">
-                          </div>
-                          <div class="tt_info">
-                            <input type="checkbox" value="8[상품고유번호]" name="tt_name">
-                            <p class="tt_name">루이보스</p></input>
-                            <p class="tt_explain">[상세설명 출력위치] </p>
-                          </div>
-                      </label>
-                    </li>
+                
                   </ul>
                 </div>
               </div>
@@ -232,150 +131,28 @@
 
                 <div class="list_wrap">
                   <ul>
+                  
+                  <c:forEach items="${teaList}" var="tea">
+                    <c:if test="${tea.ttGen eq 'blend'}">
+           		                     
                     <li class="tt_goods tt_base">
                       <label>
-
-                        <div>
                           <div class="tt_cate">
-                            <span>[카테출력] 허브 </span>
+                            <span> ${tea.ttCate} </span>
                           </div><br>
                           <div class="tt_thum">
                             <!-- <img src="${list.ttThumImg}"> -->
-                            <img src="./assets/images/tree/tt_9.png" alt="[상품명]세이지" class="tt_thum_img">
+                            <img src="./assets/images/tree/tt_${tea.ttId}.png" alt="${tea.ttName}" class="tt_thum_img">
                           </div>
                           <div class="tt_info">
-                            <input type="checkbox" value="9" name="tt_name">
-                            <p class="tt_name"> 세이지</p> </input>
-                            <p class="tt_explain">어린잎을 덖어 만든 푸릇하고 깔끔한 풀맛 녹차 </p>
+                            <input type="checkbox" value="${tea.ttName}" name="treeSelect" id="tt_${tea.ttId}" class="tt_blend">
+                            <p class="tt_name"> ${tea.ttName} </p>
+                            <p class="tt_explain"> ${tea.ttInfo} </p>
                           </div>
                       </label>
                     </li>
-                    <li class="tt_goods">
-                      <label>
-
-                        <div>
-                          <div class="tt_cate">
-                            <span>[카테출력] 허브 </span>
-                          </div><br>
-                          <div class="tt_thum">
-                            <!-- <img src="${list.ttThumImg}"> -->
-                            <img src="./assets/images/tree/tt_10.png" alt="로즈마리" class="tt_thum_img">
-                          </div>
-                          <div class="tt_info">
-                            <input type="checkbox" value="10" name="tt_name">
-                            <p class="tt_name"> 로즈마리 </p></input>
-                            <p class="tt_explain"> 찻잎을 볶아 만든 고소한 맛과 풍부한 향 </p>
-                          </div>
-                      </label>
-                    </li>
-                    <li class="tt_goods">
-                      <label>
-
-                        <div>
-                          <div class="tt_cate">
-                            <span>[카테출력] 허브 </span>
-                          </div><br>
-                          <div class="tt_thum">
-                            <!-- <img src="${list.ttThumImg}"> -->
-                            <img src="./assets/images/tree/tt_11.png" alt="레몬밤" class="tt_thum_img">
-                          </div>
-                          <div class="tt_info">
-                            <input type="checkbox" value="11" name="tt_name">
-                            <p class="tt_name"> 레몬밤 </p></input>
-                            <p class="tt_explain"> 설명 </p>
-                          </div>
-                      </label>
-                    </li>
-                    <li class="tt_goods">
-                      <label>
-
-                        <div>
-                          <div class="tt_cate">
-                            <span>[카테출력] 허브 </span>
-                          </div><br>
-                          <div class="tt_thum">
-                            <!-- <img src="${list.ttThumImg}"> -->
-                            <img src="./assets/images/tree/tt_12.png" alt="레몬밤" class="tt_thum_img">
-                          </div>
-                          <div class="tt_info">
-                            <input type="checkbox" value="12" name="tt_name">
-                            <p class="tt_name"> 레몬그라스 </p></input>
-                            <p class="tt_explain"> 설명 </p>
-                          </div>
-                      </label>
-                    </li>
-                    <li class="tt_goods">
-                      <label>
-
-                        <div>
-                          <div class="tt_cate">
-                            <span>[카테출력] 허브 </span>
-                          </div><br>
-                          <div class="tt_thum">
-                            <!-- <img src="${list.ttThumImg}"> -->
-                            <img src="./assets/images/tree/tt_13.png" alt="레몬밤" class="tt_thum_img">
-                          </div>
-                          <div class="tt_info">
-                            <input type="checkbox" value="13" name="tt_name">
-                            <p class="tt_name"> 페퍼민트 </p></input>
-                            <p class="tt_explain"> 설명 </p>
-                          </div>
-                      </label>
-                    </li>
-                    <li class="tt_goods">
-                      <label>
-
-                        <div>
-                          <div class="tt_cate">
-                            <span>[카테출력] 허브 </span>
-                          </div><br>
-                          <div class="tt_thum">
-                            <!-- <img src="${list.ttThumImg}"> -->
-                            <img src="./assets/images/tree/tt_14.png" alt="레몬밤" class="tt_thum_img">
-                          </div>
-                          <div class="tt_info">
-                            <input type="checkbox" value="14" name="tt_name">
-                            <p class="tt_name"> 로즈힙 </p></input>
-                            <p class="tt_explain"> 설명 </p>
-                          </div>
-                      </label>
-                    </li>
-                    <li class="tt_goods">
-                      <label>
-
-                        <div>
-                          <div class="tt_cate">
-                            <span>[카테출력] 허브 </span>
-                          </div><br>
-                          <div class="tt_thum">
-                            <!-- <img src="${list.ttThumImg}"> -->
-                            <img src="./assets/images/tree/tt_15.png" alt="레몬밤" class="tt_thum_img">
-                          </div>
-                          <div class="tt_info">
-                            <input type="checkbox" value="15" name="tt_name">
-                            <p class="tt_name"> 스테비아 </p></input>
-                            <p class="tt_explain"> 설명 </p>
-                          </div>
-                      </label>
-                    </li>
-                    <li class="tt_goods">
-                      <label>
-
-                        <div>
-                          <div class="tt_cate">
-                            <span>[카테출력] 허브 </span>
-                          </div><br>
-                          <div class="tt_thum">
-                            <!-- <img src="${list.ttThumImg}"> -->
-                            <img src="./assets/images/tree/tt_16.png" alt="레몬밤" class="tt_thum_img">
-                          </div>
-                          <div class="tt_info">
-                            <input type="checkbox" value="16" name="tt_name">
-                            <p class="tt_name"> 허니부쉬 </p></input>
-                            <p class="tt_explain"> 설명 </p>
-                          </div>
-                      </label>
-                    </li>
+                   </c:if>
+                </c:forEach>
                   </ul>
                 </div>
               </div>
@@ -383,80 +160,64 @@
               
               <div id="tt_blend" class="sub_tree tt_add">
                 <p class="sub_tree_title">추가 선택</p>
-              
+
                 <div class="list_wrap">
                   <ul>
+           		  <c:forEach items="${teaList}" var="tea">
+                    <c:if test="${tea.ttGen eq 'add'}">
                     <li class="tt_goods tt_base">
                       <label>
-                        <div>
                           <div class="tt_cate">
                             <span> 부자재 </span>
                           </div><br>
                           <div class="tt_thum">
                             <!-- <img src="${list.ttThumImg}"> -->
-                            <img src="./assets/images/tree/tt_49.png" alt="[상품명]" class="tt_thum_img">
+                            <img src="./assets/images/tree/tt_${tea.ttId}.png" alt="${tea.ttName}" class="tt_thum_img">
                           </div>
                           <div class="tt_info">
-                            <input type="checkbox" value="49" name="tt_name">
-                            <p class="tt_name"> 틴케이스(2개) </p> </input>
-                            <p class="tt_price">[가격출력] 5,000원 </p>
+                            <input type="checkbox" value="${tea.ttName}" name="treeAdd" id="tt_${tea.ttId}" class="tt_add">
+                            <p class="tt_name"> ${tea.ttName} </p> 
+                            <input type="hidden" value="${tea.ttPrice}" id="price${tea.ttId}"/>
+                            <p class="tt_price">${tea.ttPrice}원 </p>
                           </div>
                       </label>
                     </li>
-              
-                    <li class="tt_goods tt_base">
-                      <label>
-                        <div>
-                          <div class="tt_cate">
-                            <span> 부자재 </span>
-                          </div><br>
-                          <div class="tt_thum">
-                            <!-- <img src="${list.ttThumImg}"> -->
-                            <img src="./assets/images/tree/tt_50.png" alt="[상품명]" class="tt_thum_img">
-                          </div>
-                          <div class="tt_info">
-                            <input type="checkbox" value="50" name="tt_name">
-                            <p class="tt_name"> 티백 </p> </input>
-                            <p class="tt_price">[가격출력] 5,000원 </p>
-                          </div>
-                      </label>
-                    </li>
-              
-                    <li class="tt_goods tt_base">
-                      <label>
-                        <div>
-                          <div class="tt_cate">
-                            <span> 부자재 </span>
-                          </div><br>
-                          <div class="tt_thum">
-                            <!-- <img src="${list.ttThumImg}"> -->
-                            <img src="./assets/images/tree/tt_51.png" alt="[상품명]" class="tt_thum_img">
-                          </div>
-                          <div class="tt_info">
-                            <input type="checkbox" value="51" name="tt_name">
-                            <p class="tt_name"> 은박포장지 </p> </input>
-                            <p class="tt_price">[가격출력] 1,000원 </p>
-                          </div>
-                      </label>
-                    </li>
+                </c:if>
+               </c:forEach>       
+   
                   </ul>
                 </div>
+                </div>
+                
+                
 
+<!--                 <div id="tt_req" class="sub_tree tt_req"> -->
                 <div id="tt_req" class="sub_tree">
                   <p class="sub_tree_title">요청사항</p>
-                  <p>알레르기 여부 등 요청사항이 있으면 작성해주세요.</p>
+                  <p style="font-size:1.2rem;">알레르기 여부 등 요청사항이 있으면 작성해주세요.</p>
                 <div>
-                  <textarea placeholder=""" name="tt_req" value="" required> </textarea>
+                  <textarea placeholder="요청사항을 입력해주세요" name="treeReq" value="" id="treeReq"> </textarea>
                 </div>
               </div>
+             
+            <!-- 가격출력 -->
+            
+            
+            <div id="tt_price" class="sub_tree">
+              <p>결제금액/월</p>
+              <input type="text" name="subPrice" id="totalPrice" class="totalPrice" size=9 value="34900" readonly>원
+            </div>
 
               <div class="text-center">
                 <br />
                 <br />
                 <br />
-                <button type="submit" class="btn btn_primary text-uppercase">나무 구독 신청</button>
+                <input type="button" id="btn_subSubmit" value="구독 신청"
+                class="btn btn_primary text-uppercase" onclick="inORUp();">
+               </input>
               </div>
             </div>
+            </form>
 
             <!--여기 위 부분을 수정-->
 
@@ -474,5 +235,207 @@
         ================================================== -->
     </main>
 <jsp:include page="footer.jsp"></jsp:include>
+
+
+
+  <script>
+    var chkGoodsList = new Array();
+    // var chkGoodsList = [];
+    var chkCnt = 0;
+    var selected;
+    var addprice = 0;
+
+    $(document).ready(function () {
+    	
+      //각각 체크박스를 클릭시 체크 알아보게 변화
+      $("input:checkbox").on("click", function () {
+      // chkGoodsList.push($(this).val());
+      if($(this).is(":checked") == true){
+        $(this).parents('li').addClass('selected');
+      } else {
+        $(this).parents('li').removeClass('selected');
+      }
+      //
+      // return false;
+      // $(this).parents('li').toggleClass('selected');
+    });
+      
+      
+
+      // 업데이트 시 기존 사용자의 선택 불러오기
+      var data = <%=data%>;
+      console.log(data);
+      
+      if(data != null){
+    	  //stirng을 다시 JSON 객체로 변환
+    	  var obj = JSON.parse(data);
+    	  console.log(obj);
+    	  
+    	  var treeSelect = obj['subInfo'].treeSelect.split(',');
+    	  var treeAdd = obj['subInfo'].treeAdd.split(',');
+    	  //treeAdd = treeAdd.split(',');
+    	  var treeReq = obj['subInfo'].treeReq;
+    	  var subPrice = obj['subInfo'].subPrice;
+    	  
+    	  console.log(treeSelect);
+    	  console.log(treeAdd);
+    	  console.log(treeReq);
+    	  console.log(subPrice);
+
+    	  $('#treeReq').val(treeReq);
+    	  $('#totalPrice').val(subPrice);
+    	  
+    	  $('input:checkbox[name="treeSelect"]').each(function(){
+    		  for(var i=0 ; i< treeSelect.length ; i++){    			  
+	    		  if(this.value == treeSelect[i]){
+	    			  this.checked = true;
+	    		  }
+    		  } 
+    		});
+    	  
+		  $('input:checkbox[name="treeAdd"]').each(function(){
+				for(var i=0; i<treeAdd.length ;i++){    			  
+		    		  if(this.value == treeAdd[i] ){
+		    			  this.checked = true;
+		    		  }
+	    		  } 				
+			});    	  
+    	  
+      }
+      
+      // insert와 update 구분
+      
+      
+      if(data == null){
+ 		  //사용자가 보낸 값이 없으면 - insert
+ 		  $("#btn_subSubmit").val("나무 구독하기")
+      } else {
+    	  //사용자가 보낸 값이 있으면 - update
+    	  $("#btn_subSubmit").val("나무 구독수정")  
+      }
+      
+
+      // 베이스 선택
+      $("input:checkbox[name='treeSelect']").on("click", function () {
+        var chkCntBs = $("input:checkbox[class='tt_base']:checked").length;
+        if (chkCntBs > 3) {
+          $(this).prop("checked", false);
+          alert("베이스는 3개까지만 선택할 수 있습니다.");
+        }
+
+        // 베이스+블렌드 총 갯수 10개 이하
+        // $("input:checkbox[name='select']").on("click", function () {
+          chkCnt = $("input:checkbox[name='treeSelect']:checked").length;
+          if (chkCnt > 10) {
+            $(this).prop("checked", false);
+            alert("10개까지 선택하실 수 있습니다.")
+          }
+        //});
+
+      });
+      
+      
+      $("input:checkbox[name='treeAdd']").on("click", function () {
+    	  var price = $('#totalPrice').val();
+          // value 값을 string으로 가져올 수도 있으니 int로 변환
+          price = parseInt(price);
+          if($('#'+this.id).is(":checked")== true){
+        	if(this.id == 'tt_49') {
+            	var price1 = $('#price49').val();
+  	            price1 = parseInt(price1);
+        	} else if(this.id == 'tt_50') {
+            	var price1 = $('#price50').val();
+            	price1 = parseInt(price1);
+        	} else if(this.id == 'tt_51') {
+            	var price1 = $('#price51').val();
+            	price1 = parseInt(price1);
+        	}
+            price += price1;
+            console.log("49번 플러스");
+            console.log("+"+price1);
+            console.log(price);
+          } else {
+        	  if(this.id == 'tt_49') {
+              	var price1 = $('#price49').val();
+  	            price1 = parseInt(price1);
+          	} else if(this.id == 'tt_50') {
+              	var price1 = $('#price50').val();
+              	price1 = parseInt(price1);
+          	} else if(this.id == 'tt_51') {
+              	var price1 = $('#price51').val();
+              	price1 = parseInt(price1);
+          	}
+            price -= price1;
+            console.log("49번 선택 해제");
+            console.log("-"+price1);
+            console.log(price);
+          }
+          
+          //토탈프라이스에 프라이스값 대입
+          $('#totalPrice').val(price);
+        });
+
+
+    });
+    
+    /* 함수 */
+    
+  
+
+    function inORUp(){
+    	var data = <%=data%>;
+    	if(data == null) {
+    		// 사용자가 보낸 정보가 없으면 insert
+    		var insert = 'insertSubTree.do'
+    		submitChkCount(insert);
+    		
+    	} else {
+    		// 사용자가 보낸 정보가 있으면 update
+    		var update = 'updateSubTree.do'
+    		submitChkCount(update);
+    	}
+    	
+    }
+    
+    function submitChkCount(inOrUp) {
+      chkCnt = $("input:checkbox[name='treeSelect']:checked").length;
+      if(chkCnt == 10) {
+    	  $.ajax({
+              type: 'POST',
+              url: inOrUp,
+              dataType: 'text', // form에 있는 데이터들을 controller로 text타입으로 
+              data: $('#tree_form').serialize(),
+              
+              success: function(data) {
+                 alert(data);
+                 window.location.href = "getSubTree.do"; //JSP 이동 페이지 적기  
+              }, 
+              error: function(e) {
+                 console.log(e);
+              }
+           });
+      
+      } else if(chkCnt < 10) {
+        alert("총 10개 선택 해 주세요. 고객님의 현재 선택 갯수: " + chkCnt + "개");
+        return false;
+        
+      } 
+        
+
+      /*  goSubmit;
+        alert("구독신청 완료") */
+        
+      }
+    
+
+/*     function goSubmit() {
+      $("#tree_form").submit();
+    } */
+    
+
+   
+
+</script>
+
 </body>
 </html>
