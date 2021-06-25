@@ -72,7 +72,7 @@
 	<insert id="insertSub_tree">
    <![CDATA[
       INSERT INTO SUB_TREE(SUB_ID, TREE_SELECT, SUB_USER, TREE_ADD, SUB_PRICE, TREE_REQ)
-      VALUES((SELECT NVL(MAX(SUB_ID), 0) + 1 FROM SUB_TREE), #{treeSelect}, #{subUser}, #{treeAdd}, #{subPrice}, #{treeReq})
+      VALUES((SELECT NVL(MAX(SUB_ID), 0) + 1 FROM SUB_TREE), #{treeSelect}, #{subUser}, #{treeAdd, jdbcType=VARCHAR}, #{subPrice}, #{treeReq})
    ]]>
    </insert>
    

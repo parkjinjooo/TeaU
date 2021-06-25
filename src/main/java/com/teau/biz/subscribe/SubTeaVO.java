@@ -55,12 +55,12 @@ public class SubTeaVO {
 	public void setTtPrice(int ttPrice) {
 		this.ttPrice = ttPrice;
 	}
-	
 	@Override
 	public String toString() {
 		return "SubTeaVO [ttId=" + ttId + ", ttCate=" + ttCate + ", ttGen=" + ttGen + ", ttName=" + ttName + ", ttImg="
 				+ ttImg + ", ttInfo=" + ttInfo + ", ttPrice=" + ttPrice + "]";
 	}
-
 	
+	
+
 }

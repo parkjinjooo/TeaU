@@ -14,6 +14,7 @@ public class UserVO {
 	private String memberAddress;
 	private int memberPoint;
 	private Date memberJoindate;
+	private String memberSub;
 	
 	public String getMemberId() {
 		return memberId;
@@ -69,14 +70,18 @@ public class UserVO {
 	public void setMemberJoindate(Date memberJoindate) {
 		this.memberJoindate = memberJoindate;
 	}
-	
+	public String getMemberSub() {
+		return memberSub;
+	}
+	public void setMemberSub(String memberSub) {
+		this.memberSub = memberSub;
+	}
 	@Override
 	public String toString() {
 		return "UserVO [memberId=" + memberId + ", memberPass=" + memberPass + ", memberPasscheck=" + memberPasscheck
 				+ ", memberName=" + memberName + ", memberPhone=" + memberPhone + ", memberZipcode=" + memberZipcode
 				+ ", memberAddress=" + memberAddress + ", memberPoint=" + memberPoint + ", memberJoindate="
-				+ memberJoindate + "]";
+				+ memberJoindate + ", memberSub=" + memberSub + "]";
 	}
-
 	
 }

@@ -87,6 +87,7 @@
 
 				<form id="insertForm" method="POST">
 					<input type="hidden" id="subUser" name="subUser" value="${user.memberId}"/>
+					<input type="hidden" id="subCheck" name="subCheck" value="${user.memberSub}"/>
 					<div class="row justify-content-center">						
 						<!--나눠놓은 기준은 행 단위-->
 						<div class="col-lg-2"></div>
@@ -212,6 +213,7 @@
       ================================================== -->
 	<jsp:include page="footer.jsp"></jsp:include>
 <script>
+
 		$(document).ready(function() {
 			var data = <%=data%>;
 			console.log(data);
@@ -266,11 +268,20 @@
 		
 		
 		function inOrUp(){
+			
+			var subCheck = $('#subCheck').val();
+			console.log(subCheck);
+			
 			var data = <%=data%>
 			if(data == null){
-				var insert = 'insertSubLeaf.do';
-				checkbox_Check(insert);
-			}else{
+				if(subCheck == 1){
+					alert("이미 구독 중인 상품이 있습니다.");
+					location.href="index.jsp";
+				}else{
+					var insert = 'insertSubLeaf.do';
+					checkbox_Check(insert);		
+				}
+			}else {
 				var update = 'updateSubLeaf.do';
 				checkbox_Check(update);
 			}

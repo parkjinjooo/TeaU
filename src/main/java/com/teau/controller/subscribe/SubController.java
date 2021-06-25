@@ -25,19 +25,24 @@ import com.teau.biz.user.UserVO;
 public class SubController {
 	
 	@Autowired
-	@Qualifier("leafService")
-	private SubService leafService;
-	
-	@Autowired
 	@Qualifier("seedService")
 	private SubService seedService;
 	
 	@Autowired
+	@Qualifier("leafService")
+	private SubService leafService;
+
+	@Autowired
 	@Qualifier("treeService")
 	private TreeServiceImpl treeService;
-
+	
+	// 구독 메인 
 	@RequestMapping("/subscribe_main.do")
-	public String main() {
+	public String main(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		UserVO user = (UserVO) session.getAttribute("user");
+		
+		model.addAttribute("user", user);
 		return "WEB-INF/JSP/subscribe_main.jsp";
 	}
 	
@@ -120,7 +125,7 @@ public class SubController {
 	}
 	
 	// 나무 구독 수정
-	@RequestMapping(value="/subTreeUpdataLoad.do", produces="application/text; charset=utf8")
+	@RequestMapping(value="/subtreeupdate.do", produces="application/text; charset=utf8")
 	@ResponseBody
 	public String updataLoad(@RequestParam Map<String, String> paramMap) throws JsonProcessingException{
 		SubVO sub = new SubVO();

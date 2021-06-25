@@ -168,8 +168,8 @@
                       
                     </div>
                     <div>
-                      <button type="button" class="btn btn-primary btn-radio" onclick="update_Check();">수정</button>                    
-                      <button type="button" class="btn btn-primary btn-radio" onclick="deletesub();">해지</button>
+                      <button type="button" class="btn btn-primary btn-radio" onclick="check()">수정</button>                    
+                      <button type="button" class="btn btn-primary btn-radio" onclick="deletesub()">해지</button>
                     </div>
                   </div>
                   </form>
@@ -318,65 +318,42 @@
 
 <jsp:include page="footer.jsp"></jsp:include>
 <script>
-function update_Check(){
-    
-    if( "${sub.orderCate}" == "씨앗"){
-       var memberId = $('#memberId').val();
-         $.ajax({
-            type : 'POST',
-            url : 'subseedupdate.do',
-            data : {'memberId' : memberId},
-                  success : function(data) {
-                     window.location.href = ("subscribe_seed.do?data=" + encodeURIComponent(JSON
-                           .stringify(data)));
-                     //JSON을 string으로 변환해서 가..!
-                  },
-                  error : function(e) {
-                     console.log(e);
-                  }
-               });
-       
-         
-      } else if( "${sub.orderCate}" == "새싹") {
-         var memberId = $('#memberId').val();
-         $.ajax({
-            type:'POST',
-            url:'subleafupdate.do',
-            dataType:'text',
-            data: {'memberId' : memberId},
-            success:function(data){
-               // encodeURIComponent : URI로 데이터를 전달하기 위해서 문자열을 인코딩
-               window.location.href=("subscribe_leaf.do?data="+encodeURIComponent(JSON.stringify(data))); // JSON -> String 
-            },
-            error: function(e){
-               console.log(e);
-            }
-         });
-               
-      
-      } else if ("${sub.orderCate}" == "나무"){
-         
-         var memberId = $('#memberId').val();
-         $.ajax({
-               type:'POST',
-               url:'subTreeUpdataLoad.do',
-               dataType:'text',
-               // id만 보내주면 되서 시리얼라이즈는 하지 않음
-               data: {'memberId' : memberId},
-               
-               success:function(data){
-                  console.log(data);
-                  //서버가 보내준 data(유저의 선택)을 JSON 문자열(스트링)로 변환한다
-                  window.location.href=("subscribe_tree.do?data="+encodeURIComponent(JSON.stringify(data)));      
-               },
-               error: function(e){
-                  console.log(e);
-               }
-         });
-         
-         
-      }    
+
+function check(){
+	 var check = '${sub.orderCate}';
+	
+	if(check == '씨앗'){
+		var seed = 'seed';
+		update_Check(seed);
+	}else if(check == '새싹'){
+		var leaf = 'leaf';
+		update_Check(leaf);
+	}else if(check == '나무'){
+		var tree = 'tree';
+		update_Check(tree);
+	}
 }
+
+
+
+function update_Check(check){
+	var memberId = $('#memberId').val();
+	$.ajax({
+		type:'POST',
+		url:'sub' + check +'update.do',
+		dataType:'text',
+		data: {'memberId' : memberId},
+		success:function(data){
+			// encodeURIComponent : URI로 데이터를 전달하기 위해서 문자열을 인코딩
+			window.location.href=("subscribe_"+check+".do?data="+encodeURIComponent(JSON.stringify(data))); // JSON -> String 
+		},
+		error: function(e){
+			console.log(e);
+		}
+	});
+} 
+    
+    
  
 function deletesub(){
 	if (confirm("정말로 해지하시겠습니까?") == true) {
