@@ -87,8 +87,8 @@
 						style="font-size: 35px;">원하는 항목을 골라보세요(중복 가능)</h2>
 
 					<form action="insertSubSeed.do" id="insertForm" method="POST">
-						<input type="hidden" id="subUser" name="subUser"
-							value="${user.memberId}" />
+						<input type="hidden" id="subUser" name="subUser" value="${member.memberId}" />
+						<input type="hidden" id="subCheck" name="subCheck" value="${member.memberSub}"/>
 						<div class="row justify-content-center">
 
 
@@ -239,13 +239,20 @@
 		
 		// insert , update 경로 구분
 		function inORUp(){
+			
+			var subCheck = $('#subCheck').val();
+			
+		
 			var data = <%=data%>;
 			if(data == null) {
-				// 사용자가 보낸 정보가 없으면 insert
-				var insert = 'insertSubSeed.do'
-				checkbox(insert);
+				if(subCheck == 1){
+					alert("이미 구독 중인 상품이 있습니다.");
+					location.href="index.jsp";
+				}else{
+					var insert = 'insertSubSeed.do'
+						checkbox(insert);
+				}
 			} else {
-				// 사용자가 보낸 정보가 있으면 update
 				var update = 'updateSubSeed.do'
 				checkbox(update);
 			}

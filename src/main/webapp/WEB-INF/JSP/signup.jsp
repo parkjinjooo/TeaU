@@ -64,7 +64,7 @@
                 <div class="col-lg-8">
                   <div class="form_item">
                     <label for="id">아이디</label>
-                    <input id="userid" type="email" name="memberId" placeholder="email을 입력해주세요." autofocus required/>
+                    <input id="userid" type="text" name="memberId" placeholder="Id을 입력해주세요." autofocus required/>
                   </div>
                 </div>
                 <div class="col-lg-4" style="display: flex; align-items: center;">
@@ -88,6 +88,12 @@
                   <div class="form_item">
                     <label for="name">이름</label>
                     <input type="text" name="memberName" placeholder="성함을 입력해주세요." required/>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="form_item">
+                    <label for="email">이메일</label>
+                    <input type="email" name="memberEmail" placeholder="이메일을 입력해주세요." required/>
                   </div>
                 </div>
                 <div class="col-lg-6">

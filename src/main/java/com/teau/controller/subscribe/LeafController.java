@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.teau.biz.member.MemberVO;
 import com.teau.biz.subscribe.SubService;
 import com.teau.biz.subscribe.SubVO;
-import com.teau.biz.user.UserVO;
 
 @Controller
 public class LeafController {
@@ -28,15 +28,13 @@ public class LeafController {
 	@ResponseBody // viewResolver로 넘어가는 것을 방지 // Model은 json타입으로 오는 정보들을 vo로 맞춰주기 위히여
 	public String insertSub(@ModelAttribute SubVO vo, HttpServletRequest request) throws IOException {
 		HttpSession session = request.getSession();
-		UserVO user = (UserVO) session.getAttribute("user");
-		System.out.println(user.getMemberSub());
-		user.setMemberSub("1");
-		System.out.println(user.getMemberSub());
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		member.setMemberSub("1");
 		
 		
 		
 		leafService.insertSub(vo);
-		return "구독 신청이 완료되었습니다.";
+		return "새싹구독 신청이 완료되었습니다.";
 	}
 	
 	// 수정
@@ -52,12 +50,11 @@ public class LeafController {
 	@RequestMapping("/deleteSubLeaf.do")
 	public String deleteSub(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		UserVO user = (UserVO)session.getAttribute("user");
-		user.setMemberSub("0");
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		member.setMemberSub("0");
 		
 		SubVO vo = new SubVO();
-		vo.setSubUser(user.getMemberId());
-		System.out.println(user.getMemberId());
+		vo.setSubUser(member.getMemberId());
 		leafService.deleteSub(vo);
 		return "redirect:mypage.do";
 	}

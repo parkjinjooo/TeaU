@@ -88,8 +88,8 @@
             
 
             <form id="tree_form" method="get" action="insertSubTree.do">
-            
-            <input type=hidden id="subUser" name="subUser" value="${user.memberId}"/>
+            <input type=hidden id="subUser" name="subUser" value="${member.memberId}"/>
+            <input type=hidden id="subCheck" name="subCheck" value="${member.memberSub}"/>
             
             <div class="row justify-content-center">
               <div id="tt_base" class="sub_tree">
@@ -272,8 +272,10 @@
     	  console.log(obj);
     	  
     	  var treeSelect = obj['subInfo'].treeSelect.split(',');
-    	  var treeAdd = obj['subInfo'].treeAdd.split(',');
-    	  //treeAdd = treeAdd.split(',');
+    	  var treeAdd = obj['subInfo'].treeAdd;
+    	  if(treeAdd != null){
+    		  treeAdd = treeAdd.split(',');
+    	  }
     	  var treeReq = obj['subInfo'].treeReq;
     	  var subPrice = obj['subInfo'].subPrice;
     	  
@@ -281,10 +283,13 @@
     	  console.log(treeAdd);
     	  console.log(treeReq);
     	  console.log(subPrice);
-
+	
+    	  // 요청사항
     	  $('#treeReq').val(treeReq);
+    	  // 총 가격 
     	  $('#totalPrice').val(subPrice);
     	  
+    	  // 아이템 선택 뿌려주기 
     	  $('input:checkbox[name="treeSelect"]').each(function(){
     		  for(var i=0 ; i< treeSelect.length ; i++){    			  
 	    		  if(this.value == treeSelect[i]){
@@ -293,19 +298,21 @@
     		  } 
     		});
     	  
-		  $('input:checkbox[name="treeAdd"]').each(function(){
-				for(var i=0; i<treeAdd.length ;i++){    			  
-		    		  if(this.value == treeAdd[i] ){
-		    			  this.checked = true;
-		    		  }
-	    		  } 				
-			});    	  
-    	  
+    	  if(treeAdd != null){
+    		  $('input:checkbox[name="treeAdd"]').each(function(){
+  				for(var i=0; i<treeAdd.length ;i++){    			  
+  		    		  if(this.value == treeAdd[i] ){
+  		    			  this.checked = true;
+  		    		  }
+  	    		  } 				
+  			});    	
+    	  }
       }
       
       // insert와 update 구분
       
       
+      // insult와 update 구분 
       if(data == null){
  		  //사용자가 보낸 값이 없으면 - insert
  		  $("#btn_subSubmit").val("나무 구독하기")
@@ -386,9 +393,14 @@
     	var data = <%=data%>;
     	if(data == null) {
     		// 사용자가 보낸 정보가 없으면 insert
-    		var insert = 'insertSubTree.do'
-    		submitChkCount(insert);
-    		
+    		if(subCheck == 1){
+    			alert("이미 구독 중인 상품이 있습니다.");
+    			location.href="index.jsp";
+    		}else{
+    			var insert = 'insertSubTree.do'
+    	    		submitChkCount(insert);
+    	    		
+    		}
     	} else {
     		// 사용자가 보낸 정보가 있으면 update
     		var update = 'updateSubTree.do'

@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.teau.biz.member.MemberVO;
 import com.teau.biz.subscribe.SubTeaVO;
 import com.teau.biz.subscribe.SubVO;
 import com.teau.biz.subscribe.impl.TreeServiceImpl;
-import com.teau.biz.user.UserVO;
 
 @Controller
 public class TreeController {
@@ -28,16 +28,13 @@ public class TreeController {
     @RequestMapping(value="/insertSubTree.do", produces="application/json; charset=utf8")
 	@ResponseBody // Viewresolver로 넘어가는 것을 막기 위해, json형태로 받음. 그래서 json형태로 받은 것을 modelAtrribute를 통해 vo객체에 담아준다-인서트하기 위해서
 	
-	public String insertSub(@ModelAttribute SubVO vo, Model model) throws IOException {
-		// 구독-insert / 수정-update 분기 처리
-//		if (StringValues.equals("수정")) {
-//		return "updateSubTree.do";
-//	}
+	public String insertSub(@ModelAttribute SubVO vo, HttpServletRequest request) throws IOException {
+    	HttpSession session = request.getSession();
+    	MemberVO member = (MemberVO) session.getAttribute("member");
+    	member.setMemberSub("1");
+    	
 		treeService.insertSub(vo);
-		System.out.println("컨트롤러-나무 구독 저장");
-		//ajax에 담아줄 data
-		return "나무 구독이 신청되었습니다.";
-//		return "redirect:getSubTree.do"; // 구독 완료 후 보여줄 화면
+		return "나무구독 신청이 완료되었습니다.";
 	}
 	
     @RequestMapping(value="/updateSubTree.do", produces="application/json; charset=utf8")
@@ -52,16 +49,15 @@ public class TreeController {
 	@RequestMapping("/deleteSubTree.do")
 	public String deleteSub(HttpServletRequest request) throws IOException{
 		HttpSession session = request.getSession();
-		UserVO user = (UserVO)session.getAttribute("user");
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		member.setMemberSub("0");
 		
 		SubVO vo = new SubVO();
-		vo.setSubUser(user.getMemberId());
-		System.out.println("현재 로그인 중인 멤버 아이디"+user.getMemberId());
+		vo.setSubUser(member.getMemberId());
+		System.out.println("현재 로그인 중인 멤버 아이디"+member.getMemberId());
 		
 		treeService.deleteSub(vo);
-		// 구독 삭제 후 페이지(구독 창 없는 마이페이지?)
-		return "WEB-INF/JSP/mypage.jsp";
-//		return "redirect:mypage.do";
+		return "redirect:mypage.do";
 	}
 	
 	@RequestMapping("/getSubTree.do")
@@ -81,11 +77,11 @@ public class TreeController {
 //			System.out.println(tea.toString());
 //		}
 		HttpSession session = request.getSession();
-		UserVO user = (UserVO)session.getAttribute("user");	
+		MemberVO member = (MemberVO)session.getAttribute("member");	
 		// "member"은 나중에 필요시 "user"로 바꿔서 넘겨줘도 ok
 		model.addAttribute("teaList", list);
-		model.addAttribute("user", user);
-		System.out.println("현재 로그인 중인 멤버 아이디"+(user.getMemberId()));
+		model.addAttribute("user", member);
+		System.out.println("현재 로그인 중인 멤버 아이디"+(member.getMemberId()));
 		
 		
 		return "WEB-INF/JSP/subscribe_tree.jsp";

@@ -187,7 +187,7 @@
     			
 				<form action="loginV.do" method="POST"> 		
                 <p style="text-align:left; margin: 10px 0 0 1px;"> 아이디 </p>
-                <input type="email" id="inputEmail" name="memberId" class="form-control" placeholder="이메일을 입력하세요" required autofocus/>
+                <input type="text" id="inputId" name="memberId" class="form-control" placeholder="아이디를 입력하세요" required autofocus/>
                 <p style="text-align:left; margin: 10px 0 0 1px;"> 비밀번호 </p>
                 <input type="password" id="inputPassword" name="memberPass" class="form-control" placeholder="비밀번호를 입력하세요" required/>
                 

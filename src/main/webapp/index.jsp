@@ -69,7 +69,7 @@
 
             <div class="col-lg-2 col-md-6 col-6">
               <div class="brand_logo">
-                <a class="brand_link" href="index.html">
+                <a class="brand_link" href="index.jsp">
                   <img src="assets/images/logo/TeaU.png"
                     alt="logo_not_found">
                 </a>

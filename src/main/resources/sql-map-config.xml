@@ -14,7 +14,7 @@
 	<typeAliases>
 		<typeAlias type="com.teau.biz.subscribe.SubVO" alias="sub"></typeAlias>
 	    <typeAlias type="com.teau.biz.subscribe.SubTeaVO" alias="subTea"></typeAlias>
-		<typeAlias type="com.teau.biz.user.UserVO" alias="user"></typeAlias>
+		<typeAlias type="com.teau.biz.member.MemberVO" alias="member"></typeAlias>
 	</typeAliases>
 	
 	<!-- Sql Mapper 설정 -->

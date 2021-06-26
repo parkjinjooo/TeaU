@@ -142,6 +142,7 @@
                 
                 <div class="col-md-7 col-xs-4">
                 <form method="POST">
+                <input type= "hidden" id= "memberSub" value="${member.memberSub}" >
                  <input type="hidden" id="memberId" name="memberId" value="${sub.subUser}" >
                   <div class="item_content">
                     <div>
@@ -172,7 +173,7 @@
                       <button type="button" class="btn btn-primary btn-radio" onclick="deletesub()">해지</button>
                     </div>
                   </div>
-                  </form>
+                 </form>
                 </div>
               </div>              
               
@@ -319,6 +320,21 @@
 <jsp:include page="footer.jsp"></jsp:include>
 <script>
 
+	$(document).ready(function(){
+		var memberSub = $('#memberSub').val();
+		
+		if(memberSub == 0){
+		//document.getElementById('subscribe_order').style.display = 'none'; 	// javascript
+		$("#subscribe_order").hide() // jquery
+		}else{
+		//document.getElementById('subscribe_order').style.display = 'block';
+		$("#subscribe_order").show()
+		}
+	});
+	
+
+
+
 function check(){
 	 var check = '${sub.orderCate}';
 	
@@ -356,8 +372,10 @@ function update_Check(check){
     
  
 function deletesub(){
+	
+	
 	if (confirm("정말로 해지하시겠습니까?") == true) {
-
+		
 		if ('${sub.orderCate}' == '씨앗') {
 			location.href = "deleteSubSeed.do";
 		} else if ('${sub.orderCate}' == '새싹') {
@@ -365,6 +383,7 @@ function deletesub(){
 		} else if ('${sub.orderCate}' == '나무') {
 			location.href = "deleteSubTree.do";
 		}
+		
 	}else {
 		return false
 	}

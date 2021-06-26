@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.teau.biz.member.MemberVO;
 import com.teau.biz.subscribe.SubService;
 import com.teau.biz.subscribe.SubVO;
 import com.teau.biz.subscribe.impl.TreeServiceImpl;
-import com.teau.biz.user.UserVO;
 
 @Controller
 public class SubController {
@@ -40,9 +40,9 @@ public class SubController {
 	@RequestMapping("/subscribe_main.do")
 	public String main(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
-		UserVO user = (UserVO) session.getAttribute("user");
+		MemberVO member = (MemberVO) session.getAttribute("member");
 		
-		model.addAttribute("user", user);
+		model.addAttribute("member", member);
 		return "WEB-INF/JSP/subscribe_main.jsp";
 	}
 	
@@ -50,9 +50,9 @@ public class SubController {
 	@RequestMapping("/subscribe_seed.do")
 	public String seed(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
-		UserVO user = (UserVO) session.getAttribute("user");
+		MemberVO member = (MemberVO) session.getAttribute("member");
 		
-		model.addAttribute("user", user);
+		model.addAttribute("member", member);
 		return "WEB-INF/JSP/subscribe_seed.jsp";
 	}
 	
@@ -60,9 +60,9 @@ public class SubController {
 	@RequestMapping("/subscribe_leaf.do")
 	public String leaf(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
-		UserVO user = (UserVO)session.getAttribute("user");
+		MemberVO member = (MemberVO)session.getAttribute("member");
 		
-		model.addAttribute("user", user);
+		model.addAttribute("member", member);
 		return "WEB-INF/JSP/subscribe_leaf.jsp";
 	}
 	
@@ -148,10 +148,11 @@ public class SubController {
 	@RequestMapping("/mypage.do")
 	public String my(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
-		UserVO user = (UserVO)session.getAttribute("user");
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		model.addAttribute("member", member);
 		
 		SubVO vo = new SubVO();
-		vo.setSubUser(user.getMemberId());
+		vo.setSubUser(member.getMemberId());
 		
 		if (seedService.getSub(vo) != null) {
 			SubVO seed = seedService.getSub(vo);

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <% // 자바코드
-	String data =  request.getParameter("data"); // data를 String으로 
+	String data = request.getParameter("data"); // data를 String으로 
 %>	
 <!DOCTYPE html>
 <html lang="en">
@@ -86,8 +86,8 @@
 				</div>
 
 				<form id="insertForm" method="POST">
-					<input type="hidden" id="subUser" name="subUser" value="${user.memberId}"/>
-					<input type="hidden" id="subCheck" name="subCheck" value="${user.memberSub}"/>
+					<input type="hidden" id="subUser" name="subUser" value="${member.memberId}"/>
+					<input type="hidden" id="subCheck" name="subCheck" value="${member.memberSub}"/>
 					<div class="row justify-content-center">						
 						<!--나눠놓은 기준은 행 단위-->
 						<div class="col-lg-2"></div>

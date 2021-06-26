@@ -34,6 +34,16 @@
 
   <!-- custom - css include -->
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<script src = "assets/js/com_lib.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
+<script type = "text/javascript">
+$(document).ready(function(){
+	getMemberInfo();
+});
+
+</script>
+
+
 
 </head>
 <body>
@@ -78,7 +88,7 @@
                 </a>
                 <div class="item_content">
                   <h3 class="item_title text-uppercase">
-                    <a href="subscribe_leaf.do">
+                    <button id="subLeaf" onclick="sessionCheck()";></button>
                       <새싹구독> (중급자용 구독)
                     </a>
                   </h3>
@@ -123,6 +133,29 @@
     <!-- main body - end
       ================================================== -->
 <jsp:include page="footer.jsp"></jsp:include>
+<script>
 
+function sessionCheck(obj){
+	var id; 
+	
+	if(obj["member"] != null){
+		id = obj["member"].memberId;	
+		loginCheck(id);		
+	}else{
+		loginCheck(id);		
+	}
+}
+
+function loginCheck(id){
+	console.log(id);
+	if(id == null){
+		alert("로그인 후 이용해주세요.");
+		location.href = "index.jsp";
+	}else{
+		location.href = "subscribe_leaf.do";
+	}
+} 
+
+</script>
 </body>
 </html>

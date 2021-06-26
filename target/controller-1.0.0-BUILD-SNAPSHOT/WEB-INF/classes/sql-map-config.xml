@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+	<settings>
+	<!-- 자동으로 카멜케이스 규칙으로 변환 -->
+	<setting value="true" name="mapUnderscoreToCamelCase"/>
+	</settings>
+
+
+	<!-- Alias 설정 -->
+	<typeAliases>
+		<typeAlias type="com.teau.biz.subscribe.SubVO" alias="sub"></typeAlias>
+	    <typeAlias type="com.teau.biz.subscribe.SubTeaVO" alias="subTea"></typeAlias>
+		<typeAlias type="com.teau.biz.user.UserVO" alias="user"></typeAlias>
+	</typeAliases>
+	
+	<!-- Sql Mapper 설정 -->
+	<mappers>
+		<mapper resource="mappings/subscribe-mapping.xml" />
+		<mapper resource="mappings/user-mapping.xml" />
+	</mappers>
+</configuration>
