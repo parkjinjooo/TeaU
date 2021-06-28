@@ -127,7 +127,7 @@
                 <ul class="header_btns_group ul_li_right">
                   <li>
                     <button type="button" class="main_search_btn">
-                      <a class="fal fa-user" href="mypage.do" style="color: black;" ></a>
+                      <a class="fal fa-user" onclick="myAndLog();" style="color:black;"></a>
                     </button>
                   </li>
                   <li>
@@ -137,7 +137,7 @@
                     </button>
                   </li>
                   <li>
-                    <a class="btn btn_primary text-uppercase" id="logInOut" href="login.do">Join Us</a>
+                    <input type="button" id = "logInOut" class="btn btn_primary text-uppercase" value="LOGIN" onclick="logInOut();"/>
                   </li>
                 </ul>
               </nav>
@@ -487,7 +487,51 @@
 
   <!-- custom - jquery include -->
   <script src="assets/js/main.js"></script>
+  
+  
+<script src = "assets/js/com_lib.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type = "text/javascript">
+$(document).ready(function(){
+	getMemberInfo();
+});
 
+	
+let id ='';
+function sessionCheck(obj) {
+	if(obj["member"]!= null){
+	    id = obj["member"].memberId;
+	}else{
+		id = null;
+	}
+	console.log(id);
+	logText(id);
+}
+
+function logText(id){
+	if(id == null){
+		$('#logInOut').val("LOGIN");
+	}else{
+		$('#logInOut').val("LOGOUT");
+	}
+}
+
+function logInOut(){
+	if(id == null){
+		location.href="login.do";
+	}else{
+		location.href="logout.do";
+	}
+}
+
+function myAndLog(){
+	if(id == null){
+		location.href="login.do";
+	}else{
+		location.href="mypage.do";
+	}
+}
+
+</script>
 </body>
-
 </html>

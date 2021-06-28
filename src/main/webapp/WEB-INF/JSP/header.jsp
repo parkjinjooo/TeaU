@@ -4,7 +4,7 @@
 <html>
 <head>
 <script src = "assets/js/com_lib.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type = "text/javascript">
 $(document).ready(function(){
 	getMemberInfo();
@@ -108,7 +108,7 @@ function sessionCheck(obj) {
                   <ul class="header_btns_group ul_li_right">
                     <li>
                       <button type="button" class="main_search_btn">
-                        <a class="fal fa-user" href="mypage.do" style="color: black;" ></a>
+                        <a class="fal fa-user" onclick="myAndLog();" style="color:black;"></a>
                       </button>
                     </li>
                     <li>

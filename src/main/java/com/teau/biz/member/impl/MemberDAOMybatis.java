@@ -27,7 +27,20 @@ public class MemberDAOMybatis {
 		return (MemberVO) mybatis.selectOne("MemberDAO.getMember", vo);
 	}	
 	
+	//
 	
+	public int memberPasscheck(MemberVO vo) {
+		int result = mybatis.selectOne("MemberDAO.memberPasscheck", vo);
+		return result;	
+	}
 	
+	public int memberIdcheck(MemberVO vo) {
+		int result = mybatis.selectOne("MemberDAO.memberIdcheck", vo);
+		return result;	
+	}
+	
+	public void memberSub(MemberVO vo) {
+		mybatis.update("MemberDAO.memberSub", vo);
+	}
 	
 }

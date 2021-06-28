@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String msg = (String)request.getAttribute("msg");
+%> 
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head>  
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -33,6 +36,19 @@
 
   <!-- custom - css include -->
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+ 
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+ 
+  <!-- user 합치는 부분 -->
+  <script type="text/javascript">
+		$(document).ready(function() {
+			var msg = '<%=msg%>';//아이디 중복 시 alert 표출
+			console.log(msg);
+			if(msg != null) {
+				alert(msg);
+			}
+		});
+	</script>
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
@@ -59,7 +75,7 @@
           <div class="contact_form bg_white wow fadeInUp" data-wow-delay=".1s">
             
             
-            <form action="insertUser.do" method="GET">
+            <form action="insertMember.do" method="POST">
               <div class="row justify-content-center">
                 <div class="col-lg-8">
                   <div class="form_item">

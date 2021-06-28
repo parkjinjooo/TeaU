@@ -1,11 +1,13 @@
 package com.teau.controller.member;
 
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,72 +20,59 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	@RequestMapping("/insertUser.do")
-	public String insertUser(MemberVO vo) {
-		memberService.insertMember(vo);
-		return "redirect:contact.do";
+	// C
+	@RequestMapping("/insertMember.do")
+	public String insertMember(MemberVO vo, Model model) {
+		int result = memberService.memberIdcheck(vo);
+		
+		if(result == 0) {
+			memberService.insertMember(vo);
+			return "login";
+		}else {
+			model.addAttribute("msg", "중복된 아이디입니다.");
+			return "signup";
+		}
+		
 	}
 	
-	@RequestMapping("/updateUser.do")
-	public String updateSub(MemberVO vo) {
-		memberService.updateMember(vo);
-		return "redirect:getUser.do";
-	}
-	
-	@RequestMapping("/deleteUser.do")
-	public String deleteUser(MemberVO vo) {
-		memberService.deleteMember(vo);
-		return "redirect:getUser.do";
-	}
-	
-	@RequestMapping("/getUser.do") // userid
-	public String getUser(@RequestParam("memberId") String id, Model model) {
+	// R
+	@RequestMapping("/getMember.do") 
+	public String getMember(@RequestParam("memberId") String id, Model model) {
 		MemberVO vo = new MemberVO();
 		vo.setMemberId(id);
 		
 		model.addAttribute("member",memberService.getMember(vo));
 		return "redirect:mypage.do";
 	}
-	
-	@RequestMapping("/loginV.do") //@RequestParam('')는 받아올 name값 
-	public String loginV(@RequestParam("memberId")String id, @RequestParam("memberPass")String password, HttpSession session) {
-		MemberVO vo = new MemberVO();
-		vo.setMemberId(id);
-		
-		if(vo.getMemberId() == null || vo.getMemberId().equals("")) {
-			throw new IllegalArgumentException("아이디는 반드시 입력해야 합니다.");
-		}
 
-		MemberVO member = memberService.getMember(vo);
-		System.out.println(member);
+	
+	// U
+	@RequestMapping("/updateMember.do")
+	public String updateMember(@ModelAttribute("member") MemberVO vo, HttpSession session) {
+		session.setAttribute("member", vo);
 		
-		if(id.equals(member.getMemberId()) && password.equals(member.getMemberPass())) {
-			session.setAttribute("member", member);
-			System.out.println(member.getMemberId());
-			
-			return "redirect:index.jsp";
-		}else {
-			return "redirect:contact.do";
-		}
+		
+		memberService.updateMember(vo);
+		return "redirect:mypage.do";
 	}
 	
-	@RequestMapping("/logout.do")
-	public String logout(HttpSession session ) {
-		session.invalidate();
-		return "index.jsp";
+	// D
+	@RequestMapping("/deleteMember.do")
+	public String deleteMember(MemberVO vo) {
+		memberService.deleteMember(vo);
+		return "redirect:getMember.do";
 	}
 	
 	
-
-	@RequestMapping("/login.do")
-	public String login() {
-		return "WEB-INF/JSP/login.jsp";
+	
+		
+	// 마이페이지 수정 
+	@RequestMapping(value="/mypage_edit.do")
+	public String mypageEdit(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		
+		model.addAttribute("member", member);
+		return "mypage_edit";
 	}
-	
-	@RequestMapping("/signUp.do")
-	public String signUp() {
-		return "WEB-INF/JSP/signup.jsp";
-	}
-	
-	
 }

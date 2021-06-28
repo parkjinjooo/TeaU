@@ -48,12 +48,12 @@
               <div class="row">
                 <div class="offset-md-1 col-md-3">
                   <div class="item_content img-fluid">
-                    <h3><i class="fas fa-user"></i>티유 님 </h3>
+                    <h3><i class="fas fa-user"></i>${member.memberId } 님 </h3>
                   </div>
                 </div>
                 <div class="offset-md-3 col-md-5">
                   <div class="item_content">
-                    <h3 class="item_title text-uppercase">보유 포인트 : 3,000p</h3>
+                    <h3 class="item_title text-uppercase">보유 포인트 : ${member.memberPoint }점</h3>
                     <br>
                   </div>
                 </div>
@@ -74,15 +74,15 @@
                         <tbody>
                           <tr>
                             <th class="hi width-xsmall">이름<span class="hi text-danger">*</span></th>
-                            <td>티유</td>
+                            <td>${member.memberName }</td>
                           </tr>
                           <tr>
                             <th class="hi width-xsmall">이메일 주소<span class="hi text-danger">*</span></th>
-                            <td>teau@gmail.com</td>
+                            <td>${member.memberEmail }</td>
                           </tr>
                           <tr>
                             <th class="hi width-xsmall">전화번호<span class="hi text-danger">*</span></th>
-                            <td>010-1111-1111</td>
+                            <td>${member.memberPhone }</td>
                           </tr>
   
                           <!-- <tr>
@@ -96,7 +96,7 @@
   
                           <tr>
                             <th class="hi width-xsmall">주소</th>
-                            <td>서울특별시 서초구 강남대로 459</td>
+                            <td>${member.memberAddress } </td>
                           </tr>
   
                           <!-- <tr>
@@ -112,7 +112,7 @@
                       <hr class="hi hr">
                       
                       <ul class="hi list-menu">
-                        <li><a href="mypage_edit.html">회원정보 변경</a></li>
+                        <li><a href="mypage_edit.do">회원정보 변경</a></li>
                       </ul>
                     </div>  </div>
                 </div>
@@ -375,6 +375,7 @@ function deletesub(){
 	
 	
 	if (confirm("정말로 해지하시겠습니까?") == true) {
+
 		
 		if ('${sub.orderCate}' == '씨앗') {
 			location.href = "deleteSubSeed.do";

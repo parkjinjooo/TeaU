@@ -105,5 +105,4 @@
       ORDER BY TT_ID
       ]]>
    </select>
-	
 </mapper>

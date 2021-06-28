@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.teau.biz.member.MemberService;
 import com.teau.biz.member.MemberVO;
 import com.teau.biz.subscribe.SubTeaVO;
 import com.teau.biz.subscribe.SubVO;
@@ -25,6 +26,9 @@ public class TreeController {
 	@Qualifier("treeService")
 	private TreeServiceImpl treeService;
 	
+	@Autowired
+	private MemberService memberService;
+	
     @RequestMapping(value="/insertSubTree.do", produces="application/json; charset=utf8")
 	@ResponseBody // Viewresolver로 넘어가는 것을 막기 위해, json형태로 받음. 그래서 json형태로 받은 것을 modelAtrribute를 통해 vo객체에 담아준다-인서트하기 위해서
 	
@@ -32,14 +36,16 @@ public class TreeController {
     	HttpSession session = request.getSession();
     	MemberVO member = (MemberVO) session.getAttribute("member");
     	member.setMemberSub("1");
-    	
+    	System.out.println(11111);
 		treeService.insertSub(vo);
+		
+		memberService.memberSub(member);
 		return "나무구독 신청이 완료되었습니다.";
 	}
 	
     @RequestMapping(value="/updateSubTree.do", produces="application/json; charset=utf8")
     @ResponseBody
-    public String updateSub(SubVO vo) throws IOException{
+    public String updateSub(SubVO vo){
 		treeService.updateSub(vo);
 		System.out.println("구독이 수정 되었습니다.");
 		return "나무 구독이 수정되었습니다.";
@@ -47,21 +53,21 @@ public class TreeController {
 	}
 	
 	@RequestMapping("/deleteSubTree.do")
-	public String deleteSub(HttpServletRequest request) throws IOException{
+	public String deleteSub(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		member.setMemberSub("0");
 		
+		memberService.memberSub(member);
+		
 		SubVO vo = new SubVO();
 		vo.setSubUser(member.getMemberId());
-		System.out.println("현재 로그인 중인 멤버 아이디"+member.getMemberId());
-		
 		treeService.deleteSub(vo);
 		return "redirect:mypage.do";
 	}
 	
 	@RequestMapping("/getSubTree.do")
-	public String getSub() throws IOException{
+	public String getSub(){
 //		treeService.getSub(vo);
 //		model.addAttribute("subTree", treeService.getSub(vo));
 		return "redirect:mypage.do";
@@ -69,7 +75,6 @@ public class TreeController {
 	
 	//나무 구독 데이터 조회
 	@RequestMapping("/getTeaList.do")
-	
 	public String getTeaList(HttpServletRequest request, Model model) {
 		System.out.println("나무 차 목록 출력 처리");
 		List<SubTeaVO> list = treeService.getTeaList();
@@ -84,7 +89,7 @@ public class TreeController {
 		System.out.println("현재 로그인 중인 멤버 아이디"+(member.getMemberId()));
 		
 		
-		return "WEB-INF/JSP/subscribe_tree.jsp";
+		return "subscribe_tree";
 	}
 
 	

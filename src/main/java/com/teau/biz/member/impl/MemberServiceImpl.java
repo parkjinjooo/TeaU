@@ -32,4 +32,23 @@ public class MemberServiceImpl  implements MemberService{
 		return memberDAO.getMember(vo);
 	}
 
+	//
+	@Override
+	public int memberPasscheck(MemberVO vo) {
+		int result = memberDAO.memberPasscheck(vo);
+		return result;
+	}
+
+	@Override
+	public int memberIdcheck(MemberVO vo) {
+		int result = memberDAO.memberIdcheck(vo);
+		return result;
+	}
+
+	@Override
+	public void memberSub(MemberVO vo) {
+		memberDAO.memberSub(vo);
+	}
+	
+
 }

@@ -141,8 +141,18 @@ function loginCheck(link){
 		alert("로그인 후 이용해주세요.");
 		location.href="login.do";
 	}else{
-		location.href= link;
+		location.href= link ;
 	}
+}
+
+function myAndLog(){
+	if(id == null){
+		location.href="login.do";
+	}else{
+		location.href="mypage.do";
+	}
+	
+	
 }
 
 </script>

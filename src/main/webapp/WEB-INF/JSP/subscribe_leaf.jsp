@@ -288,6 +288,7 @@
 		}
 		
 		function checkbox_Check(inOrUp) {
+		
 						
 			if ($("input:checkbox[name=tagSeason]").is(":checked") == false) {
 				alert("'계절별'을 하나 이상 선택해주세요");
@@ -310,7 +311,7 @@
 					data: $('#insertForm').serialize(),
 					success: function(data) {
 						alert(data);
-						window.location.href=("getSubLeaf.do?subUser=" + $('#subUser').val()); //JSP 이동 페이지 적기  
+						window.location.href=("mypage.do"); //JSP 이동 페이지 적기  
 					}, 
 					error: function(e) {
 						console.log(e);
