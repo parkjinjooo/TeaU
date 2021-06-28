@@ -2,6 +2,28 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<head>
+<script src = "assets/js/com_lib.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
+<script type = "text/javascript">
+$(document).ready(function(){
+	getMemberInfo();
+});
+
+	
+let id ='';
+function sessionCheck(obj) {
+	if(obj["member"]!= null){
+	    id = obj["member"].memberId;
+	}else{
+		id = null;
+	}
+	console.log(id);
+	logText(id);
+}
+
+</script>
+</head>
 <body>
  <!-- body_wrap - start -->
   <div class="body_wrap">
@@ -96,7 +118,7 @@
                       </button>
                     </li>
                     <li>
-                      <a class="btn btn_primary text-uppercase" href="contact.do">LOGIN</a>
+                      <input type="button" class="btn btn_primary text-uppercase" id="logInOut" value="LOGIN" onclick="logInOut();"/>
                     </li>
                   </ul>
                 </nav>

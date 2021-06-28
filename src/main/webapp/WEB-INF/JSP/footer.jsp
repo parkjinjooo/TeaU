@@ -114,6 +114,37 @@
 
   <!-- custom - jquery include -->
   <script src="assets/js/main.js"></script>
+<script>
 
+function logText(id){
+	console.log(id);
+	if(id == null){
+		$('#logInOut').val("LOGIN");
+		
+	}else{
+		$('#logInOut').val("LOGOUT");
+	}
+} 
+
+function logInOut(){
+	if(id == null){
+		location.href="login.do";
+		
+	}else{
+		location.href="logout.do";
+	}
+}
+
+function loginCheck(link){
+	console.log(link);
+	if(id == null){
+		alert("로그인 후 이용해주세요.");
+		location.href="login.do";
+	}else{
+		location.href= link;
+	}
+}
+
+</script>
 </body>
 </html>

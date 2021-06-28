@@ -34,16 +34,6 @@
 
   <!-- custom - css include -->
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-<script src = "assets/js/com_lib.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
-<script type = "text/javascript">
-$(document).ready(function(){
-	getMemberInfo();
-});
-
-</script>
-
-
 
 </head>
 <body>
@@ -63,12 +53,12 @@ $(document).ready(function(){
           <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6 col-sm-6">
               <div class="blog_grid wow fadeInUp" data-wow-delay=".1s">
-                <a class="item_image" href="subscribe_seed.do">
+                <a class="item_image" onclick="loginCheck('subscribe_seed.do')">
                   <img src="assets/images/blog/select_seed.jpg" alt="image_not_found">
                 </a>
                 <div class="item_content">
                   <h3 class="item_title text-uppercase">
-                    <a href="subscribe_seed.do">
+                    <a onclick="loginCheck('subscribe_seed.do')">
                       <씨앗구독> (초심자용 구독)
                     </a>
                   </h3>
@@ -83,31 +73,31 @@ $(document).ready(function(){
 
             <div class="col-lg-4 col-md-6 col-sm-6">
               <div class="blog_grid wow fadeInUp" data-wow-delay=".2s">
-                <a class="item_image" href="subscribe_leaf.do">
+                <a class="item_image" onclick="loginCheck('subscribe_leaf.do');">
                   <img src="assets/images/blog/select_leaf.jpg" alt="image_not_found">
                 </a>
                 <div class="item_content">
                   <h3 class="item_title text-uppercase">
-                    <button id="subLeaf" onclick="sessionCheck()";></button>
-                      <새싹구독> (중급자용 구독)
+                    <a onclick="loginCheck('subscribe_leaf.do')">
+                     <새싹구독> (중급자용 구독)
                     </a>
                   </h3>
                   <p>
                     차를 즐기는 또 다른 방법, 블렌딩 차를 랜덤으로 선물 받아보세요!
                   </p>
-                  <23,000원>
+                  <29,900원>
                 </div>
               </div>
             </div>
 
             <div class="col-lg-4 col-md-6 col-sm-6">
               <div class="blog_grid wow fadeInUp" data-wow-delay=".3s">
-                <a class="item_image" href="subscribe_tree.do">
+                <a class="item_image" onclick="loginCheck('subscribe_tree.do')">
                   <img src="assets/images/blog/select_tree.jpg" alt="image_not_found">
                 </a>
                 <div class="item_content">
                   <h3 class="item_title text-uppercase">
-                    <a href="subscribe_tree.do">
+                    <a onclick="loginCheck('subscribe_tree.do')">
                       <나무구독> (고급자용 구독)
                     </a>
                   </h3>
@@ -133,29 +123,5 @@ $(document).ready(function(){
     <!-- main body - end
       ================================================== -->
 <jsp:include page="footer.jsp"></jsp:include>
-<script>
-
-function sessionCheck(obj){
-	var id; 
-	
-	if(obj["member"] != null){
-		id = obj["member"].memberId;	
-		loginCheck(id);		
-	}else{
-		loginCheck(id);		
-	}
-}
-
-function loginCheck(id){
-	console.log(id);
-	if(id == null){
-		alert("로그인 후 이용해주세요.");
-		location.href = "index.jsp";
-	}else{
-		location.href = "subscribe_leaf.do";
-	}
-} 
-
-</script>
 </body>
 </html>

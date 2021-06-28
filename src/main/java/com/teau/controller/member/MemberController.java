@@ -66,8 +66,16 @@ public class MemberController {
 			return "redirect:contact.do";
 		}
 	}
+	
+	@RequestMapping("/logout.do")
+	public String logout(HttpSession session ) {
+		session.invalidate();
+		return "index.jsp";
+	}
+	
+	
 
-	@RequestMapping("/contact.do")
+	@RequestMapping("/login.do")
 	public String login() {
 		return "WEB-INF/JSP/login.jsp";
 	}

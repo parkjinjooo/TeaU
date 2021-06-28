@@ -137,7 +137,7 @@
                     </button>
                   </li>
                   <li>
-                    <a class="btn btn_primary text-uppercase" href="contact.do">Join Us</a>
+                    <a class="btn btn_primary text-uppercase" id="logInOut" href="login.do">Join Us</a>
                   </li>
                 </ul>
               </nav>
