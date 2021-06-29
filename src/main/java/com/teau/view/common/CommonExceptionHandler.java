@@ -1,28 +1,21 @@
 package com.teau.view.common;
 
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.ui.Model;
 
 public class CommonExceptionHandler {
 	
-	public ModelAndView handleArithmeticException(Exception e) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("exception", e);
-		mav.setViewName("/common/arithmeticError.jsp");
-		return mav;
+	public String handleArithmeticException(Exception e, Model model) {
+		model.addAttribute("exception", e);
+		return "/common/arithmeticError";
 	}
 	
-	public ModelAndView handleNullPointerException(Exception e) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("exception", e);
-		mav.setViewName("/common/nullPointerError.jsp");
-		return mav;
+	public String handleNullPointerException(Exception e, Model model) {
+		model.addAttribute("exception", e);
+		return "/common/nullPointerError";
 	}
 	
-	
-	public ModelAndView handleException(Exception e) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("exception", e);
-		mav.setViewName("/common/error.jsp");
-		return mav;
+	public String handleException(Exception e, Model model) {
+		model.addAttribute("exception", e);
+		return "/common/error";
 	}
 }

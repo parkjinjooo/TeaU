@@ -44,7 +44,7 @@
 		$(document).ready(function() {
 			var msg = '<%=msg%>';//아이디 중복 시 alert 표출
 			console.log(msg);
-			if(msg != null) {
+			if(msg != 'null') {
 				alert(msg);
 			}
 		});

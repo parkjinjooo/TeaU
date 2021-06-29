@@ -36,7 +36,6 @@ public class TreeController {
     	HttpSession session = request.getSession();
     	MemberVO member = (MemberVO) session.getAttribute("member");
     	member.setMemberSub("1");
-    	System.out.println(11111);
 		treeService.insertSub(vo);
 		
 		memberService.memberSub(member);

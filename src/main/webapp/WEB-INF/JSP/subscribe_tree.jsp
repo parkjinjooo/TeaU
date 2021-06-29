@@ -4,11 +4,11 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <% 
-	String data =  request.getParameter("data"); //data 를 String 으로 변환 
+   String data =  request.getParameter("data"); //data 를 String 으로 변환 
 %> 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-					   "http://www.w3.org/TR/html4/loose.dtd">
+                  "http://www.w3.org/TR/html4/loose.dtd">
 
 <html lang="en">
 
@@ -19,6 +19,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
   <title>Subscribe - Tree</title>
+  
   <link rel="shortcut icon" href="assets/images/feature/11.jpg">
 
   <!-- framework - css include -->
@@ -44,8 +45,23 @@
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
   <link rel="stylesheet" type="text/css" href="assets/css/teau.css">
 
-
+<!-- 
+  유저 세션 받아오기
+  <script src="assets/js/com_lib.js"></script>
+  제이쿼리 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+   
+   <script type="text/javascript">
+     $(document).ready(function(){
+        getMemberInfo();
+     });
+     
+     function sessionCheck(obj){
+        var id = obj["member"].id;
+        console.log(id);
+     }
+  </script> -->
 
 
 </head>
@@ -55,6 +71,7 @@
         ================================================== -->
       <section class="breadcrumb_section text-uppercase"
         style="background-image: url(assets/images/breadcrumb/tree.jpg);">
+        
         <div class="container">
           <h1 class="page_title text-white wow fadeInUp" data-wow-delay=".1s">나무 구독</h1>
           <ul class="breadcrumb_nav ul_li wow fadeInUp" data-wow-delay=".2s">
@@ -77,23 +94,24 @@
 
       <!-- reserve_table_section - start
         ================================================== -->
-      <section class="reserve_table_section sec_ptb_120 bg-grey">
-        <div id="sub_tree" class="container">
-          <div class="reserve_table_form wow fadeInUp bg-white" style="padding-left: 0px; padding-right: 0px;"
-            data-wow-delay=".1s">
-            <div class="subcribe_title">
-              <h2 class="form_title text-center text-uppercase" style="font-size: 35px;">원하는 항목을 골라보세요(중복가능)</h2>
+    <section class="reserve_table_section sec_ptb_120 bg-grey">
+      <div id="sub_tree" class="container">
+        <div class="reserve_table_form wow fadeInUp bg-white" style="padding-left: 0px; padding-right: 0px;"
+          data-wow-delay=".1s">
+          <div class="subcribe_title">
+              <h2 class="form_title text-center text-uppercase" style="font-size: 2rem;">원하는 항목을 10개 골라보세요</h2>
             </div>
             
             
 
             <form id="tree_form" method="get" action="insertSubTree.do">
+            
             <input type=hidden id="subUser" name="subUser" value="${member.memberId}"/>
             <input type=hidden id="subCheck" name="subCheck" value="${member.memberSub}"/>
             
             <div class="row justify-content-center">
               <div id="tt_base" class="sub_tree">
-                <p class="sub_tree_title">베이스 선택</p>
+                <p class="sub_tree_title" style="font-size: 1.7rem; ">베이스 선택</p>
 
                 <div class="list_wrap">
                   <ul>
@@ -101,7 +119,7 @@
                   <c:forEach items="${teaList}" var="tea">
                     <c:if test="${tea.ttGen eq 'base'}">
                     
-                    <li class="tt_goods">
+                    <li class="tt_goods tt_base">
                       <label>
                           <div class="tt_cate">
                             <span>${tea.ttCate}</span>
@@ -134,7 +152,7 @@
                   
                   <c:forEach items="${teaList}" var="tea">
                     <c:if test="${tea.ttGen eq 'blend'}">
-           		                     
+                                      
                     <li class="tt_goods tt_base">
                       <label>
                           <div class="tt_cate">
@@ -163,7 +181,7 @@
 
                 <div class="list_wrap">
                   <ul>
-           		  <c:forEach items="${teaList}" var="tea">
+                   <c:forEach items="${teaList}" var="tea">
                     <c:if test="${tea.ttGen eq 'add'}">
                     <li class="tt_goods tt_base">
                       <label>
@@ -239,141 +257,182 @@
 
 
   <script>
-    var chkGoodsList = new Array();
-    // var chkGoodsList = [];
-    var chkCnt = 0;
-    var selected;
-    var addprice = 0;
+     let chkGoodsList = new Array();
+     // var chkGoodsList = [];
+     let chkCnt = 0;
+     let chkCntBs = 0;
+     let selected;
+     let addprice = 0;
 
-    $(document).ready(function () {
-    	
-      //각각 체크박스를 클릭시 체크 알아보게 변화
-      $("input:checkbox").on("click", function () {
-      // chkGoodsList.push($(this).val());
-      if($(this).is(":checked") == true){
-        $(this).parents('li').addClass('selected');
-      } else {
-        $(this).parents('li').removeClass('selected');
-      }
-      //
-      // return false;
-      // $(this).parents('li').toggleClass('selected');
-    });
-      
-      
+  $(document).ready(function () {
+       
 
-      // 업데이트 시 기존 사용자의 선택 불러오기
-      var data = <%=data%>;
+      // 업데이트 시 기존 사용자의 선택 불러오기(오류 수정)
+      let data = <%=data%>;
       console.log(data);
       
       if(data != null){
-    	  //stirng을 다시 JSON 객체로 변환
-    	  var obj = JSON.parse(data);
-    	  console.log(obj);
-    	  
-    	  var treeSelect = obj['subInfo'].treeSelect.split(',');
-    	  var treeAdd = obj['subInfo'].treeAdd;
-    	  if(treeAdd != null){
-    		  treeAdd = treeAdd.split(',');
-    	  }
-    	  var treeReq = obj['subInfo'].treeReq;
-    	  var subPrice = obj['subInfo'].subPrice;
-    	  
-    	  console.log(treeSelect);
-    	  console.log(treeAdd);
-    	  console.log(treeReq);
-    	  console.log(subPrice);
-	
-    	  // 요청사항
-    	  $('#treeReq').val(treeReq);
-    	  // 총 가격 
-    	  $('#totalPrice').val(subPrice);
-    	  
-    	  // 아이템 선택 뿌려주기 
-    	  $('input:checkbox[name="treeSelect"]').each(function(){
-    		  for(var i=0 ; i< treeSelect.length ; i++){    			  
-	    		  if(this.value == treeSelect[i]){
-	    			  this.checked = true;
-	    		  }
-    		  } 
-    		});
-    	  
-    	  if(treeAdd != null){
-    		  $('input:checkbox[name="treeAdd"]').each(function(){
-  				for(var i=0; i<treeAdd.length ;i++){    			  
-  		    		  if(this.value == treeAdd[i] ){
-  		    			  this.checked = true;
-  		    		  }
-  	    		  } 				
-  			});    	
-    	  }
+         //stirng을 다시 JSON 객체로 변환
+         let obj = JSON.parse(data);
+         console.log(obj);
+         
+         let treeSelect = obj['subInfo'].treeSelect.split(',');
+         let treeAdd = obj['subInfo'].treeAdd; 
+         
+         if(treeAdd != null){     
+         treeAdd = treeAdd.split(',');
+         }
+         let treeReq = obj['subInfo'].treeReq;
+         let subPrice = obj['subInfo'].subPrice;
+         
+         console.log(treeSelect);
+         console.log(treeAdd);
+         console.log(treeReq);
+         console.log(subPrice);
+
+         // 요청사항
+         $('#treeReq').val(treeReq);
+         // 총가격
+         $('#totalPrice').val(subPrice);
+         
+         // 아이템 선택 뿌려주기
+         $('input:checkbox[name="treeSelect"]').each(function(){
+            for(let i=0 ; i< treeSelect.length ; i++){               
+               if(this.value == treeSelect[i]){
+                  this.checked = true;
+               }
+            } 
+          });
+         
+         if(treeAdd != null){
+            
+        $('input:checkbox[name="treeAdd"]').each(function(){
+            for(let i=0; i<treeAdd.length ;i++){               
+                  if(this.value == treeAdd[i] ){
+                     this.checked = true;
+                  }
+               }             
+         });         
+         
+         }
+         
+         // 기존 선택된 상품에 체크표시
+          $('input:checkbox:checked').each(function() {
+            $(this).parents('li').addClass('selected');
+            $(this).siblings('.tt_explain').css({"color": "#aaa"});
+             });
+         
       }
       
-      // insert와 update 구분
-      
-      
-      // insult와 update 구분 
+      //insert와 update 구분 
       if(data == null){
- 		  //사용자가 보낸 값이 없으면 - insert
- 		  $("#btn_subSubmit").val("나무 구독하기")
+         //사용자가 보낸 값이 없으면 - insert
+         $("#btn_subSubmit").val("나무 구독하기")
       } else {
-    	  //사용자가 보낸 값이 있으면 - update
-    	  $("#btn_subSubmit").val("나무 구독수정")  
+         //사용자가 보낸 값이 있으면 - update
+         $("#btn_subSubmit").val("나무 구독수정")  
       }
+      
+      
       
 
       // 베이스 선택
       $("input:checkbox[name='treeSelect']").on("click", function () {
-        var chkCntBs = $("input:checkbox[class='tt_base']:checked").length;
+        let chkCntBs = $("input:checkbox[class='tt_base']:checked").length;
+        chkCnt = $("input:checkbox[name='treeSelect']:checked").length;
+        
         if (chkCntBs > 3) {
-          $(this).prop("checked", false);
-          alert("베이스는 3개까지만 선택할 수 있습니다.");
-        }
+            $(this).prop("checked", false);
+            $(this).parents('li').removeClass('selected');
+           /*  $(this).siblings('.tt_explain').css({"color": "#fff"}); */
+       
+            alert("베이스는 3개까지만 선택할 수 있습니다.");
+            return false;
+          } else {
+            if($(this).is(":checked") == true){
+              chkGoodsList.push($(this).val());
+              console.log(chkGoodsList);
+              $(this).parents('li').addClass('selected');
+              $(this).siblings('.tt_explain').css({"color": "#aaa"});
+            } else {
+              for(var i = 0; i < chkGoodsList.length; i++) {
+                if(chkGoodsList[i] == $(this).val()) {
+                  chkGoodsList.splice(i, 1);
+                  i--;
+                  console.log(chkGoodsList);
+                }
+              }
+              $(this).parents('li').removeClass('selected');
+              $(this).siblings('.tt_explain').css({"color": "#fff"});
+            }
+
+          } 
 
         // 베이스+블렌드 총 갯수 10개 이하
-        // $("input:checkbox[name='select']").on("click", function () {
+           
           chkCnt = $("input:checkbox[name='treeSelect']:checked").length;
-          if (chkCnt > 10) {
-            $(this).prop("checked", false);
-            alert("10개까지 선택하실 수 있습니다.")
-          }
-        //});
+          if (chkCnt > 10 ) {
+              $(this).prop("checked", false);
+              alert("10개까지 선택하실 수 있습니다.");
+              $(this).parents('li').removeClass('selected');
+              return false;
+            } else {
+              if($(this).is(":checked") == true){
+              // chkGoodsList.push($(this).val());
+              // console.log(chkGoodsList);
+              $(this).parents('li').addClass('selected');
+              $(this).siblings('.tt_explain').css({"color": "#aaa"});
+            } else {
+              $(this).parents('li').removeClass('selected');
+              $(this).siblings('.tt_explain').css({"color": "#fff"});
+            }
 
-      });
+            }
+          //});
+
+        });
+          
+      
+      
+      
       
       
       $("input:checkbox[name='treeAdd']").on("click", function () {
-    	  var price = $('#totalPrice').val();
-          // value 값을 string으로 가져올 수도 있으니 int로 변환
+         let price = $('#totalPrice').val();
+          let price1;
+         // value 값을 string으로 가져올 수도 있으니 int로 변환
           price = parseInt(price);
+          
           if($('#'+this.id).is(":checked")== true){
-        	if(this.id == 'tt_49') {
-            	var price1 = $('#price49').val();
-  	            price1 = parseInt(price1);
-        	} else if(this.id == 'tt_50') {
-            	var price1 = $('#price50').val();
-            	price1 = parseInt(price1);
-        	} else if(this.id == 'tt_51') {
-            	var price1 = $('#price51').val();
-            	price1 = parseInt(price1);
-        	}
+           $(this).parents('li').addClass('selected');  
+           if(this.id == 'tt_49') {
+               price1 = $('#price49').val();
+                 price1 = parseInt(price1);
+           } else if(this.id == 'tt_50') {
+               price1 = $('#price50').val();
+               price1 = parseInt(price1);
+           } else if(this.id == 'tt_51') {
+               price1 = $('#price51').val();
+               price1 = parseInt(price1);
+           }
             price += price1;
-            console.log("49번 플러스");
+            console.log("추가가격 플러스");
             console.log("+"+price1);
             console.log(price);
           } else {
-        	  if(this.id == 'tt_49') {
-              	var price1 = $('#price49').val();
-  	            price1 = parseInt(price1);
-          	} else if(this.id == 'tt_50') {
-              	var price1 = $('#price50').val();
-              	price1 = parseInt(price1);
-          	} else if(this.id == 'tt_51') {
-              	var price1 = $('#price51').val();
-              	price1 = parseInt(price1);
-          	}
+             $(this).parents('li').removeClass('selected');
+             if(this.id == 'tt_49') {
+                 price1 = $('#price49').val();
+                 price1 = parseInt(price1);
+             } else if(this.id == 'tt_50') {
+                 price1 = $('#price50').val();
+                 price1 = parseInt(price1);
+             } else if(this.id == 'tt_51') {
+                 price1 = $('#price51').val();
+                 price1 = parseInt(price1);
+             }
             price -= price1;
-            console.log("49번 선택 해제");
+            console.log("추가가격 마이너스");
             console.log("-"+price1);
             console.log(price);
           }
@@ -387,32 +446,39 @@
     
     /* 함수 */
     
-  
-
+    
+    // insert update 구분 함수 + 1인 1구독을 위해 구독정보 체크
     function inORUp(){
-    	var data = <%=data%>;
-    	if(data == null) {
-    		// 사용자가 보낸 정보가 없으면 insert
-    		if(subCheck == 1){
-    			alert("이미 구독 중인 상품이 있습니다.");
-    			location.href="index.jsp";
-    		}else{
-    			var insert = 'insertSubTree.do'
-    	    		submitChkCount(insert);
-    	    		
-    		}
-    	} else {
-    		// 사용자가 보낸 정보가 있으면 update
-    		var update = 'updateSubTree.do'
-    		submitChkCount(update);
-    	}
-    	
+       
+       let subCheck = $('#subCheck').val();
+       //let subCheck = $('#subCheck').val();
+       let data = <%=data%>;
+       console.log(data);
+       if(data == null) {
+          // 사용자가 보낸 정보가 없으면 구독 내역 있는지 체크(1인 1구독)          
+          if(subCheck == 1){
+             alert("이미 구독 중인 상품이 있습니다");
+             location.href="index.jsp"
+          } else{
+          // 구독 내역 없으면 insert
+          let insert = 'insertSubTree.do'
+          submitChkCount(insert);
+          }
+          
+       } else {
+          // 사용자가 보낸 정보가 있으면 update
+          let update = 'updateSubTree.do'
+          submitChkCount(update);
+       }
+       
     }
     
     function submitChkCount(inOrUp) {
+       
       chkCnt = $("input:checkbox[name='treeSelect']:checked").length;
+      
       if(chkCnt == 10) {
-    	  $.ajax({
+         $.ajax({
               type: 'POST',
               url: inOrUp,
               dataType: 'text', // form에 있는 데이터들을 controller로 text타입으로 
@@ -420,7 +486,8 @@
               
               success: function(data) {
                  alert(data);
-                 window.location.href = "getSubTree.do"; //JSP 이동 페이지 적기  
+                 //window.location.href = "getSubTree.do"; //JSP 이동 페이지 적기  
+                 window.location.href = "mypage.do"; //JSP 이동 페이지 적기  
               }, 
               error: function(e) {
                  console.log(e);
@@ -432,18 +499,7 @@
         return false;
         
       } 
-        
-
-      /*  goSubmit;
-        alert("구독신청 완료") */
-        
-      }
-    
-
-/*     function goSubmit() {
-      $("#tree_form").submit();
-    } */
-    
+    }
 
    
 

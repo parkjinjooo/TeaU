@@ -88,9 +88,9 @@ function sessionCheck(obj) {
                           board
                         </a>
                         <ul class="submenu dropdown-menu" aria-labelledby="services_submenu">
-                          <li><a href="reviewBoard.html">씨앗 리뷰</a></li>
-                          <li><a href="blendedTeaBoard.html">새싹&나무 리뷰</a></li>
-                          <li><a href="rankingBoard.html">새싹&나무 랭킹</a></li>
+                          <li><a href="toBoard.do">씨앗 리뷰</a></li>
+                          <li><a href="tbBoard.do">새싹&나무 리뷰</a></li>
+                          <li><a href="rankBoard.do">새싹&나무 랭킹</a></li>
                           <li><a href="faq.html">F.A.Q.</a></li>
                         </ul>
                       </li>

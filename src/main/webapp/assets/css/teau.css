@@ -1,3 +1,16 @@
+/* 회원가입 */
+
+#signUp {
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.container .btn {
+  display: inline-block
+}
+
+
+
 /* ▽ made by Chan ▽ */
 
 /* 나무 구독 */
@@ -17,7 +30,7 @@
 #sub_tree .sub_tree {
   position: relative;
   margin: 10px;
-  padding: 20px 20px;
+  padding: 10px 0px;
   width: 80%;
   height: 100%;
 }
@@ -25,38 +38,54 @@
 #sub_tree .list_wrap ul {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 -15px;
+  margin: 0 0; 
   /* height: 80%; */
   
 }
 
-#tt_base .list_wrap ul>li,
-#tt_add .list_wrap ul>li {
+
+#sub_tree ul>li {
   /* position: relative; */
   display: inline-block;
-  /* float: left; */
   width: 200px;
   min-height: 250px;
-  /* height: 300px; */
+  /* max-height: 400px; */
+  height: auto;
   margin: 10px 5px;
-  padding: 0 10px;
-  border-radius: 1px;
-  border: 1px solid #fff;
-  background-color: #fff;
-  /* box-shadow: 0 0 24px 0 rgb(0 0 0 / 8%); */
+  padding: 5px 10px;
+  border-radius: 40px;
+  /* border: 3px outset #fde0d8; */
+  /* background-color: #fadcd3; */
+  /* box-shadow: 0 0 24px 0 rgb(0 0 0 / 10%); */
   text-align: center;
   vertical-align: top;
   cursor:pointer;
 }
 
+/* 선택 표시 */
+#sub_tree .selected {
+    border: 3px solid #f7baaa;
+    box-shadow: 0 0 24px 0 rgb(0 0 0 / 10%);
+}
 
-#tt_base .list_wrap ul>li>div,
-#tt_add .list_wrap ul>li>div
+
+/* @media screen and (max-width: 600px) {
+  #sub_tree .list_wrap ul>li {
+  display: inline-block;
+  width: 50%;
+  min-height: 250px;
+  margin: 0px;
+  padding: 10px;
+  }
+  } */
+
+
+#sub_tree ul>li>div
 {
   overflow: hidden;
-  height: 100%;
+  /* height: 100%; */
   background-color: #fff;
-  border-radius: 4px;
+  /* border-radius: 4px; */
 } 
 
 
@@ -65,42 +94,22 @@
 
 }
 
-
-#tt_blend .list_wrap ul>li {
-  /* position: relative; */
-  display: inline-block;
-  /* float: left; */
-  width: 200px;
-  min-height: 250px;
-  height: 300px;
-  margin: 10px 5px;
-  padding: 0 10px;
-  border-radius: 1px;
-  border: 1px solid #fff;
-  background-color: #fff;
-  /* box-shadow: 0 0 24px 0 rgb(0 0 0 / 8%); */
-  text-align: center;
-  vertical-align: top;
-  cursor:pointer;
+.tt_thum_img {
+  /* border-radius: 100%; */
 }
 
-#tt_blend  .list_wrap ul>li>div {
-  overflow: hidden;
-  height: 100%;
-  background-color: #fff;
-  border-radius: 4px;
-  
-} 
-
-#tt_blend  .tt_goods .tt_thum_img {
-  margin: 10px 0 16px;
-  
-}
-
-#tt_blend .tt_goods .tt_thum_img {
+#tt_blend .tt_thum_img {
   margin: 10px 0 16px;
   height: 150px;
 }
+
+/* @media screen and (max-width: 600px) {
+
+  .tt_goods .tt_cate {
+    visibility: hidden;
+    height: 0px;
+  }
+} */
 
 
 #tt_req textarea {
@@ -111,11 +120,12 @@
 
 .tt_goods .tt_cate {
   display: inline-block;
-  margin: 20px 1px 3px;
+  margin: 20px 1px 5px;
   padding: 1px 10px 0;
-  /* border: 2px solid #eee; */
-  font-size: 15px;
-  color: black;
+  border: 1px solid #eee;
+  font-size: 1rem;
+  color: rgb(27, 27, 27);
+  /* background-color: #fcf7f6; */
   box-shadow: 0 0 24px 0 rgb(0 0 0 / 10%);
   /* background: #fff; */
   vertical-align: top;
@@ -123,9 +133,9 @@
 
 
 .tt_info .tt_name {
-  padding: 0 15px;
+  padding: 0 1px;
   display: block;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   width: 100%;
   margin: 0 0 5px;
   
@@ -137,11 +147,78 @@
   
 }
 
-.tt_goods .tt_explain {
+/* 설명 출력 */
+ p.tt_explain {
+  font-size: 15px;
+  color: #fff;
+  /* display: none; */
+  /* visibility: hidden; */
+}
+
+/* 선택했을 때 글자색 바꾸기  */
+#sub_tree ul>li:hover 
+p.tt_explain {
   font-size: 15px;
   color: #aaa;
-  display: none;
-  /* visibility: hidden; */
+  /* display: block; */
+  /* visibility:visible; */
+}
+
+/* 모바일 작은화면  */
+@media screen and (max-width: 600px) {
+  
+  #sub_tree .sub_tree {
+    position: relative;
+    margin: 10px;
+    padding: 10px 0px;
+    width: 100%;
+    height: 100%;
+  }
+  
+  #sub_tree .list_wrap ul {
+    display: flex;
+    flex-wrap: wrap;
+    /* height: 80%; */
+    /* width: 3000px; */
+    
+  }
+  
+  #sub_tree ul>li {
+    /* position: relative; */
+    display: inline-block;
+    width: 150px;
+    /* height: auto; */
+    /* min-height: 250px; */
+    /* max-height: 400px; */
+    /* height: 100px; */
+    margin: 5px;
+    padding: 5px 10px;
+  }
+
+  #sub_tree .tt_thum_img{
+    /* height: 100px; */
+  }
+
+  #tt_blend .tt_thum_img {
+    /* margin: 10px 0 16px; */
+    height: 150px;
+  }
+
+  .tt_info .tt_name {
+    font-size: 1.2rem;
+  }
+
+  .tt_goods .tt_cate {
+    display: none;
+  }
+
+
+  .tt_goods .tt_explain {
+    display: none;
+    /* visibility: hidden; */
+  }
+
+
 }
 
 .tt_goods .tt_explain .hover {
@@ -155,6 +232,37 @@
 }
 
 
+/* 결제금액 */
+#tt_price {
+  font-size: 2rem;
+  text-align: right;
+
+}
+
+#tt_price p {
+  font-weight: bolder;
+  margin-bottom: -5px;
+}
+
+#tt_price .totalPrice {
+  border: 0cm;
+  text-align: right;
+  color: #fd6c44;
+}
+
+
+/* 마이페이지 */
+
+#subscribe_order
+{
+  max-width: 1200px;
+}
+
+#subscribe_order .nodata {
+  display: none;
+  visibility: hidden;
+
+}
 
 /* 티파인더 */
 @font-face {
@@ -515,16 +623,4 @@ dd {
   cursor: pointer;
   color: black;
 }
-
-/* 회원가입 */
-
-.contact_form {
-  margin-left: 15%;
-  margin-right: 15%;
-}
-
-.container .btn {
-  display: inline-block
-}
-
 
