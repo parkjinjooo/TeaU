@@ -18,6 +18,8 @@
 		<typeAlias type="com.teau.biz.board.BoardVO" alias="board" />
 		<typeAlias type="com.teau.biz.board.RBoardVO" alias="Rboard" />
 		<typeAlias type="com.teau.biz.board.ReplyVO" alias="reply" />
+		<typeAlias type="com.teau.biz.shop.ShopVO" alias="shop" />
+		
 	</typeAliases>
 	
 	<!-- Sql Mapper 설정 -->
@@ -26,5 +28,6 @@
 		<mapper resource="mappings/member-mapping.xml" />
 		<mapper resource="mappings/board-mapping.xml"/>
 		<mapper resource="mappings/reply-mapping.xml"/>
+		<mapper resource="mappings/shop-mapping.xml"/>		
 	</mappers>
 </configuration>

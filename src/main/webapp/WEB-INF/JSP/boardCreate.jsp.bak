@@ -45,36 +45,7 @@
                         }
                     </style>
                     <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script>
-                        $(document).ready(function () {
 
-                        });
-
-                        function nullvaluealert() {
-                            if (!document.create.boardTitle.value || document.create.boardTitle.value.trim() == "") {
-                                alert("글 제목을 입력하세요");
-
-                                return false;
-                            }
-                            if (!document.create.boardContent.value || document.create.boardContent.value.trim() == "") {
-                                alert("글 내용을 입력하세요");
-
-                                return false;
-                            }
-
-
-                        }
-
-                        $("#uploadFile").change(function () {
-                            if (this.files && this.files[0]) {
-                                var reader = new FileReader;
-                                reader.onload = function (data) {
-                                    $(".select_img img").attr("src", data.target.result).width(500);
-                                }
-                                reader.readAsDataURL(this.files[0]);
-                            }
-                        });
-                    </script>
                 </head>
 
 
@@ -86,8 +57,8 @@
 
 
 
-                     <form name="create" action="boardCreate.do" method="post" enctype="multipart/form-data"
-                            onsubmit="return nullvaluealert()">
+                        <form action="boardCreate.do" method="post" enctype="multipart/form-data"
+                            >
                             <section class="contact_section sec_ptb_120 bg_default_gray">
                                 <div class="container">
                                     <div class="contact_form bg_white wow fadeInUp" style="margin-top: 100px;"
@@ -129,7 +100,18 @@
                                             <input type="file" id="uploadFile" name="uploadFile" />
                                             <div class="select_img"><img src="" /></div>
 
-                                          
+                                            <script>
+                                                $("#uploadFile").change(function () {
+                                                    if (this.files && this.files[0]) {
+                                                        var reader = new FileReader;
+                                                        reader.onload = function (data) {
+                                                            $(".select_img img").attr("src", data.target.result).width(500);
+                                                        }
+                                                        reader.readAsDataURL(this.files[0]);
+                                                    }
+                                                });
+                                            </script>
+                                            <%=request.getRealPath(" /") %>
                                         </div>
 
                                         <!-- <div class="file1">

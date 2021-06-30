@@ -44,7 +44,7 @@ public class BoardController {
 
     // 글 등록화면으로 이동
     @RequestMapping(value = "/boardCreateMove.do")
-    public String boardCreateView(BoardVO vo) throws IOException {
+    public String boardCreateView() throws IOException {
         return "boardCreate";
     }
 
@@ -57,13 +57,13 @@ public class BoardController {
 
         //   File f = new File(root_path + attach_path + filename);
 
-        if (file != null) {
+       if (file.isEmpty()) {
+            vo.setBoardImgm("");
+        } else if (!file.isEmpty()) {
             vo.setBoardImgm(file.getOriginalFilename());
             file.transferTo(new File(imgUploadPath + file.getOriginalFilename()));
-
         }
-
-        vo.setBoardImg1("1111");
+    
 
         System.out.println("글 등록 처리");
         boardService.insertBoard(vo);
@@ -106,7 +106,7 @@ public class BoardController {
         System.out.println(123+vo.getBoardImgm()+123);
       
         //return "redirect:boardViewer.do";
-        return "forward:/boardViewer.do?boardId=" + vo.getBoardId()+"&boardImgm="+vo.getBoardImgm();
+        return "redirect:/boardViewer.do?boardId=" + vo.getBoardId()+"&boardImgm="+vo.getBoardImgm();
         //      return "redirect:boardViewer.do?boardId="+vo.getBoardId();
     }
 

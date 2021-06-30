@@ -96,9 +96,9 @@
                         shop
                       </a>
                       <ul class="submenu dropdown-menu" aria-labelledby="portfolio_submenu">
-                        <li><a href="shop.html">#계절별</a></li>
-                        <li><a href="shop2.html">#사용자별</a></li>
-                        <li><a href="shop3.html">#디카페인</a></li>
+                        <li><a href="shopSeason.do">#계절</a></li>
+                        <li><a href="shopUser.do">#사용자</a></li>
+                        <li><a href="shopBlend.do">#베이스</a></li>
                       </ul>
                     </li>
                     <li class="dropdown">
