@@ -78,420 +78,46 @@
 						<div class="col-md-5 col-lg-5">
 						</div>
 						<div class="col-md-2 col-lg-2" style="text-align: center;">
-							<a class="btn btn_primary text-uppercase" href="shop_create.html">상품 추가</a>
+							<a class="btn btn_primary text-uppercase" href="shopCreate.do">상품 추가</a>
 						</div>
 						<div class="col-md-5 col-lg-5">
 						</div>
 					</div>
 					<!--상품추가버튼 여기까지-->
 
-
-					<!-- <div class="row gallery_item_grid grid wow fadeInUp " data-wow-delay=".2s">
-   
-                        <div class="element-item greentea" data-category="greentea">
-                           <div class="gallery_card_item">
-                              <a class="item_image" href="#!">
-                                 <img src="assets/images/gallery/gallery_img_04.jpg" alt="image_not_found">
-                              </a>
-                              <div class="item_content" style="padding: 5px;">
-                                 <h3 class="item_title">
-                                    <a href="#!">
-                                       상품명 안 넘치게 하고 싶은데
-                                    </a>
-                                 </h3>
-                              </div>
-                           </div>
-                              </div> -->
-
 					<!-- 상품목록 -->
 					<div class="wrap" style="padding: 1%; ">
 						<div class="related_products">
-							<h4 class="area_title text-uppercase mb-0 wow fadeInUp" data-wow-delay=".1s">Spring</h4>
+							<h4 class="area_title text-uppercase mb-0 wow fadeInUp" data-wow-delay=".1s">All</h4>
 							<div class="row">
-
+								<c:forEach items="${shopSeason}" var="tea">
+								<!-- <form action="/shop_details.do" method="POST"> -->
+								<input type="hidden" value="${tea.teaId}" >
 								<div class="col-lg-3 col-md-6 col-sm-6">
 									<div class="shop_card wow fadeInUp" data-wow-delay=".4s">
 										<a class="wishlist_btn" href="#!"><i class="fal fa-heart"></i></a>
-										<a class="item_image" href="shop_details.html">
-											<img src="assets/images/shop/img_03.png" alt="image_not_found">
+										<form>
+										<a class="item_image" href="shop_details.do?teaId=${tea.teaId }">
+											<img src="resource/imgUpload/${tea.teaImg }" alt="image_not_found">
 										</a>
 										<div class="item_content">
 											<h3 class="item_title text-uppercase">
-												<a href="shop_details.html">제주 영귤티
+												<a href="shop_details.do"> ${tea.teaName} 
+												<%-- <input type="button" id="detail" onclick="detail()"> ${tea.teaName} --%>
 											</h3>
-											<!-- <div class="btns_group" style="text-align:right">
-                                                   <a class="item_price bg_default_brown">구매하기</a>
-                                                   <a class="btn btn_border border_black text-uppercase" href="#!">Add To Cart</a>
-                                                </div> -->
 											<div>
 												<p class="" style="font-size: 1rem; color:
-                                                    black; font-weight: bold">8,800원</p></a>
+                                                    black; font-weight: bold">${tea.teaPrice} 원</p></a>
 											</div>
 										</div>
+										</form>
 									</div>
 								</div>
-
-								<div class="col-lg-3 col-md-6 col-sm-6">
-									<div class="shop_card wow fadeInUp" data-wow-delay=".4s">
-										<a class="wishlist_btn" href="#!"><i class="fal fa-heart"></i></a>
-										<a class="item_image" href="shop_details.html">
-											<img src="assets/images/shop/img_03.png" alt="image_not_found">
-										</a>
-										<div class="item_content">
-											<h3 class="item_title text-uppercase">
-												<a href="shop_details.html">제주 영귤티
-											</h3>
-											<!-- <div class="btns_group" style="text-align:right">
-                                                   <a class="item_price bg_default_brown">구매하기</a>
-                                                   <a class="btn btn_border border_black text-uppercase" href="#!">Add To Cart</a>
-                                                </div> -->
-											<div>
-												<p class="" style="font-size: 1rem; color:
-                                                    black; font-weight: bold">8,800원</p></a>
-											</div>
-										</div>
-									</div>
-								</div>
-
-
-								<div class="col-lg-3 col-md-6 col-sm-6">
-									<div class="shop_card wow fadeInUp" data-wow-delay=".4s">
-										<a class="wishlist_btn" href="#!"><i class="fal fa-heart"></i></a>
-										<a class="item_image" href="shop_details.html">
-											<img src="assets/images/shop/img_03.png" alt="image_not_found">
-										</a>
-										<div class="item_content">
-											<h3 class="item_title text-uppercase">
-												<a href="shop_details.html">제주 영귤티
-											</h3>
-											<!-- <div class="btns_group" style="text-align:right">
-                                                   <a class="item_price bg_default_brown">구매하기</a>
-                                                   <a class="btn btn_border border_black text-uppercase" href="#!">Add To Cart</a>
-                                                </div> -->
-											<div>
-												<p class="" style="font-size: 1rem; color:
-                                                    black; font-weight: bold">8,800원</p></a>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-lg-3 col-md-6 col-sm-6">
-									<div class="shop_card wow fadeInUp" data-wow-delay=".4s">
-										<a class="wishlist_btn" href="#!"><i class="fal fa-heart"></i></a>
-										<a class="item_image" href="shop_details.html">
-											<img src="assets/images/shop/img_03.png" alt="image_not_found">
-										</a>
-										<div class="item_content">
-											<h3 class="item_title text-uppercase">
-												<a href="shop_details.html">제주 영귤티
-											</h3>
-											<!-- <div class="btns_group" style="text-align:right">
-                                                   <a class="item_price bg_default_brown">구매하기</a>
-                                                   <a class="btn btn_border border_black text-uppercase" href="#!">Add To Cart</a>
-                                                </div> -->
-											<div>
-												<p class="" style="font-size: 1rem; color:
-                                                    black; font-weight: bold">8,800원</p></a>
-											</div>
-										</div>
-									</div>
-								</div>
+								<!-- </form> -->
+								</c:forEach>
 							</div>
 						</div>
-
-						<!-- 2번째 -->
-						<div class="related_products">
-							<h4 class="area_title text-uppercase mb-0 wow fadeInUp" data-wow-delay=".1s">Summer</h4>
-							<div class="row">
-
-								<div class="col-lg-3 col-md-6 col-sm-6">
-									<div class="shop_card wow fadeInUp" data-wow-delay=".4s">
-										<a class="wishlist_btn" href="#!"><i class="fal fa-heart"></i></a>
-										<a class="item_image" href="shop_details.html">
-											<img src="assets/images/shop/img_03.png" alt="image_not_found">
-										</a>
-										<div class="item_content">
-											<h3 class="item_title text-uppercase">
-												<a href="shop_details.html">제주 영귤티
-											</h3>
-											<!-- <div class="btns_group" style="text-align:right">
-                                                <a class="item_price bg_default_brown">구매하기</a>
-                                                <a class="btn btn_border border_black text-uppercase" href="#!">Add To Cart</a>
-                                             </div> -->
-											<div>
-												<p class="" style="font-size: 1rem; color:
-                                                 black; font-weight: bold">8,800원</p></a>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-lg-3 col-md-6 col-sm-6">
-									<div class="shop_card wow fadeInUp" data-wow-delay=".4s">
-										<a class="wishlist_btn" href="#!"><i class="fal fa-heart"></i></a>
-										<a class="item_image" href="shop_details.html">
-											<img src="assets/images/shop/img_03.png" alt="image_not_found">
-										</a>
-										<div class="item_content">
-											<h3 class="item_title text-uppercase">
-												<a href="shop_details.html">제주 영귤티
-											</h3>
-											<!-- <div class="btns_group" style="text-align:right">
-                                                <a class="item_price bg_default_brown">구매하기</a>
-                                                <a class="btn btn_border border_black text-uppercase" href="#!">Add To Cart</a>
-                                             </div> -->
-											<div>
-												<p class="" style="font-size: 1rem; color:
-                                                 black; font-weight: bold">8,800원</p></a>
-											</div>
-										</div>
-									</div>
-								</div>
-
-
-								<div class="col-lg-3 col-md-6 col-sm-6">
-									<div class="shop_card wow fadeInUp" data-wow-delay=".4s">
-										<a class="wishlist_btn" href="#!"><i class="fal fa-heart"></i></a>
-										<a class="item_image" href="shop_details.html">
-											<img src="assets/images/shop/img_03.png" alt="image_not_found">
-										</a>
-										<div class="item_content">
-											<h3 class="item_title text-uppercase">
-												<a href="shop_details.html">제주 영귤티
-											</h3>
-											<!-- <div class="btns_group" style="text-align:right">
-                                                <a class="item_price bg_default_brown">구매하기</a>
-                                                <a class="btn btn_border border_black text-uppercase" href="#!">Add To Cart</a>
-                                             </div> -->
-											<div>
-												<p class="" style="font-size: 1rem; color:
-                                                 black; font-weight: bold">8,800원</p></a>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-lg-3 col-md-6 col-sm-6">
-									<div class="shop_card wow fadeInUp" data-wow-delay=".4s">
-										<a class="wishlist_btn" href="#!"><i class="fal fa-heart"></i></a>
-										<a class="item_image" href="shop_details.html">
-											<img src="assets/images/shop/img_03.png" alt="image_not_found">
-										</a>
-										<div class="item_content">
-											<h3 class="item_title text-uppercase">
-												<a href="shop_details.html">제주 영귤티
-											</h3>
-											<!-- <div class="btns_group" style="text-align:right">
-                                                <a class="item_price bg_default_brown">구매하기</a>
-                                                <a class="btn btn_border border_black text-uppercase" href="#!">Add To Cart</a>
-                                             </div> -->
-											<div>
-												<p class="" style="font-size: 1rem; color:
-                                                 black; font-weight: bold">8,800원</p></a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-
-						<!-- 3번째 -->
-						<div class="related_products">
-							<h4 class="area_title text-uppercase mb-0 wow fadeInUp" data-wow-delay=".1s">Fall</h4>
-							<div class="row">
-
-								<div class="col-lg-3 col-md-6 col-sm-6">
-									<div class="shop_card wow fadeInUp" data-wow-delay=".4s">
-										<a class="wishlist_btn" href="#!"><i class="fal fa-heart"></i></a>
-										<a class="item_image" href="shop_details.html">
-											<img src="assets/images/shop/img_03.png" alt="image_not_found">
-										</a>
-										<div class="item_content">
-											<h3 class="item_title text-uppercase">
-												<a href="shop_details.html">제주 영귤티
-											</h3>
-											<!-- <div class="btns_group" style="text-align:right">
-                                                                        <a class="item_price bg_default_brown">구매하기</a>
-                                                                        <a class="btn btn_border border_black text-uppercase" href="#!">Add To Cart</a>
-                                                                     </div> -->
-											<div>
-												<p class="" style="font-size: 1rem; color:
-                                                                         black; font-weight: bold">8,800원</p></a>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-lg-3 col-md-6 col-sm-6">
-									<div class="shop_card wow fadeInUp" data-wow-delay=".4s">
-										<a class="wishlist_btn" href="#!"><i class="fal fa-heart"></i></a>
-										<a class="item_image" href="shop_details.html">
-											<img src="assets/images/shop/img_03.png" alt="image_not_found">
-										</a>
-										<div class="item_content">
-											<h3 class="item_title text-uppercase">
-												<a href="shop_details.html">제주 영귤티
-											</h3>
-											<!-- <div class="btns_group" style="text-align:right">
-                                                                        <a class="item_price bg_default_brown">구매하기</a>
-                                                                        <a class="btn btn_border border_black text-uppercase" href="#!">Add To Cart</a>
-                                                                     </div> -->
-											<div>
-												<p class="" style="font-size: 1rem; color:
-                                                                         black; font-weight: bold">8,800원</p></a>
-											</div>
-										</div>
-									</div>
-								</div>
-
-
-								<div class="col-lg-3 col-md-6 col-sm-6">
-									<div class="shop_card wow fadeInUp" data-wow-delay=".4s">
-										<a class="wishlist_btn" href="#!"><i class="fal fa-heart"></i></a>
-										<a class="item_image" href="shop_details.html">
-											<img src="assets/images/shop/img_03.png" alt="image_not_found">
-										</a>
-										<div class="item_content">
-											<h3 class="item_title text-uppercase">
-												<a href="shop_details.html">제주 영귤티
-											</h3>
-											<!-- <div class="btns_group" style="text-align:right">
-                                                                        <a class="item_price bg_default_brown">구매하기</a>
-                                                                        <a class="btn btn_border border_black text-uppercase" href="#!">Add To Cart</a>
-                                                                     </div> -->
-											<div>
-												<p class="" style="font-size: 1rem; color:
-                                                                         black; font-weight: bold">8,800원</p></a>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-lg-3 col-md-6 col-sm-6">
-									<div class="shop_card wow fadeInUp" data-wow-delay=".4s">
-										<a class="wishlist_btn" href="#!"><i class="fal fa-heart"></i></a>
-										<a class="item_image" href="shop_details.html">
-											<img src="assets/images/shop/img_03.png" alt="image_not_found">
-										</a>
-										<div class="item_content">
-											<h3 class="item_title text-uppercase">
-												<a href="shop_details.html">제주 영귤티
-											</h3>
-											<!-- <div class="btns_group" style="text-align:right">
-                                                                        <a class="item_price bg_default_brown">구매하기</a>
-                                                                        <a class="btn btn_border border_black text-uppercase" href="#!">Add To Cart</a>
-                                                                     </div> -->
-											<div>
-												<p class="" style="font-size: 1rem; color:
-                                                                         black; font-weight: bold">8,800원</p></a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-
-						<!-- 4번째 -->
-						<div class="related_products">
-							<h4 class="area_title text-uppercase mb-0 wow fadeInUp" data-wow-delay=".1s">Winter</h4>
-							<div class="row">
-
-								<div class="col-lg-3 col-md-6 col-sm-6">
-									<div class="shop_card wow fadeInUp" data-wow-delay=".4s">
-										<a class="wishlist_btn" href="#!"><i class="fal fa-heart"></i></a>
-										<a class="item_image" href="shop_details.html">
-											<img src="assets/images/shop/img_03.png" alt="image_not_found">
-										</a>
-										<div class="item_content">
-											<h3 class="item_title text-uppercase">
-												<a href="shop_details.html">제주 영귤티
-											</h3>
-											<!-- <div class="btns_group" style="text-align:right">
-                                                <a class="item_price bg_default_brown">구매하기</a>
-                                                <a class="btn btn_border border_black text-uppercase" href="#!">Add To Cart</a>
-                                             </div> -->
-											<div>
-												<p class="" style="font-size: 1rem; color:
-                                                 black; font-weight: bold">8,800원</p></a>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-lg-3 col-md-6 col-sm-6">
-									<div class="shop_card wow fadeInUp" data-wow-delay=".4s">
-										<a class="wishlist_btn" href="#!"><i class="fal fa-heart"></i></a>
-										<a class="item_image" href="shop_details.html">
-											<img src="assets/images/shop/img_03.png" alt="image_not_found">
-										</a>
-										<div class="item_content">
-											<h3 class="item_title text-uppercase">
-												<a href="shop_details.html">제주 영귤티
-											</h3>
-											<!-- <div class="btns_group" style="text-align:right">
-                                                <a class="item_price bg_default_brown">구매하기</a>
-                                                <a class="btn btn_border border_black text-uppercase" href="#!">Add To Cart</a>
-                                             </div> -->
-											<div>
-												<p class="" style="font-size: 1rem; color:
-                                                 black; font-weight: bold">8,800원</p></a>
-											</div>
-										</div>
-									</div>
-								</div>
-
-
-								<div class="col-lg-3 col-md-6 col-sm-6">
-									<div class="shop_card wow fadeInUp" data-wow-delay=".4s">
-										<a class="wishlist_btn" href="#!"><i class="fal fa-heart"></i></a>
-										<a class="item_image" href="shop_details.html">
-											<img src="assets/images/shop/img_03.png" alt="image_not_found">
-										</a>
-										<div class="item_content">
-											<h3 class="item_title text-uppercase">
-												<a href="shop_details.html">제주 영귤티
-											</h3>
-											<!-- <div class="btns_group" style="text-align:right">
-                                                <a class="item_price bg_default_brown">구매하기</a>
-                                                <a class="btn btn_border border_black text-uppercase" href="#!">Add To Cart</a>
-                                             </div> -->
-											<div>
-												<p class="" style="font-size: 1rem; color:
-                                                 black; font-weight: bold">8,800원</p></a>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-lg-3 col-md-6 col-sm-6">
-									<div class="shop_card wow fadeInUp" data-wow-delay=".4s">
-										<a class="wishlist_btn" href="#!"><i class="fal fa-heart"></i></a>
-										<a class="item_image" href="shop_details.html">
-											<img src="assets/images/shop/img_03.png" alt="image_not_found">
-										</a>
-										<div class="item_content">
-											<h3 class="item_title text-uppercase">
-												<a href="shop_details.html">제주 영귤티
-											</h3>
-											<!-- <div class="btns_group" style="text-align:right">
-                                                <a class="item_price bg_default_brown">구매하기</a>
-                                                <a class="btn btn_border border_black text-uppercase" href="#!">Add To Cart</a>
-                                             </div> -->
-											<div>
-												<p class="" style="font-size: 1rem; color:
-                                                 black; font-weight: bold">8,800원</p></a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
 					</div>
-
 
 			</section>
 			<!-- gallery_section - end

@@ -26,11 +26,11 @@ public class ShopDAOMybatis {
 	}
 	
 	public ShopVO getShop(ShopVO vo) {
-		return (ShopVO) mybatis.selectOne("SubDAO.getShop", vo);
+		return (ShopVO) mybatis.selectOne("ShopDAO.getShop", vo);
 	}
 	
 	public List<ShopVO> getShopList(){
-		return mybatis.selectList("SubDAO.getShopList");
+		return mybatis.selectList("ShopDAO.getShopList");
 	}
 	
 	

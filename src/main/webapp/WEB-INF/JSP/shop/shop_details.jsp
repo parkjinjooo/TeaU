@@ -78,7 +78,7 @@
 							<div class="details_image_wrap wow fadeInUp" data-wow-delay=".1s">
 								<div class="details_image_carousel">
 									<div class="slider_item">
-										<img src="assets/images/shop/img_01.png" alt="image_not_found">
+										<img src="resource/imgUpload/${teaDetail.teaImg }" alt="image_not_found">
 									</div>
 									<div class="slider_item">
 										<img src="assets/images/shop/img_02.png" alt="image_not_found">
@@ -100,7 +100,7 @@
 
 								<div class="details_image_carousel_nav">
 									<div class="slider_item">
-										<img src="assets/images/shop/img_01.png" alt="image_not_found">
+										<img src="resource/imgUpload/${teaDetail.teaImg }" alt="image_not_found">
 									</div>
 									<div class="slider_item">
 										<img src="assets/images/shop/img_02.png" alt="image_not_found">
@@ -124,13 +124,13 @@
 						<div class="col-lg-6 col-md-7">
 							<div class="details_content wow fadeInUp" data-wow-delay=".2s">
 								<div class="details_flex_title">
-									<h2 class="details_title text-uppercase">DB로 받아올 상품 이름</h2>
+									<h2 class="details_title text-uppercase">${teaDetail.teaName }</h2>
 								</div>
 								<p>
-									DB로 받아올 상품 소개글
+									${teaDetail.teaInfo }
 								</p>
 								<div class="details_price">
-									<strong class="price_text">$DB에서 받아올 가격</strong>
+									<strong class="price_text">${teaDetail.teaPrice }</strong>
 								</div>
 								<div>
 

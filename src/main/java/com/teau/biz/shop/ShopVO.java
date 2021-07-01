@@ -2,6 +2,8 @@ package com.teau.biz.shop;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -15,11 +17,12 @@ public class ShopVO {
 	private Date teaRegdate;
 	private String tagBase;
 	private String tagCaff;
-	private String tegSeason;
+	private String tagSeason;
 	private String tagUser;
 	private String tagTaste;
 	private String tagEff;
 	private String tagBlend;
 	private String tagDrink;
+	private MultipartFile uploadFile;
 
 }
