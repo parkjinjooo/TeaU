@@ -20,7 +20,7 @@ import com.teau.biz.shop.ShopVO;
 public class ShopController {
 
 	@Autowired
-	private ShopService shopservice;
+	private ShopService shopService;
 	
 	@Resource(name = "uploadPath")
 	private String uploadPath;
@@ -28,21 +28,21 @@ public class ShopController {
 	// 각각 페이지로 전체리스트 가지고 이동 
 	@RequestMapping(value="/shopSeason.do")
 	public String getShopSeasonList(Model model) {
-		model.addAttribute("shopSeason", shopservice.getShopList());				
+		model.addAttribute("shopSeason", shopService.getShopList());				
 		
 		return "shop/shopSeason";
 	}
 	
 	@RequestMapping(value="/shopUser.do")
 	public String getShopUserList(Model model) {
-		model.addAttribute("shopUser", shopservice.getShopList());				
+		model.addAttribute("shopUser", shopService.getShopList());				
 		
 		return "shopUser";
 	}
 	
 	@RequestMapping(value="/shopBlend.do")
 	public String getShopBlendList(Model model) {
-		model.addAttribute("shopBlend", shopservice.getShopList());				
+		model.addAttribute("shopBlend", shopService.getShopList());				
 		
 		return "shopBlend";
 	}
@@ -55,17 +55,17 @@ public class ShopController {
 	}
 	
 	// 상품 상세 
-	@RequestMapping(value="/shop_details.do")
+	@RequestMapping(value="/shopDetails.do")
 	public String getShop(@RequestParam("teaId") int id, Model model) {
 		ShopVO shop = new ShopVO();
 		shop.setTeaId(id);
 		
 		
-		model.addAttribute("teaDetail", shopservice.getShop(shop));
+		model.addAttribute("teaDetail", shopService.getShop(shop));
 		
-		System.out.println(shopservice.getShop(shop));
+		System.out.println(shopService.getShop(shop));
 		
-		return "shop/shop_details";
+		return "shop/shopDetails";
 	}
 	
 	
@@ -81,26 +81,29 @@ public class ShopController {
 		vo.setTeaImg(uploadFile.getOriginalFilename());
 		System.out.println(uploadFile.getOriginalFilename());
 		uploadFile.transferTo(new File(imgUploadPath + uploadFile.getOriginalFilename()));		
-//		
-//		if(!uploadFile.isEmpty()) {
-//			String fileName = uploadFile.getOriginalFilename();
-//			uploadFile.transferTo(new File("D;/" + fileName));
-//			System.out.println(fileName);
-//		}
 		
 		System.out.println("등록");
-		shopservice.insertShop(vo);
+		shopService.insertShop(vo);
 		return "redirect:shopSeason.do";
 	}
 
 	@RequestMapping(value="/updateShop.do")
-	public String updateShop(@ModelAttribute ShopVO vo) {
-		return "";
+	public String updateShop(@RequestParam("teaId") int teaId, Model model) {
+		ShopVO vo = new ShopVO();
+		vo.setTeaId(teaId);
+		model.addAttribute("teaDetail", shopService.getShop(vo));
+		
+		return "shop/shopUpdate";
 	}
 	
 	@RequestMapping(value="/deleteShop.do")
-	public String deleteShop(@ModelAttribute ShopVO vo) {
-		return " ";
+	public String deleteShop(@RequestParam("teaId") int teaId) {
+		ShopVO shop = new ShopVO();
+		shop.setTeaId(teaId);
+		
+		shopService.deleteShop(shop);
+		
+		return "redirect:shopSeason.do";
 	}
 	
 	

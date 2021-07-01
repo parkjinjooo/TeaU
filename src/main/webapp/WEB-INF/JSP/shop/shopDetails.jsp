@@ -67,8 +67,8 @@
 			<section class="details_section shop_details sec_ptb_120 bg_default_gray" style="padding-top: 50px;">
 				<div class="col-lg-2"></div>
 				<div class="col-lg-10" style="text-align: right; margin-bottom: 50px;">
-					<a class="btn btn_primary text-uppercase" href="shop_update.html">상품 수정</a>&nbsp;&nbsp;&nbsp;&nbsp;
-					<a class="btn btn_primary text-uppercase" href="#" id="removefrm" onclick='removeCheck()'>상품 삭제</a>
+					<a class="btn btn_primary text-uppercase" href="updateShop.do?teaId=${teaDetail.teaId }">상품 수정</a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<button class="btn btn_primary text-uppercase" id="removefrm" onclick='removeCheck()'>상품 삭제</button>
 				</div>
 				<div class="col-lg-2"></div>
 				<div class="container">
@@ -123,6 +123,7 @@
 
 						<div class="col-lg-6 col-md-7">
 							<div class="details_content wow fadeInUp" data-wow-delay=".2s">
+								<br><br>
 								<div class="details_flex_title">
 									<h2 class="details_title text-uppercase">${teaDetail.teaName }</h2>
 								</div>
@@ -247,5 +248,15 @@
 		<!-- main body - end
 			================================================== -->
 <jsp:include page="../footer.jsp"></jsp:include>
+<script>
+	function removeCheck(){
+		
+		let deleteCheck = confirm("해당 상품을 정말로 삭제하시겠습니까?")
+		if(deleteCheck){
+			location.href="deleteShop.do?teaId=${teaDetail.teaId }"
+		}
+	}
+
+</script>
 </body>
 </html>

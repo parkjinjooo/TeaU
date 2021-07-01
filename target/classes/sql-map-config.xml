@@ -9,7 +9,6 @@
 	<setting value="true" name="mapUnderscoreToCamelCase"/>
 	</settings>
 
-
 	<!-- Alias 설정 -->
 	<typeAliases>
 		<typeAlias type="com.teau.biz.subscribe.SubVO" alias="sub"></typeAlias>

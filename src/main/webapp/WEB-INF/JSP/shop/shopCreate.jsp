@@ -77,25 +77,15 @@
                             <div class="form_item">
                                 <input type="text" name="teaPrice" placeholder="차 가격을 적어주세요" required>
                             </div>
-                            
                             <h6> 베이스 선택 </h6>
                             <div>
-                                <label><input type="checkbox" name="tagBase" value="HERB" > HERB</label>
+                                <label><input type="radio" name="tagBase" value="HERB" > HERB</label>
                             </div>
                             <div>
-                                <label><input type="checkbox" name="tagBase" value="GREEN" > GREEN</label>
+                                <label><input type="radio" name="tagBase" value="GREEN" > GREEN</label>
                             </div>
                             <div>
-                                <label><input type="checkbox" name="tagBase" value="BLACK" > BLACK</label>
-                            </div>
-                            <br>
-                            
-                            <h6> 카페인 선택 </h6>
-                            <div>
-                                <label><input type="checkbox" name="tagCaff" value="카페인" > 카페인</label>
-                            </div>
-                            <div>
-                                <label><input type="checkbox" name="tagCaff" value="디카페인" > 디카페인</label>
+                                <label><input type="radio" name="tagBase" value="BLACK" > BLACK</label>
                             </div>
                             <br>
                             
@@ -129,7 +119,17 @@
                             </div>
                             <br>
                             
-                             <h6> 사용자별  선택 </h6>
+                         <div id="toChoice">
+                          	<h6> 카페인 선택 </h6>
+                            <div>
+                                <label><input type="radio" name="tagCaff" value="카페인" > 카페인</label>
+                            </div>
+                            <div>
+                                <label><input type="radio" name="tagCaff" value="디카페인" > 디카페인</label>
+                            </div>
+                            <br>
+                            
+                             <h6> 맛 선택 </h6>
                             <div>
                                 <label><input type="checkbox" name="tagTaste" value="시원한맛" > 시원한맛</label>
                             </div>
@@ -158,8 +158,10 @@
                                 <label><input type="checkbox" name="tagEff" value="건강" > 건강</label>
                             </div>
                             <br>
+                         </div>
                             
-                            <h6> 효능  선택 </h6>
+                         <div id="tbChoice">
+                            <h6> 블렌드  선택 </h6>
                             <div>
                             <label><input type="checkbox" name="tagBlend" value="꽃" > 꽃</label>
                             </div>
@@ -177,25 +179,7 @@
                             </div>
                             <br>
                             
-                            <h6> 효능  선택 </h6>
-                            <div>
-                            <label><input type="checkbox" name="tagBlend" value="꽃" > 꽃</label>
-                            </div>
-                            <div>
-                            <label><input type="checkbox" name="tagBlend" value="과일" > 과일</label>
-                            </div>
-                            <div>
-                            <label><input type="checkbox" name="tagBlend" value="시나몬" > 시나몬</label>
-                            </div>
-                            <div>
-                            <label><input type="checkbox" name="tagBlend" value="초콜렛&과자" > 초콜렛&과자</label>
-                            </div>
-                            <div>
-                            <label><input type="checkbox" name="tagBlend" value="믹스" > 믹스</label>
-                            </div>
-                            <br>
-                            
-                             <h6> 효능  선택 </h6>
+                             <h6> 마시는법  선택 </h6>
                             <div>
                             <label><input type="checkbox" name="tagDrink" value="아이스티" > 아이스티</label>
                             </div>
@@ -209,6 +193,8 @@
                             <label><input type="checkbox" name="tagDrink" value="식수대용" > 식수대용</label>
                             </div>
                             <br>
+                         </div>
+                            
                            <!--  
                             <div class="form_item">
                                 <input type="text" name="DB 보고 결정2" placeholder="DB 보고 결정2">
@@ -220,7 +206,7 @@
 
                                 <div class="file1">
                                     Image 1 : <input type="file" id="uploadFile" name="uploadFile">
-                                    <div class="select_img"><img src="" /></div>
+                                    <!-- <div class="select_img"><img src="" /></div> -->
                                 </div>
                                 <br />
 <!--                                 <div class="file2">
@@ -249,6 +235,28 @@
         </main>
         <!-- main body - end
       ================================================== -->
+      
+<script>
+	$(document).ready(function(){
+		$("#tbChoice").hide();
+	});
+
+	
+	$("input[name='orderCate']").change(function(){
+		if($("input[name='orderCate']:Checked").val() == "TO"){
+			$("#tbChoice").hide();
+			$("#toChoice").show();
+		}else{
+			$("#toChoice").hide();
+			$("#tbChoice").show();
+		}
+	});
+	
+
+	
+
+
+</script>
 
 <jsp:include page="../footer.jsp"></jsp:include>
 </body>

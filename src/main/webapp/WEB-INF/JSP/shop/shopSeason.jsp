@@ -92,17 +92,16 @@
 							<div class="row">
 								<c:forEach items="${shopSeason}" var="tea">
 								<!-- <form action="/shop_details.do" method="POST"> -->
-								<input type="hidden" value="${tea.teaId}" >
 								<div class="col-lg-3 col-md-6 col-sm-6">
 									<div class="shop_card wow fadeInUp" data-wow-delay=".4s">
 										<a class="wishlist_btn" href="#!"><i class="fal fa-heart"></i></a>
 										<form>
-										<a class="item_image" href="shop_details.do?teaId=${tea.teaId }">
+										<a class="item_image" href="shopDetails.do?teaId=${tea.teaId }">
 											<img src="resource/imgUpload/${tea.teaImg }" alt="image_not_found">
 										</a>
 										<div class="item_content">
 											<h3 class="item_title text-uppercase">
-												<a href="shop_details.do"> ${tea.teaName} 
+												<a href="shopDetails.do?teaId=${tea.teaId }"> ${tea.teaName} 
 												<%-- <input type="button" id="detail" onclick="detail()"> ${tea.teaName} --%>
 											</h3>
 											<div>
