@@ -67,7 +67,7 @@
 			<section class="details_section shop_details sec_ptb_120 bg_default_gray" style="padding-top: 50px;">
 				<div class="col-lg-2"></div>
 				<div class="col-lg-10" style="text-align: right; margin-bottom: 50px;">
-					<a class="btn btn_primary text-uppercase" href="updateShop.do?teaId=${teaDetail.teaId }">상품 수정</a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<button class="btn btn_primary text-uppercase" id="shopUpdate" onclick='update()'>상품 수정</a>&nbsp;&nbsp;&nbsp;&nbsp;
 					<button class="btn btn_primary text-uppercase" id="removefrm" onclick='removeCheck()'>상품 삭제</button>
 				</div>
 				<div class="col-lg-2"></div>
@@ -249,6 +249,23 @@
 			================================================== -->
 <jsp:include page="../footer.jsp"></jsp:include>
 <script>
+	
+	function update(){
+		let teaId = '${teaDetail.teaId}'
+		$.ajax({
+			type:'POST',
+			url:'updateInfo.do',
+			dataType:'text',
+			data: {'teaId': teaId},
+			success:function(data){
+				window.location.href=("shopAdmin.do?data=" + encodeURIComponent(JSON.stringify(data)));
+			},
+			error: function(e){
+				comsole.log(e);
+			}
+		});
+	}
+
 	function removeCheck(){
 		
 		let deleteCheck = confirm("해당 상품을 정말로 삭제하시겠습니까?")

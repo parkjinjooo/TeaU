@@ -102,7 +102,7 @@
                     </li>
                     <li class="dropdown">
                       <a class="nav-link" href="" id="services_submenu" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">1`
+                        aria-expanded="false">
                         board
                       </a>
                       <ul class="submenu dropdown-menu" aria-labelledby="services_submenu">

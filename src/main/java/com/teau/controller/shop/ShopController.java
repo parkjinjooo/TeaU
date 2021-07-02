@@ -2,6 +2,8 @@ package com.teau.controller.shop;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -11,8 +13,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.teau.biz.shop.ShopService;
 import com.teau.biz.shop.ShopVO;
 
@@ -51,7 +56,13 @@ public class ShopController {
 	@RequestMapping(value="/shopCreate.do")
 	public String shopCreate() {
 		
-		return "shop/shopCreate";
+		return "shop/shopAdmin";
+	}
+	
+	@RequestMapping("shopAdmin.do")
+	public String updateData() {
+	
+		return "shop/shopAdmin";
 	}
 	
 	// 상품 상세 
@@ -70,7 +81,8 @@ public class ShopController {
 	
 	
 	// CRUD
-	@RequestMapping(value="/insertShop.do")
+	@RequestMapping(value="/insertShop.do", produces = "application/text; charset=utf8")
+	@ResponseBody
 	public String insertShop(ShopVO vo) throws IOException {
 		
 		MultipartFile uploadFile = vo.getUploadFile();
@@ -84,17 +96,45 @@ public class ShopController {
 		
 		System.out.println("등록");
 		shopService.insertShop(vo);
-		return "redirect:shopSeason.do";
+		return "상품 등록이 완료되었습니다.";
 	}
 
-	@RequestMapping(value="/updateShop.do")
-	public String updateShop(@RequestParam("teaId") int teaId, Model model) {
+	@RequestMapping(value="/updateInfo.do", produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String updateInfo(@RequestParam Map<String, String> paramMap) throws JsonProcessingException{
 		ShopVO vo = new ShopVO();
-		vo.setTeaId(teaId);
-		model.addAttribute("teaDetail", shopService.getShop(vo));
+		vo.setTeaId(Integer.parseInt(paramMap.get("teaId")));
 		
-		return "shop/shopUpdate";
+		ShopVO shopInfo = shopService.getShop(vo);
+		
+		Map<String, Object> hashMap = new HashMap<String, Object>();
+		
+		hashMap.put("shopInfo", shopInfo);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(hashMap);
+		
+		return json;
 	}
+	
+	@RequestMapping(value="/updateShop.do", produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String updateShop(@ModelAttribute ShopVO vo) throws  IOException {
+		
+		MultipartFile uploadFile = vo.getUploadFile();
+		System.out.println("uploadFile:" + uploadFile);
+		String imgUploadPath = uploadPath + File.separator;
+		
+		
+		vo.setTeaImg(uploadFile.getOriginalFilename());
+		System.out.println(uploadFile.getOriginalFilename());
+		uploadFile.transferTo(new File(imgUploadPath + uploadFile.getOriginalFilename()));	
+		
+		shopService.updateShop(vo);
+		return "상품 수정이 완료되었습니다.";
+	}
+
 	
 	@RequestMapping(value="/deleteShop.do")
 	public String deleteShop(@RequestParam("teaId") int teaId) {

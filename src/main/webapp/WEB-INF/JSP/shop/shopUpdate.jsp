@@ -60,14 +60,25 @@
                                     </div>
                                 </div>
                             </div>
+                            <br>
                             <div class="form_item">
+                            <label>
+                            <h6> 상품 이름 </h6>
                                 <input type="text" name="subject" placeholder="차 이름을 적어주세요" value="${teaDetail.teaName }">
+                            </label>
                             </div>
+                            
+                           
                             <div class="form_item">
+                            <h6> 상품 설명 </h6>
                                 <textarea name="message" placeholder="상품 소개글을 적어주세요 :">${teaDetail.teaInfo }</textarea>
                             </div>
+                            
                             <div class="form_item">
+                            <label>
+                            <h6> 상품 가격 </h6>
                                 <input type="text" name="price" placeholder="차 가격을 적어주세요" value="${teaDetail.teaPrice }">
+                            </label>
                             </div>
                            
 

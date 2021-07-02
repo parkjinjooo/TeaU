@@ -232,6 +232,7 @@
 							this.checked = true;
 						}
 					}
+					console.log(tagSeason.length);
 				});
 				$('input:checkbox[name="tagBase"]').each(function() {
 					for(var i = 0; i< tagBase.length; i++){

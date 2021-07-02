@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%
+	String data = request.getParameter("data");
+%>
+    
+    
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,7 +53,7 @@
                 <div class="container">
                     <div class="contact_form bg_white wow fadeInUp" style="margin-top: 100px;" data-wow-delay=".1s">
 
-                        <form action="insertShop.do" method="post" enctype="multipart/form-data">
+                        <form id="insertForm" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-lg-8">
                                     <div class="form_item">
@@ -68,14 +74,24 @@
                                 <input type="radio" id="TB" name="orderCate" value="TB">
                                  <label for="TB">블렌딩티</label>
                             </div>
+                            
                             <div class="form_item">
-                                <input type="text" name="teaName" placeholder="차 이름을 적어주세요" required>
+                            <label>
+                            <h6>상품 이름</h6>
+                                <input type="text" name="teaName" id="teaName" placeholder="차 이름을 적어주세요" required>
+                            </label>
                             </div>
+                            
                             <div class="form_item">
-                                <textarea name="teaInfo" placeholder="상품 소개글을 적어주세요 :" required></textarea>
+                            <h6>상품 설명</h6>
+                                <textarea name="teaInfo" id="teaInfo" placeholder="상품 소개글을 적어주세요 :" required></textarea>
                             </div>
+                            
                             <div class="form_item">
-                                <input type="text" name="teaPrice" placeholder="차 가격을 적어주세요" required>
+                            <label>
+							<h6>상품 가격</h6>                            
+                                <input type="text" name="teaPrice" id="teaPrice" placeholder="차 가격을 적어주세요" required>
+                            </label>
                             </div>
                             <h6> 베이스 선택 </h6>
                             <div>
@@ -194,20 +210,19 @@
                             </div>
                             <br>
                          </div>
-                            
-                           <!--  
-                            <div class="form_item">
+                            <!-- <div class="form_item">
                                 <input type="text" name="DB 보고 결정2" placeholder="DB 보고 결정2">
                             </div>
                             <div class="form_item">
                                 <input type="text" name="DB 보고 결정3" placeholder="DB 보고 결정3">
                             </div> -->
 
-
+								
                                 <div class="file1">
-                                    Image 1 : <input type="file" id="uploadFile" name="uploadFile">
+                                    Image 1 : <input type="file" id="uploadFile" name="uploadFile" accept="image/*">
                                     <!-- <div class="select_img"><img src="" /></div> -->
                                 </div>
+                            
                                 <br />
 <!--                                 <div class="file2">
                                     Image 2 : <input
@@ -220,7 +235,7 @@
                                 </div> -->
                                 
                             <div class="text-center">
-                                <button type="submit" class="btn btn_primary text-uppercase">등록</button>
+                                <button type="button" class="btn btn_primary text-uppercase" onclick="inOrUp();">등록</button>
                             </div>
                             
                         </form>
@@ -238,10 +253,120 @@
       
 <script>
 	$(document).ready(function(){
-		$("#tbChoice").hide();
+		
+		
+		let data = <%= data%>;
+		
+		if(data != null){
+			let obj = JSON.parse(data);
+			
+			// 기본 
+			let orderCate = obj['shopInfo'].orderCate;
+			
+			if(orderCate == "TO"){
+				$("#tbChoice").hide();
+			}else{
+				$("#toChoice").hide();
+			}
+			
+			// text 영역
+			let teaName = obj['shopInfo'].teaName;
+			$("#teaName").val(teaName);
+			
+			let teaInfo = obj['shopInfo'].teaInfo;
+			$("#teaInfo").val(teaInfo);
+			
+			let teaPrice = obj['shopInfo'].teaPrice;
+			$("#teaPrice").val(teaPrice);
+			
+			
+			let tagSeason = obj['shopInfo'].tagSeason.split(',');
+			let tagUser = obj['shopInfo'].tagUser.split(',');
+			let tagBase = obj['shopInfo'].tagBase;
+
+			
+			$('input:radio[name="orderCate"]').each(function(){
+				var cate = $(this);
+				if(cate.val() == orderCate)
+					cate.attr('checked', true);
+			});
+			
+			$('input:checkbox[name="tagSeason"]').each(function(){
+				for(let i=0; i< tagSeason.length; i++){
+					if(this.value == tagSeason[i]){
+						this.checked = true;
+					}
+				}
+			});
+			$('input:checkbox[name="tagUser"]').each(function(){
+				for(let i=0; i< tagUser.length; i++){
+					if(this.value == tagUser[i]){
+						this.checked = true;
+					}
+				}
+			});
+ 			$('input:radio[name="tagBase"]').each(function(){
+					var base = $(this);
+					if(base.val() == tagBase)
+						base.attr('checked', true);
+				
+					
+				}); 
+ 			
+			// TO
+			if(orderCate == "TO"){
+				
+				let tagCaff = obj['shopInfo'].tagCaff;
+				let tagTaste = obj['shopInfo'].tagTaste.split(',');
+				let tagEff = obj['shopInfo'].tagEff.split(',');
+				
+				
+				$('input:radio[name="tagCaff"]').each(function(){
+					var caff = $(this);
+					if(caff.val() == tagCaff)
+						caff.attr('checked', true);
+				
+					
+				}); 
+				$('input:checkbox[name="tagTaste"]').each(function(){
+					for(let i=0; i< tagTaste.length; i++){
+						if(this.value == tagTaste[i]){
+							this.checked = true;
+						}
+					}
+				});
+				$('input:checkbox[name="tagEff"]').each(function(){
+					for(let i=0; i< tagEff.length; i++){
+						if(this.value == tagEff[i]){
+							this.checked = true;
+						}
+					}
+				});
+			// TB
+			}else{
+				let tagBlend = obj['shopInfo'].tagBlend.split(',');
+				let tagDrink = obj['shopInfo'].tagDrink.split(',');
+				
+
+				$('input:checkbox[name="tagBlend"]').each(function(){
+					for(let i=0; i< tagBlend.length; i++){
+						if(this.value == tagBlend[i]){
+							this.checked = true;
+						}
+					}
+				});
+				$('input:checkbox[name="tagDrink"]').each(function(){
+					for(let i=0; i< tagDrink.length; i++){
+						if(this.value == tagDrink[i]){
+							this.checked = true;
+						}
+					}
+				});
+			}
+		}
 	});
 
-	
+	// cate 체크에 따라 보이는 항목 변경
 	$("input[name='orderCate']").change(function(){
 		if($("input[name='orderCate']:Checked").val() == "TO"){
 			$("#tbChoice").hide();
@@ -250,9 +375,38 @@
 			$("#toChoice").hide();
 			$("#tbChoice").show();
 		}
-	});
+	}); 
 	
+	
+ 	function inOrUp(){
+		var insertForm = $('#insertForm');
+		
+		var formData = new FormData(insertForm[0]);
 
+		let data = <%=data%>
+		let location = "";
+		if(data == null){
+			location = "insertShop.do"
+		}else{
+			location ="updateShop.do"
+		} 
+	  $.ajax({
+			type:"POST",
+			url:location,
+			data: formData,
+			contentType: false,
+			processData: false,
+			success:function(data){
+				 alert(data); 
+				 window.location.href=("shopSeason.do"); 
+			},
+			error: function(e){
+				console.log(e);
+			}
+		}); 
+	 } 
+
+	
 	
 
 

@@ -13,7 +13,7 @@
 	<update id="updateShop" > 
 	<![CDATA[
 	UPDATE TEA
-	SET ORDER_CATE = #{orderCate}, TEA_NAME = #{teaName}, TEA_IMG = #{teaImg}, TEA_INFO = #{teaInfo}, TAG_BASE = #{tagBase}, TAG_CAFF =#{tagCaff} , TAG_SEASON = #{tagSeason}, TAG_USER = #{tagUser}, TAG_TASTE = #{tagTaste}, TAG_EFF= #{tagEff}, TAG_BLEND = #{tagBlend}, TAG_DRINK = #{tagDrink}
+	SET ORDER_CATE = #{orderCate}, TEA_NAME = #{teaName}, TEA_IMG = #{teaImg}, TEA_INFO = #{teaInfo}, TAG_BASE = #{tagBase, jdbcType=VARCHAR}, TAG_CAFF =#{tagCaff, jdbcType=VARCHAR} , TAG_SEASON = #{tagSeason, jdbcType=VARCHAR}, TAG_USER = #{tagUser, jdbcType=VARCHAR}, TAG_TASTE = #{tagTaste, jdbcType=VARCHAR}, TAG_EFF= #{tagEff, jdbcType=VARCHAR}, TAG_BLEND = #{tagBlend, jdbcType=VARCHAR}, TAG_DRINK = #{tagDrink, jdbcType=VARCHAR}
 	WHERE TEA_ID = #{teaId}
 	]]>
 	</update>
