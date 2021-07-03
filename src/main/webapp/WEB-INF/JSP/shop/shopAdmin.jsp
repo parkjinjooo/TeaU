@@ -210,16 +210,9 @@
                             </div>
                             <br>
                          </div>
-                            <!-- <div class="form_item">
-                                <input type="text" name="DB 보고 결정2" placeholder="DB 보고 결정2">
-                            </div>
-                            <div class="form_item">
-                                <input type="text" name="DB 보고 결정3" placeholder="DB 보고 결정3">
-                            </div> -->
-
-								
+                         	<input type="hidden" id="fileName" name="fileName"/>
                                 <div class="file1">
-                                    Image 1 : <input type="file" id="uploadFile" name="uploadFile" accept="image/*">
+                                    Image 1 : <input type="file" id="uploadFile" name="uploadFile" accept="image/*" onchange="javascript:document.getElementById('fileName').value = this.value">
                                     <!-- <div class="select_img"><img src="" /></div> -->
                                 </div>
                             
@@ -235,7 +228,7 @@
                                 </div> -->
                                 
                             <div class="text-center">
-                                <button type="button" class="btn btn_primary text-uppercase" onclick="inOrUp();">등록</button>
+                                <input type="button" id="btn_shopSubmit" class="btn btn_primary text-uppercase" onclick="inOrUp();" />
                             </div>
                             
                         </form>
@@ -363,7 +356,29 @@
 					}
 				});
 			}
+			
+			let teaImg = obj['shopInfo'].teaImg;
+			console.log(teaImg);
+			
+			$('input[name=fileName]').attr('value', teaImg);
+			console.log($('input[name=fileName]').val());
+			/* $('#fileName').val(teaImg);
+			console.log($('#fileName').val(teaImg)); */
+			/* $("#uploadFile").val(teaImg); */
+			
+		}else{
+			$("#tbChoice").hide();
 		}
+		
+		// data값에 따라 버튼 값 변경 
+		if(data == null){
+			$('#btn_shopSubmit').val('등록');
+		}else{
+			$('#btn_shopSubmit').val('수정');
+		}
+		
+		
+		
 	});
 
 	// cate 체크에 따라 보이는 항목 변경
@@ -377,19 +392,22 @@
 		}
 	}); 
 	
-	
- 	function inOrUp(){
-		var insertForm = $('#insertForm');
 		
-		var formData = new FormData(insertForm[0]);
+ 	function inOrUp(){
+		let data = <%= data%>;
+		let obj = JSON.parse(data);
+			
+		let insertForm = $('#insertForm');
+		
+		let formData = new FormData(insertForm[0]);
 
-		let data = <%=data%>
 		let location = "";
 		if(data == null){
-			location = "insertShop.do"
+			location = "insertShop.do";
 		}else{
-			location ="updateShop.do"
-		} 
+			let teaId = obj['shopInfo'].teaId;
+			location ="updateShop.do?teaId="+teaId;
+		}
 	  $.ajax({
 			type:"POST",
 			url:location,
@@ -405,7 +423,20 @@
 			}
 		}); 
 	 } 
+ 	
+ 	function LoadImg(value) 
+ 	{ 
+ 		if(value.files && value.files[0]) 
+ 		{ 
+ 			var reader = new FileReader();
+ 			reader.onload = function (e){
+ 				$('#uploadFile').attr('src', e.target.result);
+ 				}
+ 			reader.readAsDataURL(value.files[0]);
+ 			}
+ 		}
 
+ 	
 	
 	
 

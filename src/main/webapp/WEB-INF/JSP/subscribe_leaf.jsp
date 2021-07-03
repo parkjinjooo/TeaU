@@ -40,6 +40,9 @@
 
 <!-- custom - css include -->
 <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="assets/css/teau.css">
+
+
 <style>
 .header_section {
 	background-color: white;
@@ -77,11 +80,11 @@
 	<!-- reserve_table_section - start
         ================================================== -->
 	<section class="reserve_table_section sec_ptb_120">
-		<div class="container">
+		<div id="subLeaf" class="container">
 			<div class="reserve_table_form wow fadeInUp"
 				style="padding-left: 0px; padding-right: 0px;" data-wow-delay=".1s">
 				<div class="subcribe_title">
-					<h2 class="form_title text-center text-uppercase"
+					<h2 class="form_title text-center text-uppercase subLeafTitle"
 						style="font-size: 35px;">원하는 항목을 골라보세요(중복 가능)</h2>
 				</div>
 
@@ -97,7 +100,8 @@
 						<div class="col-lg-3"></div>
 						<div class="col-lg-3 sub_leaf_content">
 
-						<label><input type="checkbox" name="tagSeason" value="봄" /> 봄</label> 
+						<input type="checkbox" name="tagSeason" value="봄" id="spinrg" />
+						<label for="spinrg"> 봄</label> 
 						<br /> 
 						<label><input type="checkbox" name="tagSeason" value="가을" /> 가을 </label>
 

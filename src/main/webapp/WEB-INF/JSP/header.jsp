@@ -91,7 +91,7 @@ function sessionCheck(obj) {
                           <li><a href="toBoard.do">씨앗 리뷰</a></li>
                           <li><a href="tbBoard.do">새싹&나무 리뷰</a></li>
                           <li><a href="rankBoard.do">새싹&나무 랭킹</a></li>
-                          <li><a href="faq.html">F.A.Q.</a></li>
+                          <li><a href="faq.jsp">F.A.Q.</a></li>
                         </ul>
                       </li>
                       <li class="dropdown">

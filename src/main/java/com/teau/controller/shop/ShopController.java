@@ -98,7 +98,30 @@ public class ShopController {
 		shopService.insertShop(vo);
 		return "상품 등록이 완료되었습니다.";
 	}
-
+	
+	@RequestMapping(value="/updateShop.do", produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String updateShop(@RequestParam("teaId") int teaId, ShopVO vo) throws  IOException {
+		
+		
+		System.out.println("teaId="+teaId);
+		MultipartFile uploadFile = vo.getUploadFile();
+		System.out.println("uploadFile:" + uploadFile);
+		String imgUploadPath = uploadPath + File.separator;
+		
+		
+		vo.setTeaImg(uploadFile.getOriginalFilename());
+		vo.setTeaId(teaId);
+		
+		System.out.println(uploadFile.getOriginalFilename());
+		uploadFile.transferTo(new File(imgUploadPath + uploadFile.getOriginalFilename()));	
+		
+		System.out.println("수정");
+		shopService.updateShop(vo);
+		return "상품 수정이 완료되었습니다.";
+	}
+	
+	
 	@RequestMapping(value="/updateInfo.do", produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String updateInfo(@RequestParam Map<String, String> paramMap) throws JsonProcessingException{
@@ -117,24 +140,6 @@ public class ShopController {
 		
 		return json;
 	}
-	
-	@RequestMapping(value="/updateShop.do", produces = "application/text; charset=utf8")
-	@ResponseBody
-	public String updateShop(@ModelAttribute ShopVO vo) throws  IOException {
-		
-		MultipartFile uploadFile = vo.getUploadFile();
-		System.out.println("uploadFile:" + uploadFile);
-		String imgUploadPath = uploadPath + File.separator;
-		
-		
-		vo.setTeaImg(uploadFile.getOriginalFilename());
-		System.out.println(uploadFile.getOriginalFilename());
-		uploadFile.transferTo(new File(imgUploadPath + uploadFile.getOriginalFilename()));	
-		
-		shopService.updateShop(vo);
-		return "상품 수정이 완료되었습니다.";
-	}
-
 	
 	@RequestMapping(value="/deleteShop.do")
 	public String deleteShop(@RequestParam("teaId") int teaId) {

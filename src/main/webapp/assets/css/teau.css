@@ -1,4 +1,11 @@
-/* 회원가입 */
+
+
+@font-face {
+    font-family: 'InfinitySans-RegularA1';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
 #signUp {
   margin-left: 15%;
@@ -7,6 +14,39 @@
 
 .container .btn {
   display: inline-block
+}
+
+
+/* 새싹구독 */
+
+#subLeaf 
+ 	{
+	font-family: 'InfinitySans-RegularA1';
+	}
+
+#subLeaf .container .reserve_table_form {
+  background-color: white;
+  
+}
+
+.subLeafTitle{
+	font-family: 'InfinitySans-RegularA1';
+} 
+
+#subLeaf input[type=checkbox]{
+	display:none;
+}
+
+#subLeaf input[type=checkbox] + label { 
+  display: inline-block; 
+  cursor: pointer; 
+  line-height: 30px; 
+  padding-left: 22px; 
+  background: url('webapp/assets/images/leaf/chocolate.png') left/30px no-repeat;
+}
+
+#subLeaf input[type=checkbox]:checked + label{
+	background: url('webapp/assets/images/leaf/chocolate.png');
 }
 
 
