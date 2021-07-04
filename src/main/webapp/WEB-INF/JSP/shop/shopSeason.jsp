@@ -10,7 +10,7 @@
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 
 	<title>Our Shop - Cafenod HTML5 Template</title>
-	<link rel="shortcut icon" href="assets/images/logo/favourite_icon.png">
+	<link rel="shortcut icon" href="assets/images/feature/11.jpg">
 
 	<!-- fraimwork - css include -->
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">

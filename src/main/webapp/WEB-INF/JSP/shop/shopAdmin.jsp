@@ -212,7 +212,11 @@
                          </div>
                          	<input type="hidden" id="fileName" name="fileName"/>
                                 <div class="file1">
-                                    Image 1 : <input type="file" id="uploadFile" name="uploadFile" accept="image/*" onchange="javascript:document.getElementById('fileName').value = this.value">
+                                    Image 1 : <input type="file" id="uploadFile" name="uploadFile" accept="image/*" onchange="LoadImg(event)">
+                                    <br/><br/>
+                                    <div>
+                                    <img id="preImage" style="width:250px;"> 
+                                    </div>
                                     <!-- <div class="select_img"><img src="" /></div> -->
                                 </div>
                             
@@ -424,23 +428,25 @@
 		}); 
 	 } 
  	
- 	function LoadImg(value) 
- 	{ 
- 		if(value.files && value.files[0]) 
- 		{ 
- 			var reader = new FileReader();
- 			reader.onload = function (e){
- 				$('#uploadFile').attr('src', e.target.result);
- 				}
- 			reader.readAsDataURL(value.files[0]);
- 			}
- 		}
-
  	
-	
-	
-
-
+ 	// 이미지 미리보기
+ 	$(function(){
+ 		$('#uploadFile').on('change', function(){
+			readURL(this); 		
+ 		});
+ 	});
+ 	
+ 	function readURL(input){
+ 		if(input.files && input.files[0]){
+ 			var reader = new FileReader();
+ 			reader.onload = function(e){
+ 				$('#preImage').attr('src', e.target.result);
+ 			}
+ 			reader.readAsDataURL(input.files[0]);
+ 		}
+ 	}
+ 	
+ 	
 </script>
 
 <jsp:include page="../footer.jsp"></jsp:include>
