@@ -78,7 +78,7 @@
 						<div class="col-md-5 col-lg-5">
 						</div>
 						<div class="col-md-2 col-lg-2" style="text-align: center;">
-							<a class="btn btn_primary text-uppercase" href="shopCreate.do">상품 추가</a>
+							<a class="btn btn_primary text-uppercase" href="shopAdmin.do">상품 추가</a>
 						</div>
 						<div class="col-md-5 col-lg-5">
 						</div>

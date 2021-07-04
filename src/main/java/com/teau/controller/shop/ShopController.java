@@ -1,8 +1,10 @@
 package com.teau.controller.shop;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -52,13 +55,7 @@ public class ShopController {
 		return "shopBlend";
 	}
 	
-	// 상품 추가 
-	@RequestMapping(value="/shopCreate.do")
-	public String shopCreate() {
-		
-		return "shop/shopAdmin";
-	}
-	
+	// 상품 추가 & 수정
 	@RequestMapping("shopAdmin.do")
 	public String updateData() {
 	
@@ -83,8 +80,19 @@ public class ShopController {
 	// CRUD
 	@RequestMapping(value="/insertShop.do", produces = "application/text; charset=utf8")
 	@ResponseBody
-	public String insertShop(ShopVO vo) throws IOException {
-		
+	public String insertShop(MultipartHttpServletRequest request, ShopVO vo) throws IOException {
+
+		/*
+		 * String fileName="";
+		 * 
+		 * List<MultipartFile> fileList = request.getFiles("uploadFile");
+		 * for(MultipartFile filePart : fileList) { fileName =
+		 * filePart.getOriginalFilename(); System.out.println("실제 파일명:" +fileName );
+		 * 
+		 * if(!fileName.equals("")) { try { FileOutputStream fs = new
+		 * FileOutputStream(uploadPath +fileName ); fs.write(filePart.getBytes());
+		 * fs.close(); }catch(Exception e) { e.printStackTrace(); } } }
+		 */
 		MultipartFile uploadFile = vo.getUploadFile();
 		System.out.println("uploadFile:" + uploadFile);
 		String imgUploadPath = uploadPath + File.separator;
@@ -99,6 +107,7 @@ public class ShopController {
 		return "상품 등록이 완료되었습니다.";
 	}
 	
+	// U
 	@RequestMapping(value="/updateShop.do", produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String updateShop(@RequestParam("teaId") int teaId, ShopVO vo) throws  IOException {
@@ -121,7 +130,7 @@ public class ShopController {
 		return "상품 수정이 완료되었습니다.";
 	}
 	
-	
+	// 수정 버튼 클릭 시 기존의 정보들 가져오기
 	@RequestMapping(value="/updateInfo.do", produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String updateInfo(@RequestParam Map<String, String> paramMap) throws JsonProcessingException{

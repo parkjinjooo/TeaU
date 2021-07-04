@@ -212,10 +212,10 @@
                          </div>
                          	<input type="hidden" id="fileName" name="fileName"/>
                                 <div class="file1">
-                                    Image 1 : <input type="file" id="uploadFile" name="uploadFile" accept="image/*" onchange="LoadImg(event)">
+                                    Image 1 : <input multiple="multiple" type="file" id="uploadFile" name="uploadFile" accept="image/*">
                                     <br/><br/>
                                     <div>
-                                    <img id="preImage" style="width:250px;"> 
+                                    <img id="preImage" style="width:250px; border-radius:20px"> 
                                     </div>
                                     <!-- <div class="select_img"><img src="" /></div> -->
                                 </div>
@@ -362,13 +362,12 @@
 			}
 			
 			let teaImg = obj['shopInfo'].teaImg;
-			console.log(teaImg);
 			
 			$('input[name=fileName]').attr('value', teaImg);
 			console.log($('input[name=fileName]').val());
-			/* $('#fileName').val(teaImg);
-			console.log($('#fileName').val(teaImg)); */
-			/* $("#uploadFile").val(teaImg); */
+			
+			
+			
 			
 		}else{
 			$("#tbChoice").hide();
