@@ -15,12 +15,12 @@ public class ShopServiceImpl implements ShopService {
 	private ShopDAOMybatis shopDAO;
 	
 	
-	public void insertShop(ShopVO vo) {
-		shopDAO.insertShop(vo);
+	public void insertShop(ShopVO vo, List<String> fileNames) {
+		shopDAO.insertShop(vo, fileNames);
 	}
 
-	public void updateShop(ShopVO vo) {
-		shopDAO.updateShop(vo);
+	public void updateShop(ShopVO vo, List<String> fileNames) {
+		shopDAO.updateShop(vo, fileNames);
 	}
 
 	public void deleteShop(ShopVO vo) {
@@ -33,6 +33,10 @@ public class ShopServiceImpl implements ShopService {
 
 	public List<ShopVO> getShopList() {
 		return shopDAO.getShopList();
+	}
+
+	public List<ShopVO> getImg(ShopVO vo) {
+		return shopDAO.getImg(vo);
 	}
 
 }

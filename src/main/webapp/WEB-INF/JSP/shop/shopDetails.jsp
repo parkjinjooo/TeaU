@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+
 <!Doctype html>
 <html lang="en">
 
@@ -77,46 +78,19 @@
 						<div class="col-lg-6 col-md-7">
 							<div class="details_image_wrap wow fadeInUp" data-wow-delay=".1s">
 								<div class="details_image_carousel">
-									<div class="slider_item">
-										<img src="resource/imgUpload/${teaDetail.teaImg }" alt="image_not_found">
-									</div>
-									<div class="slider_item">
-										<img src="assets/images/shop/img_02.png" alt="image_not_found">
-									</div>
-									<div class="slider_item">
-										<img src="assets/images/shop/img_03.png" alt="image_not_found">
-									</div>
-									<div class="slider_item">
-										<img src="assets/images/shop/img_04.png" alt="image_not_found">
-									</div>
-									<div class="slider_item">
-										<img src="assets/images/shop/img_05.png" alt="image_not_found">
-									</div>
-									<div class="slider_item">
-										<img src="assets/images/shop/img_06.png" alt="image_not_found">
-									</div>
-
+								<c:forEach items="${shopImg}" var="img">
+										<div class="slider_item">
+											<img src="resource/imgUpload/${img.teaImg }" alt="image_not_found">
+										</div>
+								</c:forEach>
 								</div>
-
+									
 								<div class="details_image_carousel_nav">
-									<div class="slider_item">
-										<img src="resource/imgUpload/${teaDetail.teaImg }" alt="image_not_found">
-									</div>
-									<div class="slider_item">
-										<img src="assets/images/shop/img_02.png" alt="image_not_found">
-									</div>
-									<div class="slider_item">
-										<img src="assets/images/shop/img_03.png" alt="image_not_found">
-									</div>
-									<div class="slider_item">
-										<img src="assets/images/shop/img_04.png" alt="image_not_found">
-									</div>
-									<div class="slider_item">
-										<img src="assets/images/shop/img_05.png" alt="image_not_found">
-									</div>
-									<div class="slider_item">
-										<img src="assets/images/shop/img_06.png" alt="image_not_found">
-									</div>
+									<c:forEach items="${shopImg}" var="img">
+										<div class="slider_item">
+											<img src="resource/imgUpload/${img.teaImg }" alt="image_not_found">
+										</div>
+									</c:forEach>
 								</div>
 							</div>
 						</div>
@@ -249,6 +223,13 @@
 			================================================== -->
 <jsp:include page="../footer.jsp"></jsp:include>
 <script>
+
+	$( document ).ready(function() {
+    console.log( "ready!" );
+	});
+
+
+
 	
 	function update(){
 		let teaId = '${teaDetail.teaId}'

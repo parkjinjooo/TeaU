@@ -386,7 +386,7 @@
 
 	// cate 체크에 따라 보이는 항목 변경
 	$("input[name='orderCate']").change(function(){
-		if($("input[name='orderCate']:Checked").val() == "TO"){
+		if($(this).val() == "TO"){
 			$("#tbChoice").hide();
 			$("#toChoice").show();
 		}else{
@@ -411,6 +411,8 @@
 			let teaId = obj['shopInfo'].teaId;
 			location ="updateShop.do?teaId="+teaId;
 		}
+		
+		console.log($("input[name='orderCate']").val());
 	  $.ajax({
 			type:"POST",
 			url:location,
@@ -424,7 +426,7 @@
 			error: function(e){
 				console.log(e);
 			}
-		}); 
+		});
 	 } 
  	
  	
