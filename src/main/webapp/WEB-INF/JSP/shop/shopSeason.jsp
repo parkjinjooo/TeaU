@@ -84,14 +84,13 @@
 						</div>
 					</div>
 					<!--상품추가버튼 여기까지-->
-
+					
 					<!-- 상품목록 -->
 					<div class="wrap" style="padding: 1%; ">
 						<div class="related_products">
 							<h4 class="area_title text-uppercase mb-0 wow fadeInUp" data-wow-delay=".1s">All</h4>
 							<div class="row">
 								<c:forEach items="${shopSeason}" var="tea">
-								<!-- <form action="/shop_details.do" method="POST"> -->
 								<div class="col-lg-3 col-md-6 col-sm-6">
 									<div class="shop_card wow fadeInUp" data-wow-delay=".4s">
 										<a class="wishlist_btn" href="#!"><i class="fal fa-heart"></i></a>
@@ -112,7 +111,6 @@
 										</form>
 									</div>
 								</div>
-								<!-- </form> -->
 								</c:forEach>
 							</div>
 						</div>

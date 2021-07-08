@@ -18,6 +18,7 @@
 		<typeAlias type="com.teau.biz.board.RBoardVO" alias="Rboard" />
 		<typeAlias type="com.teau.biz.board.ReplyVO" alias="reply" />
 		<typeAlias type="com.teau.biz.shop.ShopVO" alias="shop" />
+		<typeAlias type="com.teau.biz.orders.CartVO" alias="cart" />
 		
 	</typeAliases>
 	
@@ -27,6 +28,8 @@
 		<mapper resource="mappings/member-mapping.xml" />
 		<mapper resource="mappings/board-mapping.xml"/>
 		<mapper resource="mappings/reply-mapping.xml"/>
-		<mapper resource="mappings/shop-mapping.xml"/>		
+		<mapper resource="mappings/shop-mapping.xml"/>	
+		<mapper resource="mappings/orders-mapping.xml"/>	
+			
 	</mappers>
 </configuration>

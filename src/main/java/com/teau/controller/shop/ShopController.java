@@ -45,14 +45,14 @@ public class ShopController {
 	public String getShopUserList(Model model) {
 		model.addAttribute("shopUser", shopService.getShopList());
 
-		return "shopUser";
+		return "shop/shopUser";
 	}
 
 	@RequestMapping(value = "/shopBlend.do")
 	public String getShopBlendList(Model model) {
 		model.addAttribute("shopBlend", shopService.getShopList());
 
-		return "shopBlend";
+		return "shop/shopBlend";
 	}
 
 	// 상품 추가 & 수정
@@ -71,9 +71,6 @@ public class ShopController {
 		model.addAttribute("teaDetail", shopService.getShop(shop));
 		model.addAttribute("shopImg", shopService.getImg(shop));
 		
-		System.out.println(shopService.getImg(shop));
-		System.out.println(shopService.getShop(shop));
-
 		return "shop/shopDetails";
 	}
 
@@ -91,8 +88,8 @@ public class ShopController {
 		for (MultipartFile filePart : fileList) {
 			fileName = filePart.getOriginalFilename();
 			System.out.println("실제 파일명:" + fileName);
-			vo.setTeaImg(fileName);
 			fileNames.add(fileName);
+			vo.setTeaImg(fileNames.get(0));
 
 			if (!fileName.equals("")) {
 				try {
@@ -116,7 +113,7 @@ public class ShopController {
 	// U
 	@RequestMapping(value = "/updateShop.do", produces = "application/text; charset=utf8")
 	@ResponseBody
-	public String updateShop(@RequestParam("teaId") int teaId, MultipartHttpServletRequest request, ShopVO vo) throws IOException {
+	public String updateShop( MultipartHttpServletRequest request, ShopVO vo) throws IOException {
 
 		String fileName = "";
 		
@@ -127,8 +124,8 @@ public class ShopController {
 		for (MultipartFile filePart : fileList) {
 			fileName = filePart.getOriginalFilename();
 			System.out.println("실제 파일명:" + fileName);
-			vo.setTeaImg(fileName);
 			fileNames.add(fileName);
+			vo.setTeaImg(fileNames.get(0));
 
 			if (!fileName.equals("")) {
 				try {
@@ -156,10 +153,13 @@ public class ShopController {
 		vo.setTeaId(Integer.parseInt(paramMap.get("teaId")));
 
 		ShopVO shopInfo = shopService.getShop(vo);
+		List<ShopVO> imgInfo =  shopService.getImg(vo);
 
 		Map<String, Object> hashMap = new HashMap<String, Object>();
 
 		hashMap.put("shopInfo", shopInfo);
+		hashMap.put("imgInfo", imgInfo);
+		
 
 		ObjectMapper mapper = new ObjectMapper();
 

@@ -64,11 +64,4 @@ public class LeafController {
 		leafService.deleteSub(vo);
 		return "redirect:mypage.do";
 	}
-	
-	// 불러오기 
-	/*
-	 * @RequestMapping("/getSubLeaf.do") public String getSub() { return
-	 * "redirect:mypage.do"; }
-	 */
-	
 }

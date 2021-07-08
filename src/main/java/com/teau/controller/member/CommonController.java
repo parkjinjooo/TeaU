@@ -13,6 +13,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.teau.biz.member.MemberVO;
 
+
 @Controller
 public class CommonController {
 	@RequestMapping("/getMemberInfo.do")
@@ -26,5 +27,4 @@ public class CommonController {
 		String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(hashmap);
 		return json;
 	}
-
 }

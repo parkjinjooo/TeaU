@@ -197,8 +197,6 @@
                 
                 <div style="text-align: center;">
                   <input value="로그인" class="btn btn-success btn-block" type="submit" style="background-color: #fd6c44; margin-top: 10%; font-size: large;"/>
-                  <!-- <button class="btn btn-success btn-block" type="submit" >네이버 로그인</button>
-                  <button class="btn btn-success btn-block" type="submit">카카오 로그인</button> -->
                 </div>
                 </form>   
                 
@@ -246,32 +244,6 @@
                     </div>
                     <a href="#" id="cancel_reset"><i class="fas fa-angle-left"></i> 뒤로가기 </a>
                 </form>
-                
-                <!-- <p>가입창</p>  -->
-                <!-- <form action="/signup1/" class="form-signup">
-                  <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign Up </h1> -->
-                    <!-- <div class="social-login">
-                        <button class="btn naver-btn social-btn" type="button"><span>네이버 가입</span> </button>
-                    </div>
-                    <div class="social-login">
-                        <button class="btn kakao-btn social-btn" type="button"><span>카카오 가입</span> </button>
-                    </div> -->
-                    <!-- <p style="text-align:left; margin: 10px 0 0 1px;"> 이름 </p>
-                    <input type="text" id="user-name" class="form-control" placeholder="이름" required="" autofocus="">
-                    <p style="text-align:left; margin: 10px 0 0 1px;"> 이메일 </p>
-                    <input type="email" id="user-email" class="form-control" placeholder="이메일주소" required autofocus="">
-                    <p style="text-align:left; margin: 10px 0 0 1px;"> 비밀번호 </p>
-                    <input type="password" id="user-pass" class="form-control" placeholder="비밀번호" required autofocus="">
-                    <p style="text-align:left; margin: 10px 0 0 1px;"> 비밀번호 확인 </p>
-                    <input type="password" id="user-repeatpass" class="form-control" placeholder="비밀번호 확인" required autofocus="">
-                    <p style="text-align:left; margin: 10px 0 0 1px;"> 주소 </p>
-                    <input type="text" id="user-address" class="form-control" placeholder="주소" required autofocus="">
-                    <div style="text-align: center;">
-                      <button class="btn btn-primary btn-block" type="submit" style="background-color: #fd6c44;"><i class="fas fa-user-plus"></i> Sign Up</button>
-                    </div>
-                    <a href="#" id="cancel_signup"><i class="fas fa-angle-left"></i> 뒤로가기 </a>
-                </form>
-                <br> -->
                 
         </div>
 

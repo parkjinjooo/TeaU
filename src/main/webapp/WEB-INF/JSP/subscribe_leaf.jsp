@@ -100,19 +100,45 @@
 						<div class="col-lg-3"></div>
 						<div class="col-lg-3 sub_leaf_content">
 
-						<input type="checkbox" name="tagSeason" value="봄" id="spinrg" />
-						<label for="spinrg"> 봄</label> 
+						<input class="inp-cbx" type="checkbox" name="tagSeason" value="봄" id="spring" />
+						<label class="cbx" for="spring">
+						<span>
+						<svg width="12px" height="10px">
+						<use xlink:href="#check"></use>
+						</svg></span>
+						<span>봄</span></label> 
 						<br /> 
-						<label><input type="checkbox" name="tagSeason" value="가을" /> 가을 </label>
-
-						</div>
+						
+						<input class="inp-cbx" type="checkbox" name="tagSeason" value="가을 " id="fall" />
+						<label class="cbx" for="fall">
+						<span>
+						<svg width="12px" height="10px">
+						<use xlink:href="#check"></use>
+						</svg></span>
+						<span>가을</span></label> 
+						<br /> 
+						
+						
 						<div class="col-lg-3 sub_leaf_content">
-						<label><input type="checkbox" name="tagSeason" value="여름" /> 여름</label>
-						<br /> 
-						<label><input type="checkbox" name="tagSeason" value="겨울" /> 겨울</label>
+						<input class="inp-cbx" type="checkbox" name="tagSeason" value="여름" id="summer" />
+						<label class="cbx" for="summer">
+						<span>
+						<svg width="12px" height="10px">
+						<use xlink:href="#check"></use>
+						</svg></span>
+						<span>여름</span></label> 
+						<br />
+						
+						
+						<input class="inp-cbx" type="checkbox" name="tagSeason" value="겨울 " id="winter" />
+						<label class="cbx" for="winter">
+						<span>
+						<svg width="12px" height="10px">
+						<use xlink:href="#check"></use>
+						</svg></span>
+						<span>겨울</span></label> 
 						</div>
 						<div class="col-lg-3"></div>
-
 
 						<div class="col-lg-2"></div>
 						<div class="col-lg-8">
@@ -127,6 +153,52 @@
 
 						<div class="col-lg-3"></div>
 						<div class="col-lg-3 sub_leaf_content">
+						
+						<input class="inp-cbx" type="checkbox" name="tagBase" value="녹차 " id="green" />
+						<label class="cbx" for="green">
+						<span>
+						<svg width="12px" height="10px">
+						<use xlink:href="#check"></use>
+						</svg></span>
+						<span>녹차</span></label> 
+						<br />
+						
+						<input class="inp-cbx" type="checkbox" name="tagBase" value="홍차 " id="black" />
+						<label class="cbx" for="black">
+						<span>
+						<svg width="12px" height="10px">
+						<use xlink:href="#check"></use>
+						</svg></span>
+						<span>홍차</span></label> 
+						<br />
+						
+						<div class="col-lg-3 sub_leaf_content">
+						<input class="inp-cbx" type="checkbox" name="tagBase" value="우롱차 " id="oolong" />
+						<label class="cbx" for="oolong">
+						<span>
+						<svg width="12px" height="10px">
+						<use xlink:href="#check"></use>
+						</svg></span>
+						<span>우롱차</span></label> 
+						<br />
+						
+						<input class="inp-cbx" type="checkbox" name="tagBase" value="허브차" id="hurb" />
+						<label class="cbx" for="hurb">
+						<span>
+						<svg width="12px" height="10px">
+						<use xlink:href="#check"></use>
+						</svg></span>
+						<span>허브차</span></label> 
+												</div>
+						<div class="col-lg-3"></div>
+
+						<div class="col-lg-2"></div>
+						<div class="col-lg-8">
+							<hr size="5" noshade>
+						</div>
+						<div class="col-lg-2"></div>
+						
+						<!-- 
 						<label><input type="checkbox" name="tagBase" value="녹차" />녹차</label>
 					    <br /> 
 					    <label><input type="checkbox" name="tagBase" value="홍차" /> 홍차</label>
@@ -137,15 +209,7 @@
 						<label><input type="checkbox" name="tagBase" value="우롱차" />우롱차</label> 
 						<br /> 
 						<label><input type="checkbox" name="tagBase" value="허브차" /> 허브차(카페인x)</label>
-						</div>
-						<div class="col-lg-3"></div>
-
-						<div class="col-lg-2"></div>
-						<div class="col-lg-8">
-							<hr size="5" noshade>
-						</div>
-						<div class="col-lg-2"></div>
-
+ -->
 						<div class="col-lg-2"></div>
 						<div class="col-lg-8 sub_leaf_title">마시는 방법</div>
 						<div class="col-lg-2"></div>
@@ -195,8 +259,13 @@
 							<input  type="button" id="btn_subSubmit" class="btn btn_primary text-uppercase" onclick="inOrUp()"/>
 						</div>
 					</div>
+					<svg class="inline-svg">
 				</form>
-
+               <!--  <symbol id="check" viewbox="0 0 12 10">
+                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                </symbol>
+              	</svg>
+ -->
 				<!--여기 위 부분을 수정-->
 
 				<div class="decoration_icon">
@@ -294,7 +363,6 @@
 		
 		function checkbox_Check(inOrUp) {
 		
-						
 			if ($("input:checkbox[name=tagSeason]").is(":checked") == false) {
 				alert("'계절별'을 하나 이상 선택해주세요");
 				return false;				
@@ -308,7 +376,7 @@
 				alert("'블렌드'를 하나 이상 선택해주세요");
 				return false;				
 			}else{
-				
+			
 			 $.ajax({
 					type: 'POST',
 					url: inOrUp,
@@ -324,8 +392,6 @@
 				}); 
 			}
 		}
-		
-		
 		
 	</script>
 </body>

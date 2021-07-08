@@ -68,7 +68,7 @@
 			<section class="details_section shop_details sec_ptb_120 bg_default_gray" style="padding-top: 50px;">
 				<div class="col-lg-2"></div>
 				<div class="col-lg-10" style="text-align: right; margin-bottom: 50px;">
-					<button class="btn btn_primary text-uppercase" id="shopUpdate" onclick='update()'>상품 수정</a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<button class="btn btn_primary text-uppercase" id="shopUpdate" onclick='update()'>상품 수정</button>&nbsp;&nbsp;&nbsp;&nbsp;
 					<button class="btn btn_primary text-uppercase" id="removefrm" onclick='removeCheck()'>상품 삭제</button>
 				</div>
 				<div class="col-lg-2"></div>
@@ -114,17 +114,19 @@
 									<li>
 										<div class="quantity_input quantity_boxed">
 											<h4 class="quantity_title text-uppercase">Quantity</h4>
-											<form action="#">
-												<button type="button" class="input_number_decrement">–</button>
-												<input class="input_number" type="text" value="1">
-												<button type="button" class="input_number_increment">+</button>
+											<form action="#" id="cartInfo">
+												<input type="hidden" name="teaId"  value="${teaDetail.teaId }"/>
+												<input type="hidden" name="memberId" value="${member.memberId }"/>
+												<button type="button" onclick="countCheckMinus();">–</button>
+												<input type="text" name="proCnt" id="cartSize" value="1" >
+												<button type="button" onclick="countCheckPlus();">+</button>
 											</form>
 										</div>
 									</li>
 								</ul>
 								<ul class="btns_group ul_li">
-									<li><a class="btn btn_secondary text-uppercase" href="#!">Add To Cart</a></li>
-									<li><a class="btn btn_secondary text-uppercase" href="#!">Direct Buy</a></li>
+									<li><a class="btn btn_secondary text-uppercase" onclick="addCart();">Add To Cart</a></li>
+									<li><a class="btn btn_secondary text-uppercase">Direct Buy</a></li>
 								</ul>
 								<div class="details_wishlist_btn">
 									<a href="#!"><i class="fas mr-1"></i></a>
@@ -223,13 +225,6 @@
 			================================================== -->
 <jsp:include page="../footer.jsp"></jsp:include>
 <script>
-
-	$( document ).ready(function() {
-    console.log( "ready!" );
-	});
-
-
-
 	
 	function update(){
 		let teaId = '${teaDetail.teaId}'
@@ -253,6 +248,69 @@
 		if(deleteCheck){
 			location.href="deleteShop.do?teaId=${teaDetail.teaId }"
 		}
+	}
+	
+	function addCart(){
+		/* 
+		let cnt = $('#cartSize').val();
+		if(id == null){
+			window.location.href="login.do?teaId=${teaDetail.teaId}"
+		}else{
+			window.location.href="cart.do?teaId=${teaDetail.teaId}&&memberId=${member.memberId }&&cnt="+cnt
+		} */
+		
+		let location;
+		if(id == null){
+			window.location.href="login.do?teaId=${teaDetail.teaId}"
+		}else{
+			location = 'cart.do';
+		}
+		
+		// 로그인 안되었을 때 넘어가는 문제 
+		// 장바구니 이동 시 model 에 담아가기 
+		
+		$.ajax({
+			type: 'POST',
+			url: location,
+			dataType: 'text', // form에 있는 데이터들을 controller로 text타입으로 
+			data: $('#cartInfo').serialize(),
+			success: function(data) {
+				alert(data)				
+			}, 
+			error: function(e) {
+				console.log(e);
+			}
+		});
+		
+		
+		
+		
+	}
+	
+	function countCheckMinus(){
+		 var value = $('#cartSize').val();
+		  value--;
+
+		  if(value < 1){ 
+			 alert("최소 수량은 1개입니다.");
+			 $('#cartSize').val(1);
+			 value=1;
+		 } else {
+			 $('#cartSize').val(value);
+		 }
+	}
+	
+	function countCheckPlus(){
+		 var value = $('#cartSize').val();
+		  value++;
+
+		  if(value > 10){ 
+			 alert("최대 수량은 10개입니다.");
+			 $('#cartSize').val(10);
+			 value = 10;
+		 } else {
+			 $('#cartSize').val(value);
+		 }
 	}
 
 </script>

@@ -23,7 +23,7 @@ public class ShopDAOMybatis {
 			paramMap.put("teaId", teaId);
 			paramMap.put("imgId", i); // imgId 기본 키로 추가 
 			paramMap.put("teaImg", fileNames.get(i));
-
+			
 			mybatis.insert("ShopDAO.insertShopFile", paramMap);
 		}
 	}
@@ -34,6 +34,7 @@ public class ShopDAOMybatis {
 		for (int i = 0; i < fileNames.size(); i++) {
 			Map<String, Object> paramMap = new HashMap<String, Object>();
 			paramMap.put("teaId", teaId);
+			paramMap.put("imgId", i);
 			paramMap.put("teaImg", fileNames.get(i));
 
 			mybatis.update("ShopDAO.updateShopFile", paramMap);
@@ -42,6 +43,7 @@ public class ShopDAOMybatis {
 
 	public void deleteShop(ShopVO vo) {
 		mybatis.delete("ShopDAO.deleteShop", vo);
+		mybatis.delete("ShopDAO.deleteShopFile", vo); 
 	}
 
 	public ShopVO getShop(ShopVO vo) {

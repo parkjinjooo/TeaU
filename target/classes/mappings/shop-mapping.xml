@@ -34,29 +34,45 @@
 	</select>
 
 	<select id="getShopList" resultType="shop">
+	<![CDATA[
 	SELECT * FROM TEA
 	ORDER BY TEA_ID DESC
+	]]>
 	</select>
 	
 	<select id="selectTeaId" resultType="int">
+	<![CDATA[
 	SELECT MAX(TEA_ID) FROM TEA
+	]]>
 	</select>
 	
 	<insert id="insertShopFile" parameterType="hashmap">
-	INSERT INTO IMG_FILE(TEA_ID, TEA_IMG)
-	VALUES(#{teaId}, #{teaImg})
+	<![CDATA[
+	INSERT INTO IMG_FILE(TEA_ID, IMG_ID, TEA_IMG)
+	VALUES(#{teaId}, #{imgId}, #{teaImg})
+	]]>
 	</insert>
 	
 	<update id="updateShopFile" parameterType="hashmap">
+	<![CDATA[
 	UPDATE IMG_FILE
 	SET TEA_IMG = #{teaImg}
-	WHERE TEA_ID = #{teaId}
+	WHERE TEA_ID = #{teaId} AND IMG_ID = #{imgId}
+	]]>
 	</update>
 	
-
+	<delete id="deleteShopFile">
+	<![CDATA[
+	DELETE FROM IMG_FILE
+	WHERE TEA_ID = #{teaId}
+	]]>
+	</delete>
+	
 	<select id="getImg" resultType="shop">
+	<![CDATA[
 	SELECT * FROM IMG_FILE
 	WHERE TEA_ID = #{teaId}
+	]]>
 	</select>
 	
 </mapper>
