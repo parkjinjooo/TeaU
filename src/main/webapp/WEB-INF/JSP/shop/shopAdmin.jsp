@@ -373,10 +373,6 @@
 				let teaImg1 = obj['imgInfo'][1].teaImg;
 				let teaImg2 = obj['imgInfo'][2].teaImg;
 				let teaImg3 = obj['imgInfo'][3].teaImg;
-				console.log(obj['imgInfo'][0].teaImg);
-				console.log(obj['imgInfo'][1].teaImg);
-				console.log(obj['imgInfo'][2].teaImg);
-				console.log(obj['imgInfo'][3].teaImg);
 								
 
 				$('#uploadFile').attr('value', teaImg);

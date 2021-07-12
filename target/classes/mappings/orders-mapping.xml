@@ -21,8 +21,10 @@ WHERE TEA_ID = #{teaId} AND MEMBER_ID = #{memberId}
 </delete>
 
 <select id="getCartList" resultType="cart">
-SELECT * FROM CART
-WHERE MEMBER_ID = #{memberId}
+SELECT CART.CART_ID, CART.MEMBER_ID, CART.TEA_ID, CART.PRO_CNT, TEA.TEA_NAME, TEA.TEA_IMG, TEA.TEA_PRICE
+FROM CART, TEA
+WHERE CART.TEA_ID = TEA.TEA_ID
+AND CART.MEMBER_ID = #{memberId}
 </select>
 
 </mapper>

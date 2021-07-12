@@ -53,32 +53,34 @@
 										<th>개별총액</th>
 									</tr>
 								</thead>
+							<c:forEach items="${cartItem }" var="item">
 								<tbody>
-								<%-- <c:forEach items="${cartItem }" var="item"> --%>
+								  <input type="hidden" id="teaId${item.teaId }" value="${item.teaId }"/>
 									<tr class="wow fadeInUp" data-wow-delay=".1s">
 										<td>
 											<div class="carttable_product_item">
 												<div class="item_image">
-													<img src="resource/imgUpload/${cartItem.teaImg }" alt="image_not_found">
+													<img src="resource/imgUpload/${item.teaImg }" alt="image_not_found">
 												</div>
-												<button type="button" class="remove_btn"><i class="fal fa-times"></i></button>
-												<h3 class="item_title">${cartItem.teaName }</h3>
+												<button type="button" class="remove_btn" onclick="remove(${item.teaId });"><i class="fal fa-times"></i></button>
+												<h3 class="item_title">${item.teaName }</h3>
 											</div>
 										</td>
-										<td><span class="price_text2">${cartItem.teaPrice }</span></td>
+									<td><span class="price_text2" id="price${item.teaId }">${item.teaPrice }</span></td>
+										<%-- <input class="price_text2" type="text" name="price" value="${item.teaPrice }"/> --%>
 										<td>
 											<div class="quantity_input">
 												<form action="#">
-													<button type="button"  onclick="countCheckMinus();">–</button>
-													<input type="text" id="cartSize" value=1>
-													<button type="button" onclick="countCheckPlus();">+</button>
+													<button type="button"  onclick="countCheckMinus(${item.teaId });">–</button>
+													<input type="text" id="cartSize${item.teaId }" name="count" value=${item.proCnt }>
+													<button type="button" onclick="countCheckPlus(${item.teaId });">+</button>
 												</form>
 											</div>
 										</td>
-										<td><span class="price_text1" id="totalPrice" ></span></td>
+										<td><span class="price_text1" id="totalPrice${item.teaId }" ></span></td>
 									</tr>
-								<%-- </c:forEach> --%>
 								</tbody>
+							 </c:forEach>
 							</table>
 						</div>
 						<ul class="carttable_footer ul_li_right wow fadeInUp" data-wow-delay=".1s">
@@ -103,43 +105,60 @@
 <jsp:include page="footer.jsp"></jsp:include>
 <script>
 		
+
 		let price;
 		let count;
-
 	$(document).ready(function(){
 		
-		 price = '${cartItem.teaPrice }';
-		 count = $('#cartSize').val();
-		$('#totalPrice').text(price*count);
-	});
+		<c:forEach items="${cartItem }" var="item">
+			$('#totalPrice'+${item.teaId }).text($('#price' + ${item.teaId }).text() * $('#cartSize'+${item.teaId }).val()); 
+		</c:forEach>
+	
+			price =	$('#price').val();
+			count =	$('#cartSize').val();
+				
+		 console.log(price);
+		 console.log(count);
+		
+		  price = $('#price').text();
+		  count = $('#cartSize').val();
+		
+		 console.log(price * count)
+		 
+		 
+		$('#totalPrice').text(price*count); 
+		
+	}); 
 
 	
-  function countCheckMinus(){
-	  var value = $('#cartSize').val();
+  function countCheckMinus(teaId){
+	  var value = $('#cartSize' + teaId).val();
+	  price = $('#price' + teaId).text();
 	  value--;
 
 	  if(value < 1){ 
 		 alert("최소 수량은 1개입니다.");
-		 $('#cartSize').val(1);
+		 $('#cartSize' + teaId).val(1);
 		 value=1;
 	 } else {
-		 $('#cartSize').val(value);
+		 $('#cartSize'+teaId).val(value);
 	 }
-	 $('#totalPrice').text(price*value);
+	 $('#totalPrice' + teaId).text(price*value);
  }
   
-  function countCheckPlus(){
-	  var value = $('#cartSize').val();
+  function countCheckPlus(teaId){
+	  var value = $('#cartSize' + teaId).val();
+	  price = $('#price' + teaId).text();
 	  value++;
 
 	  if(value > 10){ 
 		 alert("최대 수량은 10개입니다.");
-		 $('#cartSize').val(10);
+		 $('#cartSize'+teaId).val(10);
 		 value = 10;
 	 } else {
-		 $('#cartSize').val(value);
+		 $('#cartSize' + teaId).val(value);
 	 }
-	  $('#totalPrice').text(price*value);
+	  $('#totalPrice' + teaId).text(price*value);
  }
   
   
@@ -147,7 +166,12 @@
 	  console.log($('#cartSize').val());
   }
 
-
+	function remove(tId){
+		let member =  id;
+		let teaId = $('#teaId'+tId).val();
+		console.log(member);
+		location.href="deleteCart.do?memberId="+member+"&&teaId="+teaId;
+	}
 </script>
 </body>
 </html>
