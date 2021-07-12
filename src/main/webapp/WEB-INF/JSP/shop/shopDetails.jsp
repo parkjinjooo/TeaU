@@ -137,7 +137,7 @@
 						<ul class="btns_group ul_li">
 							<li><a class="btn btn_secondary text-uppercase"
 								onclick="addCart();">Add To Cart</a></li>
-							<li><a class="btn btn_secondary text-uppercase">Direct
+							<li><a class="btn btn_secondary text-uppercase" onclick="buy();">Direct
 									Buy</a></li>
 						</ul>
 						<div class="details_wishlist_btn">
@@ -336,6 +336,11 @@
 				$('#cartSize').val(value);
 			}
 			$('#totalPrice').text(price*value);
+		}
+		
+		function buy(){
+			window.location.href = "cart.do?memberId=${member.memberId}" ;
+			
 		}
 	</script>
 </body>

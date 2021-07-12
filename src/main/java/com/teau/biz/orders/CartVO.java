@@ -17,5 +17,7 @@ public class CartVO {
     private String teaImg;
     
     private int teaPrice;
+    
+    private int totalPrice;
 
 }

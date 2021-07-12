@@ -232,78 +232,44 @@
                   </div>
                   <div>
                     <ul class="list_order">
-                    <li class="order_item">
-                      <div class="row order_header">
-                        <div class="col-md-9 col-xs-9">
-                          <div class="order_date">
-                            <dt>2021.06.01 (18시 31분) </dt>
-                          </div>
-                          <div class="order_name">
-                            <a href="/buy_detail.html"><h5>제주영귤차 외 2종</h5></a>
-                          </div>
-                        </div>
-                        <div class="col-md-3 col-xs-3 order_button ">
-                          <span class="button"><a class="link">주문취소</a></span>
-                          <span class="button"><a class="link">1:1문의</a></span>
-                        </div>
-                      </div>
-                        <hr>
-                        <div class="row order_info">
-                            <div class="col-xs-9 order_goods">
-                              <div class="order_id">
-                                <dt>주문번호</dt>
-                                  <a href="#"><dd>202106011831</dd></a>
-                                </div>
-                            <div class="order_price">
-                              <dt>결제금액</dt>
-                              <dd>25,000원</dd>
-                            </div>
-                            <div class="order_status">
-                              <dt>주문상태</dt>
-                              <dd>배송중</dd>                            
-                              <button>배송조회</button>
-                            </div>
-                          </div>
+                    <c:forEach items="${OrdersList }" var="orders">
+							<li class="order_item">
+								<div class="row order_header">
+									<div class="col-md-9 col-xs-9">
+										<div class="order_date">
+											<dt>${orders.ordersDate }</dt>
+										</div>
+										<div class="order_name">
+											<a href="/buy_detail.html"><h5>${orders.teaName }</h5></a>
+										</div>
+									</div>
+									<div class="col-md-3 col-xs-3 order_button ">
+										<span class="button"><a class="link">주문취소</a></span> <span
+											class="button"><a class="link">1:1문의</a></span>
+									</div>
+								</div>
+								<hr>
+								<div class="row order_info">
+									<div class="col-xs-9 order_goods">
+										<div class="order_id">
+											<dt>주문번호</dt>
+											<a href="#"><dd>${orders.ordersId }</dd></a>
+										</div>
+										<div class="order_price">
+											<dt>결제금액</dt>
+											<dd>${orders.ordersTotal }</dd>
+										</div>
+										<div class="order_status">
+											<dt>주문상태</dt>
+											<dd>배송중</dd>
+											<button>배송조회</button>
+										</div>
+									</div>
 
-                      </div>
-                    </li>
+								</div>
+							</li>
 
-                    <li class="order_item">
-                      <div class="row order_header">
-                        <div class="col-md-9 col-xs-9">
-                          <div class="order_date">
-                            <dt>2021.06.01 (18시 31분) </dt>
-                          </div>
-                          <div class="order_name">
-                            <a href="/buy_detail.html"><h5>제주영귤차 외 2종</h5></a>
-                          </div>
-                        </div>
-                        <div class="col-md-3 col-xs-3 order_button ">
-                          <span class="button"><a class="link">주문취소</a></span>
-                          <span class="button"><a class="link">1:1문의</a></span>
-                        </div>
-                      </div>
-                        <hr>
-                        <div class="row order_info">
-                            <div class="col-xs-9 order_goods">
-                              <div class="order_id">
-                                <dt>주문번호</dt>
-                                  <a href="#"><dd>202106011831</dd></a>
-                                </div>
-                            <div class="order_price">
-                              <dt>결제금액</dt>
-                              <dd>25,000원</dd>
-                            </div>
-                            <div class="order_status">
-                              <dt>주문상태</dt>
-                              <dd>배송중</dd>                            
-                              <button>배송조회</button>
-                            </div>
-                          </div>
-
-                      </div>
-                    </li>
-
+							</c:forEach>
                   </ul>
                 </div>
               </div>

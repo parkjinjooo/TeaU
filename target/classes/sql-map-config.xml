@@ -19,7 +19,7 @@
 		<typeAlias type="com.teau.biz.board.ReplyVO" alias="reply" />
 		<typeAlias type="com.teau.biz.shop.ShopVO" alias="shop" />
 		<typeAlias type="com.teau.biz.orders.CartVO" alias="cart" />
-		
+		<typeAlias type="com.teau.biz.orders.OrdersVO" alias="orders"/>
 	</typeAliases>
 	
 	<!-- Sql Mapper 설정 -->
@@ -29,7 +29,7 @@
 		<mapper resource="mappings/board-mapping.xml"/>
 		<mapper resource="mappings/reply-mapping.xml"/>
 		<mapper resource="mappings/shop-mapping.xml"/>	
-		<mapper resource="mappings/orders-mapping.xml"/>	
-			
+		<mapper resource="mappings/cart-mapping.xml"/>	
+		<mapper resource="mappings/orders-mapping.xml"/>
 	</mappers>
 </configuration>

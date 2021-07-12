@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.teau.biz.member.MemberVO;
+import com.teau.biz.orders.OrdersService;
+import com.teau.biz.orders.OrdersVO;
 import com.teau.biz.subscribe.SubService;
 import com.teau.biz.subscribe.SubVO;
 import com.teau.biz.subscribe.impl.TreeServiceImpl;
@@ -35,6 +37,9 @@ public class SubController {
 	@Autowired
 	@Qualifier("treeService")
 	private TreeServiceImpl treeService;
+	
+	@Autowired
+	private OrdersService ordersService;
 	
 	@RequestMapping("/subscribe_main.do")
 	public String main() {
@@ -154,6 +159,11 @@ public class SubController {
 			model.addAttribute("sub", null);
 		} // 확인 필요 
 
+		
+		OrdersVO order = new OrdersVO(); 
+		 order.setMemberId(member.getMemberId());
+		 model.addAttribute("OrdersList", ordersService.getOrdersList(order));
+		
 		return "mypage";
 	}
 	

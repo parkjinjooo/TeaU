@@ -86,8 +86,8 @@
 						<ul class="carttable_footer ul_li_right wow fadeInUp" data-wow-delay=".1s">
 							<li>
 								<div class="total_price text-uppercase">
-									<span>총 가격 x 총 수량</span>
-									<span>$45,00</span>
+									<span >Total Price</span>
+									<span id="allPrice" style="color:#fd6c44"></span>
 								</div>
 							</li>
 							<li>
@@ -108,34 +108,33 @@
 
 		let price;
 		let count;
+		
+		let allPrice = new Array();
+		let allPrice2 = 0 ;
 	$(document).ready(function(){
-		
 		<c:forEach items="${cartItem }" var="item">
-			$('#totalPrice'+${item.teaId }).text($('#price' + ${item.teaId }).text() * $('#cartSize'+${item.teaId }).val()); 
+		 $('#totalPrice'+${item.teaId }).text($('#price' + ${item.teaId }).text() * $('#cartSize'+${item.teaId }).val()); 
+		 		
+		 	 allPrice.push($('#totalPrice'+${item.teaId }).text());
+		 	console.log(allPrice);
 		</c:forEach>
-	
-			price =	$('#price').val();
-			count =	$('#cartSize').val();
-				
-		 console.log(price);
-		 console.log(count);
 		
-		  price = $('#price').text();
-		  count = $('#cartSize').val();
 		
-		 console.log(price * count)
-		 
-		 
-		$('#totalPrice').text(price*count); 
 		
+		//var allPrice2=0;
+		for(var i = 0; i < allPrice.length; i++) {
+			allPrice2 += parseInt(allPrice[i]);
+		}
+		$('#allPrice').text(allPrice2);		
 	}); 
 
-	
   function countCheckMinus(teaId){
+
 	  var value = $('#cartSize' + teaId).val();
 	  price = $('#price' + teaId).text();
 	  value--;
-
+	  let checkValue = $('#totalPrice' + teaId).text();
+	  
 	  if(value < 1){ 
 		 alert("최소 수량은 1개입니다.");
 		 $('#cartSize' + teaId).val(1);
@@ -144,13 +143,23 @@
 		 $('#cartSize'+teaId).val(value);
 	 }
 	 $('#totalPrice' + teaId).text(price*value);
+	
+	for(var i = 0; i < allPrice.length; i++) {
+		if(allPrice[i] ==  checkValue){
+			
+			allPrice2 -= parseInt(price);
+			allPrice[i] = $('#totalPrice' + teaId).text();
+		}
+	}
+	$('#allPrice').text(allPrice2);
  }
   
   function countCheckPlus(teaId){
 	  var value = $('#cartSize' + teaId).val();
 	  price = $('#price' + teaId).text();
 	  value++;
-
+	  let checkValue = $('#totalPrice' + teaId).text();
+	  
 	  if(value > 10){ 
 		 alert("최대 수량은 10개입니다.");
 		 $('#cartSize'+teaId).val(10);
@@ -159,11 +168,22 @@
 		 $('#cartSize' + teaId).val(value);
 	 }
 	  $('#totalPrice' + teaId).text(price*value);
+	  
+	  for(var i = 0; i < allPrice.length; i++) {
+			if(allPrice[i] ==  checkValue){
+			
+				allPrice2 += parseInt(price);
+				allPrice[i] = $('#totalPrice' + teaId).text();
+			}
+		}
+		$('#allPrice').text(allPrice2);
  }
   
   
   function gopay() {
-	  console.log($('#cartSize').val());
+	  	 console.log($('#cartSize').val());
+	  	 console.log(id);
+	     location.href="insertOrdersView.do?memberId="+id+"&totalPrice="+ allPrice2;
   }
 
 	function remove(tId){
@@ -172,6 +192,7 @@
 		console.log(member);
 		location.href="deleteCart.do?memberId="+member+"&&teaId="+teaId;
 	}
+	
 </script>
 </body>
 </html>

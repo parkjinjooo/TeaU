@@ -82,19 +82,21 @@
 	<section class="reserve_table_section sec_ptb_120">
 		<div id="subLeaf" class="container">
 			<div class="reserve_table_form wow fadeInUp"
-				style="padding-left: 0px; padding-right: 0px;" data-wow-delay=".1s">
+				style="padding-left: 0px; padding-right: 0px;" data-wow-delay=".1s" style="box-shadow: 0px 0px 5px 5px rgb(236, 236, 236);">
 				<div class="subcribe_title">
 					<h2 class="form_title text-center text-uppercase subLeafTitle"
-						style="font-size: 35px;">원하는 항목을 골라보세요(중복 가능)</h2>
+						style="font-size: 35px; margin-bottom: 75px;">원하는 항목을 골라보세요(중복 가능)</h2>
 				</div>
 
 				<form id="insertForm" method="POST">
 					<input type="hidden" id="subUser" name="subUser" value="${member.memberId}"/>
 					<input type="hidden" id="subCheck" name="subCheck" value="${member.memberSub}"/>
 					<div class="row justify-content-center">						
+						
+						
 						<!--나눠놓은 기준은 행 단위-->
 						<div class="col-lg-2"></div>
-						<div class="col-lg-8 sub_leaf_title">계절별</div>
+						<div class="col-lg-8 sub_leaf_title" style="margin-bottom: 25px;">계절별</div>
 						<div class="col-lg-2"></div>
 
 						<div class="col-lg-3"></div>
@@ -116,9 +118,9 @@
 						<use xlink:href="#check"></use>
 						</svg></span>
 						<span>가을</span></label> 
-						<br /> 
+						</div> 
 						
-						
+						<div class="col-lg-1"></div>
 						<div class="col-lg-3 sub_leaf_content">
 						<input class="inp-cbx" type="checkbox" name="tagSeason" value="여름" id="summer" />
 						<label class="cbx" for="summer">
@@ -138,17 +140,13 @@
 						</svg></span>
 						<span>겨울</span></label> 
 						</div>
-						<div class="col-lg-3"></div>
+						
+						<div class="col-lg-1"></div>
+                		<div class="col-lg-12"></div>
+						
 
 						<div class="col-lg-2"></div>
-						<div class="col-lg-8">
-							<hr size="5" noshade>
-						</div>
-						<div class="col-lg-2"></div>
-
-
-						<div class="col-lg-2"></div>
-						<div class="col-lg-8 sub_leaf_title">베이스</div>
+						<div class="col-lg-8 sub_leaf_title" style="margin-bottom: 30px; margin-top: 20px;">베이스</div>
 						<div class="col-lg-2"></div>
 
 						<div class="col-lg-3"></div>
@@ -170,8 +168,9 @@
 						<use xlink:href="#check"></use>
 						</svg></span>
 						<span>홍차</span></label> 
-						<br />
+						</div>
 						
+						<div class="col-lg-1"></div>
 						<div class="col-lg-3 sub_leaf_content">
 						<input class="inp-cbx" type="checkbox" name="tagBase" value="우롱차 " id="oolong" />
 						<label class="cbx" for="oolong">
@@ -189,69 +188,129 @@
 						<use xlink:href="#check"></use>
 						</svg></span>
 						<span>허브차</span></label> 
-												</div>
-						<div class="col-lg-3"></div>
-
-						<div class="col-lg-2"></div>
-						<div class="col-lg-8">
-							<hr size="5" noshade>
-						</div>
-						<div class="col-lg-2"></div>
+						</div>		
 						
-						<!-- 
-						<label><input type="checkbox" name="tagBase" value="녹차" />녹차</label>
-					    <br /> 
-					    <label><input type="checkbox" name="tagBase" value="홍차" /> 홍차</label>
-					    <br />
-						</div>
-
-						<div class="col-lg-3 sub_leaf_content">
-						<label><input type="checkbox" name="tagBase" value="우롱차" />우롱차</label> 
-						<br /> 
-						<label><input type="checkbox" name="tagBase" value="허브차" /> 허브차(카페인x)</label>
- -->
+						
+						<div class="col-lg-1"></div>
+                		<div class="col-lg-12"></div>
+                		
+					     
+					     
 						<div class="col-lg-2"></div>
-						<div class="col-lg-8 sub_leaf_title">마시는 방법</div>
+						<div class="col-lg-8 sub_leaf_title" style="margin-bottom: 30px; margin-top: 20px;">마시는 방법</div>
 						<div class="col-lg-2"></div>
 
 						<div class="col-lg-3"></div>
 						<div class="col-lg-3 sub_leaf_content">
-						<label><input type="checkbox" name="tagDrink" value="아이스티" />아이스티</label> 
+						
+						<input class="inp-cbx" type="checkbox" name="tagDrink" value="아이스티" id="iceTea" />
+						<label class="cbx" for="iceTea">
+						<span>
+						<svg width="12px" height="10px">
+						<use xlink:href="#check"></use>
+						</svg></span>
+						<span>아이스티</span></label> 
 						<br />
-						<label><input type="checkbox" name="tagDrink" value="핫티" /> 핫티</label>
+						
+						<input class="inp-cbx" type="checkbox" name="tagDrink" value="핫티" id="hotTea"/> 
+						<label class="cbx" for="hotTea">
+						<span>
+						<svg width="12px" height="10px">
+						<use xlink:href="#check"></use>
+						</svg></span>
+						<span>핫티</span></label> 
 						</div>
-
+						
+						
+						<div class="col-lg-1"></div>
 						<div class="col-lg-3 sub_leaf_content">
-						<label><input type="checkbox" name="tagDrink" value="밀크티" />밀크티</label> 
-						<br /> 
-						<label> <input type="checkbox" name="tagDrink" value="식수대용" /> 식수대용</label>
+						
+						<input class="inp-cbx" type="checkbox" name="tagDrink" value="밀크티" id="milkTea"/>
+						<label class="cbx" for="milkTea">
+						<span>
+						<svg width="12px" height="10px">
+						<use xlink:href="#check"></use>
+						</svg></span>
+						<span>밀크티</span></label> 
+						<br />
+						
+						<input class="inp-cbx" type="checkbox" name="tagDrink" value="식수대용" id="water"/>
+						<label class="cbx" for="water">
+						<span>
+						<svg width="12px" height="10px">
+						<use xlink:href="#check"></use>
+						</svg></span>
+						<span>식수대용</span></label> 
 						</div>
+						
+						
+						<div class="col-lg-1"></div>
+                		<div class="col-lg-12"></div>
+                		
+                		
+                		
+						<div class="col-lg-2"></div>
+						<div class="col-lg-8 sub_leaf_title" style="margin-bottom: 30px; margin-top: 20px;">블렌드(향기)</div>
+						<div class="col-lg-2"></div>
+
 						<div class="col-lg-3"></div>
-
-						<div class="col-lg-2"></div>
-						<div class="col-lg-8">
-							<hr size="5" noshade>
-						</div>
-						<div class="col-lg-2"></div>
-
-						<div class="col-lg-2"></div>
-						<div class="col-lg-8 sub_leaf_title">블렌드(향기)</div>
-						<div class="col-lg-2"></div>
-
-						<div class="col-lg-3"></div>
 						<div class="col-lg-3 sub_leaf_content">
-						<label><input type="checkbox" name="tagBlend" value="꽃" /> 꽃</label>
-						<br /> 
-						<label><input type="checkbox" name="tagBlend" value="시나몬" /> 시나몬</label>
-						 <br /> 
-						 <label><input type="checkbox"name="tagBlend" value="믹스" /> 믹스</label>
-						</div>
+						
+						
 
-						<div class="col-lg-3 sub_leaf_content">
-						<label><input type="checkbox" name="tagBlend" value="과일" />과일</label>
-						<br /> 
-						<label><input type="checkbox" name="tagBlend" value="초콜릿&과자" /> 초콜릿&과자</label>
+						<input class="inp-cbx" type="checkbox" name="tagBlend" value="꽃" id="flower"/>
+						<label class="cbx" for="flower">
+						<span>
+						<svg width="12px" height="10px">
+						<use xlink:href="#check"></use>
+						</svg></span>
+						<span>꽃</span></label> 
+						<br />
+						
+						<input class="inp-cbx" type="checkbox" name="tagBlend" value="시나몬" id="cinnamomum" />
+						<label class="cbx" for="cinnamomum">
+						<span>
+						<svg width="12px" height="10px">
+						<use xlink:href="#check"></use>
+						</svg></span>
+						<span>시나몬</span></label> 
+						<br />
+						
+						<input class="inp-cbx" type="checkbox"name="tagBlend" value="민트" id="mint" />
+						<label class="cbx" for="mint">
+						<span>
+						<svg width="12px" height="10px">
+						<use xlink:href="#check"></use>
+						</svg></span>
+						<span>민트</span></label> 
 						</div>
+						
+						
+						<div class="col-lg-1"></div>
+						<div class="col-lg-3 sub_leaf_content">
+						<input class="inp-cbx" type="checkbox" name="tagBlend" value="과일" id="fruit" />
+						<label class="cbx" for="fruit">
+						<span>
+						<svg width="12px" height="10px">
+						<use xlink:href="#check"></use>
+						</svg></span>
+						<span>과일</span></label> 
+						<br />
+						
+						<input class="inp-cbx" type="checkbox" name="tagBlend" value="초콜릿&과자" id="chocolate" />
+						<label class="cbx" for="chocolate">
+						<span>
+						<svg width="12px" height="10px">
+						<use xlink:href="#check"></use>
+						</svg></span>
+						<span>초콜릿&과자</span></label> 
+						</div>
+						
+						<div class="col-lg-1"></div>
+                		<div class="col-lg-12"></div>
+						
+						
+						
 						<div class="col-lg-3"></div>
 
 						<div class="text-center">
