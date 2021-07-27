@@ -75,10 +75,10 @@
 		<div class="col-lg-2"></div>
 		<div class="col-lg-10" style="text-align: right; margin-bottom: 50px;">
 			<button class="btn btn_primary text-uppercase" id="shopUpdate"
-				onclick='update()'>상품 수정</button>
+				onclick='update();'>상품 수정</button>
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			<button class="btn btn_primary text-uppercase" id="removefrm"
-				onclick='removeCheck()'>상품 삭제</button>
+				onclick='removeCheck();'>상품 삭제</button>
 		</div>
 		<div class="col-lg-2"></div>
 		<div class="container">
@@ -292,7 +292,7 @@
 					data : $('#cartInfo').serialize(),
 					success : function(data) {
 						console.log(data);
-						 let goCart = confirm("장바구니에 상품을 담았습니다.");
+						 let goCart = confirm(data);
 						 
 						 if (id == null){
 							if (goCart) {

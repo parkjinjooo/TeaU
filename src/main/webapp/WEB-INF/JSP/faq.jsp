@@ -1,9 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!Doctype html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+        <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+            <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<head>
+                    <!doctype html>
+                    <html lang="en">
+  <head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -33,11 +34,16 @@
 
     <!-- custom - css include -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    
+
 
   </head>
-<body>
+
+
+  <body>
 <jsp:include page="header.jsp"></jsp:include>
- <!-- breadcrumb_section - start
+	
+        <!-- breadcrumb_section - start
         ================================================== -->
         <section class="breadcrumb_section text-uppercase" style="background-image: url(assets/images/breadcrumb/tea.jpg);">
           <div class="container">
@@ -87,7 +93,7 @@
                   <div class="accordion-item wow fadeInUp" data-wow-delay=".1s">
                     <h3 class="accordion-header" id="faq_heading2">
                       <button class="collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq_collapse2" aria-expanded="false" aria-controls="faq_collapse2">
-                        매월 같은 상품을 정기구하나요?
+                        정기구독은 매월 같은 상품을 받아보게 되나요?
                       </button>
                     </h3>
                     <div id="faq_collapse2" class="collapse" aria-labelledby="faq_heading2" data-bs-parent="#faq_accordion">
@@ -186,6 +192,7 @@
       </main>
       <!-- main body - end
       ================================================== -->
-<jsp:include page="footer.jsp"></jsp:include>
-</body>
-</html>
+
+      <!-- footer_section - start
+      ================================================== -->
+    <jsp:include page="footer.jsp"></jsp:include>

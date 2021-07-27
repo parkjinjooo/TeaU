@@ -41,7 +41,12 @@
 
 <!-- custom - css include -->
 <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-
+<style>
+table#gray thead tr th
+{border-bottom-color:rgb(194, 194, 194)}
+table#gray tbody tr td
+{border-bottom-color:#f0f0f0}
+</style>
 
 </head>
 
@@ -52,14 +57,16 @@
 	<!-- cart_section - start
         ================================================== -->
 	<section class="cart_section sec_ptb_120 bg_default_gray">
-		<div class="container container_boxed">
+		<div class="container container_boxed" style="box-shadow: 0px 0px 5px 5px rgb(236, 236, 236);">
 			<h3 class="form_title text-uppercase wow fadeInUp"
-				data-wow-delay=".1s" style="padding-bottom: 20px;">주문내역 확인</h3>
+				data-wow-delay=".1s">주문내역 확인</h3>
+				<br>
 			<div>
 			<!-- 일반상품 , 카트상품 분기 -->
-				<table class="table">
-					<thead class="text-uppercase wow fadeInUp" data-wow-delay=".1s">
+				<table class="table" id="gray">
+					<thead class="text-uppercase wow fadeInUp" data-wow-delay=".1s" >
 						<tr>
+							<th>상품이미지</th>
 							<th>상품명</th>
 							<th>수량</th>
 							<th>상품금액</th>
@@ -68,6 +75,7 @@
 					<c:forEach items="${orders }" var="order">
 					<tbody>
 						<tr>
+							<td><img src="resource/imgUpload/${order.teaImg }" alt="image_not_found" style="width:50px; height:50px;"></td>
 							<td>${order.teaName }</td>
 							<td>${order.proCnt }</td>
 							<td>${order.teaPrice }</td>
@@ -108,7 +116,7 @@
 						</h4>
 						<div>
 							<input type="tel" name="ordersPhone"
-								placeholder="전화번호를 입력해주세요. 예시: 010-0000-0000" value=""
+								placeholder="전화번호를 입력해주세요." value=""
 								pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required>
 						</div>
 					</div>
@@ -146,9 +154,9 @@
                </div>
  -->
 				<div class="checkout_form_footer wow fadeInUp" data-wow-delay=".5s">
-					<span class="total_price"><strong>Total</strong><input
+					<span class="total_price"><strong>Total</strong><%-- <input
 						type="text" name="ordersTotal" value="<%=totalPrice %>" required
-						autofocus></span>
+						style="margin-left:20px"> --%><span style="margin-left: 50px; font-size:50px" id="ordersTotal"><%=totalPrice %></span></span>
 					<!-- <a class="btn btn_primary text-uppercase" href="checkout_step2.html">결제하기</a> -->
 				<button type="button" onclick="orderscheck()">결제</button>
 				</div>	
@@ -191,22 +199,21 @@
  		var ordersReceiver = $('input[name="ordersReceiver"]').val();
  		var ordersPhone = $('input[name="ordersPhone"]').val();
  		var ordersAddress = $('input[name="ordersAddress"]').val();
- 		var ordersTotal = $('input[name="ordersTotal"]').val();
-       
+        var ordersTotal = $('#ordersTotal').text();
  		
  		// 물건 아이디
         IMP.request_pay({
            pg: 'html5_inicis', // version 1.1.0부터 지원.
            pay_method: 'card',
            merchant_uid: <%=totalPrice%> + new Date().getTime(),
-           name: 'Tea U', // 상품명
+           name: 'Tea U',
            amount: <%=totalPrice%>,
            buyer_email: "${member.memberEmail}", // 구매자 이메일
            buyer_name: "${member.memberName}", // 구매자 이름
            buyer_tel: "${member.memberPhone}", // 구매자 연락처
            buyer_addr: "${member.memberAddress}", // 구매자 주소
         }, function (rsp) {
-            if (rsp.success) { 
+           if (rsp.success) {  
 
               var msg = '결제가 완료되었습니다.';
               msg += '고유ID : ' + rsp.imp_uid;
@@ -232,13 +239,13 @@
 
 					}
 			});
-		 } else {
+		  } else {
 			var msg = '결제에 실패하였습니다.';
 			msg += '에러내용 : ' + rsp.error_msg;
 			alert(msg);
 			//location.href="shopDetails.do?teaId=${order.teaId}";
 			location.href="index.jsp";
-		} 
+		}  
 	});
 };
 

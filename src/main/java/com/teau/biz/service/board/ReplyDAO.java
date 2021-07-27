@@ -22,16 +22,16 @@ public class ReplyDAO {
         System.out.println("===> Mybatis로 insertReply 기능 처리완료");
     }
 
-    //delete
+    // delete
     public void deleteReply(ReplyVO vo) {
         System.out.println("===> Mybatis로 deleteReply 기능 처리");
         mybatis.delete("ReplyDAO.deleteReply", vo);
     }
-     
-    //view
-    public List<ReplyVO> listReply(int boardId){
-    	System.out.println("===> Mybatis로 listReply 기능 처리");		
-		return mybatis.selectList("ReplyDAO.listReply",boardId);			
-	}
+
+    // view
+    public List<ReplyVO> listReply(int boardId) {
+        System.out.println("===> Mybatis로 listReply 기능 처리");
+        return mybatis.selectList("ReplyDAO.listReply", boardId);
+    }
 
 }

@@ -247,8 +247,18 @@
 					<div class="file1">
 						Image 1 : <input multiple="multiple" type="file" id="uploadFile"
 							name="uploadFile" accept="image/*"> <br /> <br />
-						<div>
-							<img id="preImage" style="width: 250px; border-radius: 20px">
+						<div id="preImage">
+							<form id="imgSelect">
+								<div>
+									<input type="checkbox">
+									<input type="checkbox">
+									<input type="checkbox">
+									<input type="checkbox">
+									
+									<img>
+								</div>
+							
+							</form>
 						</div>
 					</div>
 
@@ -275,7 +285,11 @@
 		$(document).ready(function() {
 			
 			let data = <%=data%>;
-	
+			let imgs = JSON.parse(data).imgInfo;
+			for(i=0;i<imgs.length;i++){
+				console.log(imgs[i]);
+				preview(imgs[i].teaImg);
+			}
 			console.log(data);	
 		
 			if (data != null) {
@@ -482,7 +496,7 @@
 			
 			let data =<%=data%>;
 			let obj = JSON.parse(data);
-
+			
 			let insertForm = $('#insertForm');
 
 			let formData = new FormData(insertForm[0]);
@@ -524,11 +538,26 @@
 			console.log(input);
 			if (input.files && input.files[0]) {
 				var reader = new FileReader();
+				var img = document.createElement('img');
+				img.style.cssText = 'width: 250px; border-radius: 20px';
+
+				//<img id="preImage" style="width: 250px; border-radius: 20px">
 				reader.onload = function(e) {
-					$('#preImage').attr('src', e.target.result);
+					img.src = e.target.result;
+					document.getElementById('preImage').appendChild(img);
+					//$('#preImage').attr('src', e.target.result);
 				}
 				reader.readAsDataURL(input.files[0]);
 			}
+		}
+		function preview(fileName) {
+				console.log($('#uploadFile').val());
+				var img = document.createElement('img');
+				img.style.cssText = 'width: 250px; border-radius: 20px';
+
+				img.src = "resource/imgUpload/"+fileName;
+				document.getElementById('preImage').appendChild(img);
+				console.log(this);
 		}
 	</script>
 

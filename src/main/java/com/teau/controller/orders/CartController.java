@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.teau.biz.member.MemberVO;
 import com.teau.biz.orders.CartService;
 import com.teau.biz.orders.CartVO;
 import com.teau.biz.shop.ShopService;
@@ -35,7 +36,6 @@ public class CartController {
 	@RequestMapping(value = "/cartInsert.do", produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String insertCart(@ModelAttribute CartVO vo) {
-
 		cartService.insertCart(vo);
 		return "장바구니에 상품을 담았습니다.";
 	}
@@ -45,21 +45,6 @@ public class CartController {
 	@ResponseBody
 	public String cartInfo(ShopVO vo, Model model) throws JsonProcessingException {
 
-		/*
-		 * ShopVO shop = new ShopVO(); 
-		 * shop.setTeaId(vo.getTeaId()); 
-		 * ShopVO cartItem =
-		 * shopService.getShop(shop); 
-		 * cartItem.setProCnt(vo.getProCnt());
-		 * 
-		 * Map<String, Object> haspMap = new HashMap<String, Object>();
-		 * haspMap.put("cartItem", cartItem);
-		 * 
-		 * ObjectMapper mapper = new ObjectMapper();
-		 * 
-		 * String json = mapper.writeValueAsString(haspMap);
-		 */
-		 
 		return "장바구니에 상품을 담았습니다.";
 	}
 
@@ -69,6 +54,9 @@ public class CartController {
 		HttpSession session = request.getSession();
 	 //비로그인
 		if (session.getAttribute("member") == null) {
+			if(request.getParameter("teaId") == null) {
+				return "cart";
+			}else {
 			String teaId = request.getParameter("teaId");
 			String cnt = request.getParameter("cnt");
 			ShopVO vo = new ShopVO();
@@ -78,11 +66,25 @@ public class CartController {
 			List<ShopVO> cartItemList = new ArrayList<ShopVO>();
 			cartItemList.add(cartItem);
 			model.addAttribute("cartItem",cartItemList );
-			return "cart";
-		
+			return "cart";}
 		// 로그인
 		} else {
-			String memberId = request.getParameter("memberId");
+			MemberVO member =(MemberVO)session.getAttribute("member");
+			String memberId = member.getMemberId();
+			
+			if(request.getParameter("teaId") != null) {
+				String teaId = request.getParameter("teaId");
+				String cnt = request.getParameter("cnt");
+				
+				CartVO cart = new CartVO();
+				cart.setMemberId(memberId);
+				cart.setTeaId(Integer.parseInt(teaId));
+				cart.setProCnt(Integer.parseInt(cnt));
+				cartService.insertCart(cart);
+				
+				return "redirect:getCartList.do";
+			}
+			
 			CartVO vo = new CartVO();
 			vo.setMemberId(memberId);
 			model.addAttribute("cartItem", cartService.getCartList(vo));
@@ -108,9 +110,11 @@ public class CartController {
 	}
 
 	@RequestMapping("getCartList.do")
-	public String getCartList(@RequestParam("memberId")String memberId, Model model) {
-
-		System.out.println(memberId);
+	public String getCartList(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		MemberVO member =(MemberVO)session.getAttribute("member");
+		String memberId = member.getMemberId();
+		
 		CartVO vo = new CartVO();
 		vo.setMemberId(memberId);
 		model.addAttribute("cartItem", cartService.getCartList(vo));

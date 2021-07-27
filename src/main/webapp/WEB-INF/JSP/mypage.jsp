@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>mypage</title>
+    <title>My page</title>
     <link rel="shortcut icon" href="assets/images/feature/11.jpg">
 
     <!-- fraimwork - css include -->
@@ -150,7 +150,13 @@
                         <div>
                         
                           <br>
-                          <h5>${sub.orderCate}구독 </h5>
+                          <h4>${sub.orderCate} 구독 
+                                       <button type="button" class="btn btn_primary text-uppercase" style="margin-left:10%;"
+                                          onclick="updateCheck();">수정</button>
+                                       <button type="button" class="btn btn_primary text-uppercase"
+                                          onclick="deletesub();">해지</button>
+                                       <button type="button" class="btn btn_primary text-uppercase" id="check_module" onclick="checkModule();">결제</button>
+                           </h4>
                         </div>
                         <hr> 
                         <div>
@@ -162,15 +168,16 @@
                           <dd>${sub.subPrice}원/월</dd>
                         </div>
                         <div>
-                          <dt>선택한 요소</dt><br>
-                          <dd>${sub.tagTaste} ${sub.tagCaff} ${sub.tagEffect} ${sub.tagSeason} ${sub.tagBase} ${sub.tagDrink} ${sub.tagBlend} ${sub.treeSelect}</dd>
-                        </div>
-                      </div>
+                                       <dt>취향선택</dt>
+                                       <dd id="tea_tag">
+                                          ${sub.tagSeason}${sub.tagBase}${sub.tagDrink}
+                                          ${sub.tagBlend} ${sub.tagTaste} ${sub.tagCaff}
+                                          ${sub.tagEffect} ${sub.treeSelect}
+                                       </dd>
+                                    </div>
+                                    <div class="hiddenDiv"> </div>
+                                 </div>
                       
-                    </div>
-                    <div>
-                      <button type="button" class="btn btn-primary btn-radio" onclick="check()">수정</button>                    
-                      <button type="button" class="btn btn-primary btn-radio" onclick="deletesub()">해지</button>
                     </div>
                   </div>
                  </form>
@@ -282,7 +289,10 @@
       </main>
       <!-- main body - end
       ================================================== -->
-
+<script type="text/javascript"
+      src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript"
+      src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <jsp:include page="footer.jsp"></jsp:include>
 <script>
 
@@ -301,24 +311,25 @@
 
 
 
-function check(){
+function updateCheck(){
 	 var check = '${sub.orderCate}';
 	
 	if(check == '씨앗'){
 		var seed = 'seed';
-		update_Check(seed);
+		updateJson(seed);
 	}else if(check == '새싹'){
 		var leaf = 'leaf';
-		update_Check(leaf);
+		updateJson(leaf);
 	}else if(check == '나무'){
 		var tree = 'tree';
-		update_Check(tree);
+		updateJson(tree);
 	}
 }
 
 
 
-function update_Check(check){
+function updateJson(check){
+	
 	var memberId = $('#memberId').val();
 	$.ajax({
 		type:'POST',
@@ -355,6 +366,41 @@ function deletesub(){
 		return false
 	}
 }
+
+function checkModule() {
+    
+	   
+    var Imp = window.IMP;
+    IMP.init('imp45072851');
+    
+    IMP.request_pay({
+        pg : 'kakaopay', // version 1.1.0부터 지원.
+        pay_method : 'kakaopay',
+        merchant_uid : "${sub.subDate}",
+        name : '"${sub.orderCate}"구독 결제', // 상품명
+        amount : "${sub.subPrice}",
+        buyer_email : "${member.memberEmail}", // 구매자 이메일
+        buyer_name : "${member.memberName}", // 구매자 이름
+        buyer_tel : "${member.memberPhone}", // 구매자 연락처
+        buyer_addr : "${member.memberAddress}", // 구매자 주소
+    }, function(rsp) {
+        if ( rsp.success ) {
+           
+                  var msg = '결제가 완료되었습니다.';
+                  msg += '고유ID : ' + rsp.imp_uid;
+                  msg += '상점 거래ID : ' + rsp.merchant_uid;
+                  msg += "${sub.subPrice}" + rsp.paid_amount;
+                  msg += '카드 승인번호 : ' + rsp.apply_num;
+             
+        } else {
+            var msg = '결제에 실패하였습니다.';
+            msg += '에러내용 : ' + rsp.error_msg;
+        }
+        alert(msg);
+    });
+    
+    }
+
 
 </script>
 </body>

@@ -58,8 +58,8 @@ public class LoginController {
 		
 		String referer = request.getHeader("Referer"); // 이전페이지의 정보를 담고 있는 
         model.addAttribute("referer", referer.substring(referer.lastIndexOf("/")+1, referer.length()));
-		
-		return "login";
+		System.out.println(referer.substring(referer.lastIndexOf("/")+1, referer.length()));
+		return "login"; 
 	}
 	
 	

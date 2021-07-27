@@ -5,21 +5,21 @@ import java.sql.Date;
 // 댓글 
 public class ReplyVO {
 
-    // 댓글 번호 
+    // 댓글 번호
     private int replyId;
 
-    // 게시판 번호 
+    // 게시판 번호
     private int boardId;
 
-    // 댓글 작성자 
+    // 댓글 작성자
     private String replyWriter;
 
-    // 댓글 내용 
+    // 댓글 내용
     private String replyContent;
-    
+
     // 댓글 단 시간
     private Date replyRegdate;
-   
+
     public int getReplyId() {
         return replyId;
     }
@@ -53,14 +53,14 @@ public class ReplyVO {
     }
 
     public Date getReplyRegdate() {
-		return replyRegdate;
-	}
+        return replyRegdate;
+    }
 
-	public void setReplyRegdate(Date replyRegdate) {
-		this.replyRegdate = replyRegdate;
-	}
+    public void setReplyRegdate(Date replyRegdate) {
+        this.replyRegdate = replyRegdate;
+    }
 
-	@Override
+    @Override
     public String toString() {
         return "ReplyVO [replyId=" + replyId + ", boardId=" + boardId + ", replyWriter=" + replyWriter
                 + ", replyContent=" + replyContent + "]";

@@ -1,13 +1,13 @@
 package com.teau.biz.service.board;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.teau.biz.board.BoardVO;
-import com.teau.biz.board.RBoardVO;
 
 //DAO(Data Access Object)
 
@@ -17,33 +17,30 @@ public class BoardDAO {
     @Autowired
     private SqlSessionTemplate mybatis;
 
-    // CRUD  기능
+    // CRUD 기능
     // insert 기능
     public void insertBoard(BoardVO vo) {
         System.out.println("===> Mybatis로 insertBoard 기능 처리");
         mybatis.insert("BoardDAO.insertBoard", vo);
     }
 
-    //update
+    // update
     public void updateBoard(BoardVO vo) {
         System.out.println("===> Mybatis로 updateBoard 기능 처리");
         mybatis.update("BoardDAO.updateBoard", vo);
         System.out.println(vo.getBoardTitle());
     }
-    
 
-	
     // 댓글 갯수 업뎃
-	public void updateReplyCount(BoardVO vo) throws Exception {
-		System.out.println("===> Mybatis로 updateReplyCount 기능 처리");
-		System.out.println(vo.getReplyCount());
-		mybatis.update("BoardDAO.updateReplyCount", vo);
-		System.out.println(vo.getReplyCount());
-		
-	}
+    public void updateReplyCount(BoardVO vo) throws Exception {
+        System.out.println("===> Mybatis로 updateReplyCount 기능 처리");
+        System.out.println(vo.getReplyCount());
+        mybatis.update("BoardDAO.updateReplyCount", vo);
+        System.out.println(vo.getReplyCount());
 
+    }
 
-    //delete
+    // delete
     public void deleteBoard(BoardVO vo) {
         System.out.println("===> Mybatis로 deleteBoard 기능 처리");
         mybatis.delete("BoardDAO.deleteBoard", vo);
@@ -68,45 +65,46 @@ public class BoardDAO {
         return mybatis.selectList("BoardDAO.getBoardListB", vo);
     }
 
-    // 랭킹 보드 insert 기능
-    public void insertBoard(RBoardVO vo) {
-        System.out.println("===> Mybatis로 insertRBoard 기능 처리");
-        mybatis.insert("BoardDAO.insertRBoard", vo);
-    }
-
-    // 랭킹 보드 update
-    public void updateBoard(RBoardVO vo) {
-        System.out.println("===> Mybatis로 updateRBoard 기능 처리");
-        mybatis.update("BoardDAO.updateRBoard", vo);
-    }
-
-    // 랭킹 보드 delete
-    public void deleteBoard(RBoardVO vo) {
-        System.out.println("===> Mybatis로 deleteRBoard 기능 처리");
-        mybatis.delete("BoardDAO.deleteRBoard", vo);
-    }
-
-    // 랭킹 보드 개별 보기
-    public RBoardVO getBoard(RBoardVO vo) {
-        System.out.println("===> Mybatis로  getRBoardList() 기능 처리");
-        return (RBoardVO) mybatis.selectOne("BoardDAO.getRBoard", vo);
-    }
-
     // 랭킹 보드 목록보기
-    public List<RBoardVO> getBoardListR(RBoardVO vo) {
+    public List<BoardVO> getBoardListR(BoardVO vo) {
         System.out.println("===> Mybatis로  getRBoardListR() 기능 처리");
         return mybatis.selectList("BoardDAO.getRBoardListR", vo);
     }
+    
+  
+    
+    // 하트 갯수 업뎃
+    public void updateBoardLikeCount(BoardVO vo) throws Exception {
+        System.out.println("===> Mybatis로 updateReplyCount 기능 처리");
+        System.out.println("업뎃전 좋아요갯수: "+vo.getBoardLikeCount());
+        mybatis.update("BoardDAO.updateBoardLikeCount", vo);
+        System.out.println("업뎃후 좋아요갯수: "+vo.getBoardLikeCount());
+
+    }
+   
 
     // 페이징 관련
-    public int totalCnt() {
+    public int totalCnt(BoardVO vo) {
         System.out.println("===> Mybatis로 totalCnt");
-        return mybatis.selectOne("BoardDAO.getTotalCnt");
+        return mybatis.selectOne("BoardDAO.getTotalCnt", vo);
     }
-    
-    public int totalCntB() {
+
+    public int totalCntB(BoardVO vo) {
         System.out.println("===> Mybatis로 totalCntB");
-        return mybatis.selectOne("BoardDAO.getTotalCntB");
+        return mybatis.selectOne("BoardDAO.getTotalCntB", vo);
+    }
+
+    public int totalCntR(BoardVO vo) {
+        System.out.println("===> Mybatis로 totalCntB");
+        return mybatis.selectOne("BoardDAO.getTotalCntR", vo);
     }
     
+    public int getLikeChk(Map<String, String> paramMap) {
+    	return mybatis.selectOne("BoardDAO.getLikeChk", paramMap);
+    }
+    
+    public List<BoardVO> getOrderList(BoardVO vo) {
+        System.out.println("===> Mybatis로 getOrderList");
+        return mybatis.selectList("BoardDAO.getOrderList",vo);
+    }
 }

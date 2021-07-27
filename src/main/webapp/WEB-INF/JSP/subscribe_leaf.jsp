@@ -82,11 +82,10 @@
 	<section class="reserve_table_section sec_ptb_120">
 		<div id="subLeaf" class="container">
 			<div class="reserve_table_form wow fadeInUp"
-				style="padding-left: 0px; padding-right: 0px;" data-wow-delay=".1s" style="box-shadow: 0px 0px 5px 5px rgb(236, 236, 236);">
+				style="padding-left: 0px; padding-right: 0px;box-shadow: 0px 0px 5px 5px rgb(236, 236, 236);" data-wow-delay=".1s;">
 				<div class="subcribe_title">
 					<h2 class="form_title text-center text-uppercase subLeafTitle"
 						style="font-size: 35px; margin-bottom: 75px;">원하는 항목을 골라보세요(중복 가능)</h2>
-				</div>
 
 				<form id="insertForm" method="POST">
 					<input type="hidden" id="subUser" name="subUser" value="${member.memberId}"/>
@@ -320,11 +319,11 @@
 					</div>
 					<svg class="inline-svg">
 				</form>
-               <!--  <symbol id="check" viewbox="0 0 12 10">
+                 <symbol id="check" viewbox="0 0 12 10">
                   <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
                 </symbol>
               	</svg>
- -->
+ 				</div>
 				<!--여기 위 부분을 수정-->
 
 				<div class="decoration_icon">

@@ -35,8 +35,17 @@
 
 		<!-- custom - css include -->
 		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<style>
+table#border tbody tr
+{box-shadow: 0px 0px 3px 3px rgb(236, 236, 236);}
+table#border thead tr th
+{font-size:18px}
+tbody tr td.font 
+{font-size:18px}
 
+</style>
 	</head>
+	
 <body>
 <jsp:include page="header.jsp"></jsp:include>
 <!-- cart_section - start
@@ -44,7 +53,7 @@
 				<section class="cart_section sec_ptb_120 bg_default_gray" style="margin-top: 50px;">
 					<div class="container">
 						<div class="cart_table">
-							<table class="table">
+							<table class="table" id="border">
 								<thead class="text-uppercase wow fadeInUp" data-wow-delay=".1s">
 									<tr>
 										<th>상품</th>
@@ -63,11 +72,10 @@
 													<img src="resource/imgUpload/${item.teaImg }" alt="image_not_found">
 												</div>
 												<button type="button" class="remove_btn" onclick="remove(${item.teaId });"><i class="fal fa-times"></i></button>
-												<h3 class="item_title">${item.teaName }</h3>
+												<h3 class="item_title font">${item.teaName }</h3>
 											</div>
 										</td>
-									<td><span class="price_text2" id="price${item.teaId }">${item.teaPrice }</span></td>
-										<%-- <input class="price_text2" type="text" name="price" value="${item.teaPrice }"/> --%>
+									<td><span style="font-size:18px" class="price_text2 font" id="price${item.teaId }">${item.teaPrice }</span></td>
 										<td>
 											<div class="quantity_input">
 												<form action="#">
@@ -77,7 +85,7 @@
 												</form>
 											</div>
 										</td>
-										<td><span class="price_text1" id="totalPrice${item.teaId }" ></span></td>
+										<td><span style="font-size:18px" class="price_text1 font" id="totalPrice${item.teaId }" ></span></td>
 									</tr>
 								</tbody>
 							 </c:forEach>
@@ -86,12 +94,13 @@
 						<ul class="carttable_footer ul_li_right wow fadeInUp" data-wow-delay=".1s">
 							<li>
 								<div class="total_price text-uppercase">
-									<span >Total Price</span>
-									<span id="allPrice" style="color:#fd6c44"></span>
+									<span >Total Price</span>&nbsp;&nbsp;&nbsp;&nbsp;
+									<span id="allPrice" style="color:#fd6c44;font-size:25px"></span>
+									
 								</div>
 							</li>
 							<li>
-								<a class="btn btn_primary text-uppercase" onclick="gopay();">Go Payment</a>
+								<a class="btn btn_primary text-uppercase" onclick="goPay();">Go Payment</a>
 							</li>
 						</ul>
 					</div>
@@ -180,10 +189,14 @@
  }
   
   
-  function gopay() {
-	  	 console.log($('#cartSize').val());
-	  	 console.log(id);
-	     location.href="insertOrdersView.do?memberId="+id+"&totalPrice="+ allPrice2;
+  function goPay() {
+	  console.log(id);
+	  	if(id==null){
+	  		location.href="login.do";
+	  	}else{
+	     location.href="insertOrdersView.do?memberId="+id+"&totalPrice="+ allPrice2;	  		
+	  	}	 
+	  
   }
 
 	function remove(tId){

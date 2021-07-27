@@ -151,9 +151,12 @@ function myAndLog(){
 	}else{
 		location.href="mypage.do";
 	}
-	
-	
 }
+
+function goCart(){
+		location.href="cart.do";
+}
+
 
 </script>
 </body>

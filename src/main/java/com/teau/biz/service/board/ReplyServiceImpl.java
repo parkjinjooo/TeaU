@@ -7,22 +7,23 @@ import org.springframework.stereotype.Service;
 
 import com.teau.biz.board.ReplyVO;
 
-@Service("ReplyService") 
+@Service("ReplyService")
 public class ReplyServiceImpl implements ReplyService {
 	@Autowired
 	private ReplyDAO ReplyDAO;
-	
-	public ReplyServiceImpl() {}
-	
+
+	public ReplyServiceImpl() {
+	}
+
 	public void insertReply(ReplyVO vo) {
 		ReplyDAO.insertReply(vo);
 	}
-	
+
 	public void deleteReply(ReplyVO vo) {
 		ReplyDAO.deleteReply(vo);
 	}
-	
-	 public List<ReplyVO> listReply(int boardId){
+
+	public List<ReplyVO> listReply(int boardId) {
 		ReplyDAO.listReply(boardId);
 		return ReplyDAO.listReply(boardId);
 	}

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -113,35 +114,35 @@ public class ShopController {
 	// U
 	@RequestMapping(value = "/updateShop.do", produces = "application/text; charset=utf8")
 	@ResponseBody
-	public String updateShop( MultipartHttpServletRequest request, ShopVO vo) throws IOException {
+	public String updateShop(HttpServletRequest  request, ShopVO vo) throws IOException {
 
-		String fileName = "";
-		
-		List<MultipartFile> fileList = request.getFiles("uploadFile");
-		
-		List<String> fileNames = new ArrayList<String>();
-		
-		for (MultipartFile filePart : fileList) {
-			fileName = filePart.getOriginalFilename();
-			System.out.println("실제 파일명:" + fileName);
-			fileNames.add(fileName);
-			vo.setTeaImg(fileNames.get(0));
-
-			if (!fileName.equals("")) {
-				try {
-					FileOutputStream fs = new FileOutputStream(uploadPath+  File.separator + fileName);
-					fs.write(filePart.getBytes());
-					fs.close();
-
-				} catch (Exception e) {
-
-					e.printStackTrace();
-
-				}
-			}
-		}
+//		String fileName = "";
+//		
+//		List<MultipartFile> fileList = request.getFiles("uploadFile");
+//		
+//		List<String> fileNames = new ArrayList<String>();
+//		
+//		for (MultipartFile filePart : fileList) {
+//			fileName = filePart.getOriginalFilename();
+//			System.out.println("실제 파일명:" + fileName);
+//			fileNames.add(fileName);
+//			vo.setTeaImg(fileNames.get(0));
+//
+//			if (!fileName.equals("")) {
+//				try {
+//					FileOutputStream fs = new FileOutputStream(uploadPath+  File.separator + fileName);
+//					fs.write(filePart.getBytes());
+//					fs.close();
+//
+//				} catch (Exception e) {
+//
+//					e.printStackTrace();
+//
+//				}
+//			}
+//		}
 		System.out.println("수정");
-		shopService.updateShop(vo, fileNames);
+//		shopService.updateShop(vo, fileNames);
 		return "상품 수정이 완료되었습니다.";
 	}
 

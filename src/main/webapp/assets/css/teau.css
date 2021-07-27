@@ -1,11 +1,154 @@
 
-
+/* 폰트 */
 @font-face {
     font-family: 'InfinitySans-RegularA1';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+    font-family: 'twayair';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+} 
+
+/* 씨앗 & 새싹 구독 */
+#subLeaf {
+   font-family: 'InfinitySans-RegularA1';
+}
+
+#subLeaf .container .reserve_table_form {
+  background-color: white; 
+}
+
+.subLeafTitle{
+   font-family: 'InfinitySans-RegularA1';
+} 
+
+
+/* 씨앗 구독 */
+#subSeed {
+   font-family: 'InfinitySans-RegularA1';
+}
+.subSeed .shopFont{
+   font-family: 'InfinitySans-RegularA1';
+}
+#subMain {
+	font-family: 'twayair';
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.cbx {
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+.cbx:not(:last-child) {
+  margin-right: 6px;
+}
+.cbx:hover {
+  background: rgba(255, 121, 88, 0.11);
+}
+.cbx span {
+  float: left;
+  vertical-align: middle;
+  transform: translate3d(0, 0, 0);
+}
+.cbx span:first-child {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  transform: scale(1);
+  border: 1px solid #fd6c44;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 1px rgba(255, 121, 88, 0.11);
+}
+.cbx span:first-child svg {
+  position: absolute;
+  top: 3px;
+  left: 2px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 16px;
+  stroke-dashoffset: 16px;
+  transition: all 0.3s ease;
+  transition-delay: 0.1s;
+  transform: translate3d(0, 0, 0);
+}
+.cbx span:last-child {
+  padding-left: 8px;
+  line-height: 18px;
+}
+.cbx:hover span:first-child {
+  border-color: #fd6c44;
+}
+.inp-cbx {
+  position: absolute;
+  visibility: hidden;
+}
+.inp-cbx:checked + .cbx span:first-child {
+  background: #fd6c44;
+  border-color: #fd6c44;
+  animation: wave 0.4s ease;
+}
+.inp-cbx:checked + .cbx span:first-child svg {
+  stroke-dashoffset: 0;
+}
+
+.inline-svg {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  user-select: none;
+}
+@media screen and (max-width: 640px) {
+  body {
+    width: auto;
+    display: inherit;
+    padding: 20px;
+  }
+  .cbx {
+    width: 100%;
+    margin-bottom: 4px;
+    display: inline-block;
+  }
+}
+@-moz-keyframes wave {
+  50% {
+    transform: scale(0.9);
+  }
+}
+@-webkit-keyframes wave {
+  50% {
+    transform: scale(0.9);
+  }
+}
+@-o-keyframes wave {
+  50% {
+    transform: scale(0.9);
+  }
+}
+@keyframes wave {
+  50% {
+    transform: scale(0.9);
+  }
+}
+
+
+/* 회원가입 */
 
 #signUp {
   margin-left: 15%;
@@ -16,137 +159,28 @@
   display: inline-block
 }
 
-/* 씨앗 & 새싹 구독 */
-#subLeaf {
-	font-family: 'InfinitySans-RegularA1';
-}
-
-#subLeaf .container .reserve_table_form {
-  background-color: white; 
-}
-
-.subLeafTitle{
-	font-family: 'InfinitySans-RegularA1';
-} 
-
-#subSeed {
-font-family: 'InfinitySans-RegularA1';
-}
-.subSeed {
-font-family: 'InfinitySans-RegularA1';
-}
-
-* {
-box-sizing: border-box;
-}
-
-.cbx {
--webkit-user-select: none;
-user-select: none;
-cursor: pointer;
-padding: 6px 8px;
-border-radius: 6px;
-overflow: hidden;
-transition: all 0.2s ease;
-}
-.cbx:not(:last-child) {
-margin-right: 6px;
-}
-.cbx:hover {
-background: rgba(255, 121, 88, 0.11);
-}
-.cbx span {
-float: left;
-vertical-align: middle;
-transform: translate3d(0, 0, 0);
-}
-.cbx span:first-child {
-position: relative;
-width: 18px;
-height: 18px;
-border-radius: 4px;
-transform: scale(1);
-border: 1px solid #fd6c44;
-transition: all 0.2s ease;
-box-shadow: 0 1px 1px rgba(255, 121, 88, 0.11);
-}
-.cbx span:first-child svg {
-position: absolute;
-top: 3px;
-left: 2px;
-fill: none;
-stroke: #fff;
-stroke-width: 2;
-stroke-linecap: round;
-stroke-linejoin: round;
-stroke-dasharray: 16px;
-stroke-dashoffset: 16px;
-transition: all 0.3s ease;
-transition-delay: 0.1s;
-transform: translate3d(0, 0, 0);
-}
-.cbx span:last-child {
-padding-left: 8px;
-line-height: 18px;
-}
-.cbx:hover span:first-child {
-border-color: #fd6c44;
-}
-.inp-cbx {
-position: absolute;
-visibility: hidden;
-}
-.inp-cbx:checked + .cbx span:first-child {
-background: #fd6c44;
-border-color: #fd6c44;
-animation: wave 0.4s ease;
-}
-.inp-cbx:checked + .cbx span:first-child svg {
-stroke-dashoffset: 0;
-}
-
-.inline-svg {
-position: absolute;
-width: 0;
-height: 0;
-pointer-events: none;
-user-select: none;
-}
-@media screen and (max-width: 640px) {
-body {
-  width: auto;
-  display: inherit;
-  padding: 20px;
-}
-.cbx {
-  width: 100%;
-  margin-bottom: 4px;
-  display: inline-block;
-}
-}
-@-moz-keyframes wave {
-50% {
-  transform: scale(0.9);
-}
-}
-@-webkit-keyframes wave {
-50% {
-  transform: scale(0.9);
-}
-}
-@-o-keyframes wave {
-50% {
-  transform: scale(0.9);
-}
-}
-@keyframes wave {
-50% {
-  transform: scale(0.9);
-}
-}
-
-
 /* ▽ made by Chan ▽ */
+/* 전체 */
+
+/* 버튼  :  style.css 293~305 가져옴 */ 
+.btn {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+/*   padding: 21px 42px; */
+  border-radius: 5px;
+  display: inline-block;
+  transition: 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  font-family: "DM Sans", sans-serif;
+}
+}
+
+/* 자몽 버튼 */
+.btn_primary {
+  background-color: #fd6c44;
+  color: #ffffff;
+}
+
 
 /* 나무 구독 */
 
@@ -160,6 +194,18 @@ body {
 
 #sub_tree .container .reserve_table_form {
   background-color: white;
+/*   font-family: 'Nanum Gothic', sans-serif;*/  
+   font-family: 'InfinitySans-RegularA1';
+  
+}
+
+.sub_tree_title {
+/*    font-family: 'Nanum Gothic', sans-serif; */
+    font-family: 'InfinitySans-RegularA1';
+}
+
+.form_title {
+   font-family: 'InfinitySans-RegularA1';
 }
 
 #sub_tree .sub_tree {
@@ -180,6 +226,7 @@ body {
 
 
 #sub_tree ul>li {
+   
   /* position: relative; */
   display: inline-block;
   width: 200px;
@@ -195,6 +242,11 @@ body {
   text-align: center;
   vertical-align: top;
   cursor:pointer;
+  
+/*  font-family: 'Nanum Gothic', sans-serif; */
+   font-family: 'InfinitySans-RegularA1';
+   
+   
 }
 
 /* 선택 표시 */
@@ -225,7 +277,8 @@ body {
 
 
 .list_wrap ul>li input[type="checkbox"] {
-	/* display:none; */
+   
+   display:none; 
 
 }
 
@@ -270,16 +323,17 @@ body {
 .tt_info .tt_name {
   padding: 0 1px;
   display: block;
-  font-size: 1.1rem;
+  font-size: 1.6rem;
+  
   width: 100%;
-  margin: 0 0 5px;
+  margin: 5px 0 5px 0;
+  
   
 }
 
 .tt_info {
   /* font-size: 10px; */
-  font-weight:bold
-  
+  font-weight:bold;
 }
 
 /* 설명 출력 */
@@ -288,10 +342,10 @@ body {
   color: #fff;
   /* display: none; */
   /* visibility: hidden; */
+  font-weight:normal;
 }
 
-/* 선택했을 때 글자색 바꾸기  */
-#sub_tree ul>li:hover 
+#sub_tree ul>li:hover
 p.tt_explain {
   font-size: 15px;
   color: #aaa;
@@ -371,12 +425,14 @@ p.tt_explain {
 #tt_price {
   font-size: 2rem;
   text-align: right;
+  font-family: 'InfinitySans-RegularA1';
 
 }
 
 #tt_price p {
   font-weight: bolder;
   margin-bottom: -5px;
+  font-family: 'InfinitySans-RegularA1';
 }
 
 #tt_price .totalPrice {
@@ -415,24 +471,24 @@ p.tt_explain {
 }
 
 #finder_detail01 .img-responsive {
-  margin-left: 20%;
+  /* margin-left: 20%; */
 }
 
 #finder_detail02 .img-responsive,
 #finder_detail03 .img-responsive {
-  margin-left: 29%;
+  /* margin-left: 29%; */
 }
 
 
 #finder_detail04 .ul_li_center {
-  margin-left: 40%;
+  /* margin-left: 40%; */
   margin-top: 50px;
   margin-bottom: 30px;
 
 }
 
 #finder_detail05 .img-responsive {
-  margin-left: 13%;
+  /* margin-left: 13%; */
 }
 
 #finder_detail05 .finder_choice {
@@ -759,3 +815,43 @@ dd {
   color: black;
 }
 
+
+/* shopAdmin */
+
+.fileDiv .imgs_wrap {
+  /*    border: 2px solid #eee; */
+    padding: 20px;
+    margin-top: 20px;
+    
+  }
+  
+  .fileDiv .imgs_wrap .imgblock {
+    display:inline-block;
+    
+  }
+  
+  .fileDiv .removeIcon {
+    text-align:right;
+    padding-right: 20px;
+    
+  }
+  
+  .fileDiv .fa-minus-square {
+    width: 50px;
+  }
+  
+  .fileDiv .imgName {
+    width: 150px;
+    text-align:center;
+    overflow: auto;
+  }
+  
+  .fileDiv imgs_wrap .preImg {
+    
+    width: 150px;
+    height:150px;
+    border-radius:20px;
+    margin: 10px 10px;
+    
+  }
+  

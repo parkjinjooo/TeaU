@@ -29,6 +29,7 @@ public class ShopDAOMybatis {
 	}
 
 	public void updateShop(ShopVO vo, List<String> fileNames) {
+		System.out.println(vo);
 		mybatis.update("ShopDAO.updateShop", vo);
 		int teaId = mybatis.selectOne("ShopDAO.selectTeaId");
 		for (int i = 0; i < fileNames.size(); i++) {

@@ -6,7 +6,7 @@ public class PageMaker {
     private boolean prev;
     private boolean next;
 
-    private BoardVO cri; // 
+    private BoardVO cri;
 
     public PageMaker(BoardVO cri, int total) {
         this.cri = cri;

@@ -1,5 +1,7 @@
 package com.teau.controller.board;
 
+import java.net.URLEncoder;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,45 +16,40 @@ import com.teau.biz.service.board.ReplyService;
 @Controller
 @SessionAttributes("reply")
 public class ReplyController {
-	
+
 	@Autowired
 	private BoardService boardService;
 	@Autowired
-    private ReplyService replyService;
+	private ReplyService replyService;
 
-	
 	// 댓글 작성
 	@RequestMapping(value = "/replyCreate.do", method = RequestMethod.POST)
 	public String insertReply(ReplyVO vo, BoardVO dvo) throws Exception {
 		System.out.println("댓글 삽입 테스트11111111111111111111");
-		
-	    replyService.insertReply(vo);
-	    System.out.println("댓글 삽입 테스트222222222222222222222");
-	    
-	    // 게시물에 댓글 추가시 업데이트
-	 	boardService.updateReplyCount(dvo);
-	    
-	    return "redirect:/boardViewer.do?boardId=" + vo.getBoardId()+"&boardImgm="+dvo.getBoardImgm();
-	   
-	}
-	
-    // 댓글 삭제
-    @RequestMapping(value ="/replyDelete.do")
-    public String deleteReply(ReplyVO vo, BoardVO dvo) throws Exception {
-        System.out.println("댓글 삭제 처리");
-        replyService.deleteReply(vo);
-        
-        // 게시물에 댓글 추가시 업데이트
-	 	boardService.updateReplyCount(dvo);
-	 	System.out.println(dvo.getBoardImgm());
-        
-        return "redirect:/boardViewer.do?boardId=" + vo.getBoardId()+"&boardImgm="+dvo.getBoardImgm();
-    }
-	
 
-    
-	
-	
-	
+		replyService.insertReply(vo);
+		System.out.println("댓글 삽입 테스트222222222222222222222");
+
+		// 게시물에 댓글 추가시 업데이트
+		boardService.updateReplyCount(dvo);
+		String encodedParam = URLEncoder.encode(dvo.getBoardImgm(), "UTF-8");
+	    return "redirect:/boardViewer.do?boardId=" + dvo.getBoardId() + "&boardImgm=" + encodedParam;
+		
+
+	}
+
+	// 댓글 삭제
+	@RequestMapping(value = "/replyDelete.do")
+	public String deleteReply(ReplyVO vo, BoardVO dvo) throws Exception {
+		System.out.println("댓글 삭제 처리");
+		replyService.deleteReply(vo);
+
+		// 게시물에 댓글 추가시 업데이트
+		boardService.updateReplyCount(dvo);
+		System.out.println(dvo.getBoardImgm());
+
+		String encodedParam = URLEncoder.encode(dvo.getBoardImgm(), "UTF-8");
+	    return "redirect:/boardViewer.do?boardId=" + dvo.getBoardId() + "&boardImgm=" + encodedParam;
+	}
 
 }

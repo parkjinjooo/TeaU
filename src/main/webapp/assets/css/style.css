@@ -18,15 +18,24 @@ Author         :  Xpressrow
 ================================================== */
 /* global reset - start
 ================================================== */
+
+/* 폰트 */
+@font-face {
+    font-family: 'InfinitySans-RegularA1';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 body {
   margin: 0px;
   padding: 0px;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 400;
   line-height: 1.65;
   font-style: normal;
   color: #737c70;
-  font-family: "Roboto", sans-serif;
+  /* font-family: "Roboto", sans-serif; */
+  font-family: 'twayair';
   text-rendering: optimizelegibility;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -124,6 +133,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   color: #1B1B1B;
   font-family: "Oswald", sans-serif;
+/*  font-family: 'twayair'; */
 }
 
 /* section decoration wrap - start */
@@ -296,12 +306,14 @@ button {
   line-height: 1;
   color: #ffffff;
   font-size: 14px;
-  font-weight: 700;
+  /* font-weight: 700; */
   padding: 21px 42px;
   border-radius: 5px;
   display: inline-block;
   transition: 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-  font-family: "DM Sans", sans-serif;
+  /* font-family: "DM Sans", sans-serif; */
+ /*  font-family: 'InfinitySans-RegularA1'; */
+ font-family: 'twayair';
 }
 .btn:focus {
   outline: none;
@@ -593,7 +605,7 @@ button {
 }
 
 .bg_default_gray {
-  background-color: #f6f6f6;
+  background-color: #ffffff;
 }
 
 /* background colors - end
@@ -839,7 +851,7 @@ button {
   position: absolute;
   transform: rotate(45deg);
   background-color: #ffffff;
-  box-shadow: 0px 9px 16px 0px rgba(179, 179, 179, 0.2);
+  box-shadow: 0px 9px 16px 0px rgba(179, 179, 179);
 }
 
 /* reserve table form - end */
@@ -904,14 +916,32 @@ button {
 .filters-button-group li:not(:last-child) {
   margin-right: 5px;
 }
+/* 
 .filters-button-group button {
   color: #8b887d;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 700;
   padding: 0px 20px;
   position: relative;
   padding-bottom: 30px;
 }
+ */
+ @font-face {
+    font-family: 'twayair';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+ .filters-button-group button {
+  color: #8b887d;
+  font-size: 24px;
+  font-family: 'twayair';
+  /* font-weight: 700; */
+  padding: 0px 25px;
+  position: relative;
+  padding-bottom: 15px;
+}
+
 .filters-button-group button:before {
   left: 15px;
   right: 15px;
@@ -2818,13 +2848,16 @@ button {
 
 .shop_filter_grid {
   margin: -15px;
+  display: inline-block;
 }
 .shop_filter_grid .element-item {
   padding: 15px;
-  width: 100%;
+  width:  100%;
+  display: inline-block;
 }
 .shop_filter_grid .shop_card {
-  margin-top: 0px;
+  margin-top: 10px;
+  display: inline-block;
 }
 
 /* shop page - end
@@ -3336,7 +3369,7 @@ blockquote i {
   margin: -15px;
 }
 .gallery_item_grid .element-item {
-  float: left;
+
   padding: 15px;
   width: 33.333%;
   display: inline-block;

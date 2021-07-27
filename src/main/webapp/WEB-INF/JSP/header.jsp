@@ -91,16 +91,16 @@ function sessionCheck(obj) {
                           <li><a href="toBoard.do">씨앗 리뷰</a></li>
                           <li><a href="tbBoard.do">새싹&나무 리뷰</a></li>
                           <li><a href="rankBoard.do">새싹&나무 랭킹</a></li>
-                          <li><a href="faq.jsp">F.A.Q.</a></li>
+                          <li><a href="faq.do">F.A.Q.</a></li>
                         </ul>
                       </li>
                       <li class="dropdown">
-                        <a class="nav-link" href="magazine.html" id="experience_submenu">
+                        <a class="nav-link" href="magazine.do" id="experience_submenu">
                           Magazine
                         </a>
                       </li>
                       <li>
-                        <a class="nav-link" href="tea_finder_detail.html">Tea finder</a>
+                        <a class="nav-link" href="tea_finder.do">Tea finder</a>
                       </li>
                     </ul>
                   </div>
@@ -112,9 +112,8 @@ function sessionCheck(obj) {
                       </button>
                     </li>
                     <li>
-                      <button type="button" class="cart_btn">
-                        <i class="fal fa-shopping-bag"></i>
-                        <small class="cart_counter">2</small>
+                      <button type="button">
+                        <a class="fal fa-shopping-bag" onclick="goCart();" style="color:black;" ></a>
                       </button>
                     </li>
                     <li>
@@ -237,5 +236,6 @@ function sessionCheck(obj) {
       </div>
       <!-- cart_sidebar - end
         ================================================== -->
+       
 </body>
 </html>
